@@ -1,0 +1,35 @@
+/* .logoStyle{
+    min-width: 90px;
+    height: 70px;
+    width: 120px;
+} */
+.navbar{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.navbar-show{
+    position: fixed !important;
+    z-index: 2;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+.navbar-brand{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.navbar-logo{
+    min-width: 90px;
+    height: 70px;
+    width: 120px;
+    display: block;
+    background: url('../../../resources/logo/Logo.png');
+    background-position: center;
+    background-size: cover;
+   
+}

@@ -1,0 +1,127 @@
+.cart-container {
+    margin-top: 100px;
+    padding: 2rem 4rem;
+}
+
+.cart-container h2 {
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+}
+
+.cart-container .titles {
+    margin: 2rem 0 1rem 0;
+}
+
+.cart-container .titles h3 {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.cart-item,
+.cart-container .titles {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 0.5rem;
+}
+
+.cart-item {
+    border-top: 1px solid rgb(187, 187, 187);
+    padding: 1rem 0;
+}
+
+.cart-item .cart-product img {
+    width: 100px;
+    max-width: 100%;
+    margin-right: 1rem;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgb(187, 187, 187);
+    flex-wrap: wrap;
+    padding-top: 2rem;
+}
+
+.cart-summary .clear-cart {
+    width: 130px;
+    max-width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    margin-bottom:10px ;
+    font-weight: 400;
+    letter-spacing: 1.15px;
+    border: 0.5px solid rgb(177, 177, 177);
+    color: gray;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    
+}
+
+.cart-placeorder {
+    width: 270px;
+    max-width: 100%;
+}
+.cart-placeorder .totalitems {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.cart-placeorder .totalitems .items {
+    font-weight: 700;
+}
+
+.cart-placeorder .subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.cart-placeorder .subtotal .amount {
+    font-weight: 700;
+}
+
+.cart-placeorder button {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: 400;
+    letter-spacing: 1.15px;
+    border: 0.5px solid rgb(177, 177, 177);
+    color: white;
+    background: #4b70e2;
+    outline: none;
+    cursor: pointer;
+    margin: 25px 0;
+}
+
+.continue-shopping{
+    margin-top: 1rem;
+}
+
+.continue-shopping span,
+.start-shopping span {
+    color: gray;
+    margin-left: 0.5rem;
+}
+
+.cart-empty {
+    font-size: 20px;
+    color: rgb(84, 84, 84);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-empty p {
+    font-size: 20px;
+}
+
+.cart-product-action {
+    cursor: pointer;
+}

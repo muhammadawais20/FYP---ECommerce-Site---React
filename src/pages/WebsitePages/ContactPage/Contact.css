@@ -1,0 +1,15 @@
+.contactWrapper{
+    margin-top: 100px;
+}
+.paperStyle {
+    margin: 20px auto;
+    padding: 20px 5px !important;
+}
+.headerStyle {
+    background-color: none;
+    margin: 0 !important;
+}
+.btnStyle {
+    margin: '8px 0';
+    background-color: black !important;
+}

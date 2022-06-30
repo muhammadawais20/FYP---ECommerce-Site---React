@@ -1,0 +1,15 @@
+.contact-container{
+    margin-top: 100px;
+}
+.header-Style{
+    width: 75%;
+    padding: 9px 15px 7px;
+    border-radius:  5px;
+    margin: auto !important;
+    color: pink !important;
+    background-color: black;
+}
+
+.cardStyle{
+    margin: 20px auto;
+}

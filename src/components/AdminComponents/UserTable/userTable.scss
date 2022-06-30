@@ -1,0 +1,97 @@
+.userTable {
+    height: 650px;
+    padding: 20px;
+
+    
+    .table {
+        display: flex;
+        
+        .tableData{
+            text-align: center;
+        }
+    }
+    
+    .userTableTitle{
+
+        width: 100%;
+        font-size: 24px;
+        color: gray;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .linkToNewUser{
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600px;
+            color: green;
+            border: 1px dotted green;
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .view-delete {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-decoration: none;
+        text-decoration-style: none;
+
+        .delete {
+            color: red;
+            border: 1px dotted lightcoral;
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+
+        .edit{
+            color: green;
+            border: 1px dotted greenyellow;
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+    }
+
+    .userImageCell{
+        display: flex;
+        align-items: center;
+
+        .userImage{
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            margin-right: 10px;
+            
+        }
+
+    }
+
+    .userStatusCell {
+
+            padding: 5px;
+    
+            &.Active {
+                color: green;
+                background-color: rgb(146, 241, 146, 0.5);
+                width: 50px;
+                text-align: center;
+            }
+    
+            &.Pending {
+                color: goldenrod;
+                background-color: rgb(248, 248, 38, 0.5);
+                width: 50px;
+                text-align: center;
+            }
+
+            &.Passive {
+                color: crimson;
+                background-color: rgb(255, 140, 163, 0.5);
+                width: 50px;
+                text-align: center;
+            }
+    }
+
+}

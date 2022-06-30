@@ -1,0 +1,63 @@
+.widget {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 10px;
+    height: 120px;
+    border-radius: 5px;
+    -webkit-box-shadow: 5px 5px 10px 0px gray;
+    box-shadow: 5px 5px 10px 0px rgb(230, 226, 226);
+
+    .leftSideOfWidget, .rightSideOfWidget{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .categoryTitle {
+            font-size: 14px;
+            font-weight: bold;
+            color: gray;
+        }
+
+        .categoryCount{
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .seeAllUsers {
+            font-size: 14px;
+            border-bottom: 1px solid gray;
+            cursor: pointer;
+
+        }
+
+        .percentageOfUsers{
+            display: flex;   
+            justify-content: center;   
+            align-items: center;
+            font-size: 14px;
+
+            &.positive {
+                color: green;
+            }
+
+            &.negative {
+                color: red;
+            }
+
+            .arrowIcon {
+                font-size: 24px;
+            }
+        }
+
+        .icon{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 5px;
+            align-self: flex-end;
+            padding: 4px;
+        }
+    }
+}
