@@ -39,41 +39,79 @@ const App = () => {
 
   let currentUser = JSON.parse(localStorage.getItem('currentUser')).user.email;
 
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(function (user) {
+  //     setUser(user)
+  //     dispatch({
+  //       type: "currentUser",
+  //       payload: user,
+  //     });
+  //     // if (user != null &&  user.email === "awais20@gmail.com") {
+  //       if (user.email === "awais20@gmail.com") {
+  //       dispatch({
+  //         type: 'setAdmin',
+  //         adminStatus: true,
+  //       })
+  //       dispatch({
+  //         type: 'setLoggedIn',
+  //         loggedIn: false,
+  //       })
+  //       // adminStateChange()
+  //       // navigate('/adminHome')
+  //     } else {
+  //       dispatch({
+  //         type: 'setLoggedIn',
+  //         loggedIn: true,
+  //       })
+  //       dispatch({
+  //         type: 'setAdmin',
+  //         adminStatus: false,
+  //       })
+
+  //     }
+  //     setLoading(false)
+  //   });
+  //   setLoading(false)
+
+  // }, []);
+
   useEffect(() => {
-    auth.onAuthStateChanged(function (user) {
-      setUser(user)
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) ? JSON.parse(localStorage.getItem('currentUser')) : null
+    if (currentUser) {
+      setUser(currentUser.user)
       dispatch({
         type: "currentUser",
-        payload: user,
+        payload: currentUser.user,
       });
-      // if (user != null &&  user.email === "awais20@gmail.com") {
-        if (user.email === "awais20@gmail.com") {
-        dispatch({
-          type: 'setAdmin',
-          adminStatus: true,
-        })
-        dispatch({
-          type: 'setLoggedIn',
-          loggedIn: false,
-        })
-        // adminStateChange()
-        // navigate('/adminHome')
-      } else {
-        dispatch({
-          type: 'setLoggedIn',
-          loggedIn: true,
-        })
-        dispatch({
-          type: 'setAdmin',
-          adminStatus: false,
-        })
+      if (currentUser.user != null) {
+        if (currentUser.user.email === "awais20@gmail.com") {
+          dispatch({
+            type: 'setAdmin',
+            adminStatus: true,
+          })
+          dispatch({
+            type: 'setLoggedIn',
+            loggedIn: false,
+          })
+          // adminStateChange()
+          // navigate('/adminHome')
+        } else {
+          dispatch({
+            type: 'setLoggedIn',
+            loggedIn: true,
+          })
+          dispatch({
+            type: 'setAdmin',
+            adminStatus: false,
+          })
 
+        }
       }
-      setLoading(false)
-    });
+    };
     setLoading(false)
 
   }, []);
+
 
   // function adminStateChange() {
   //   auth.onAuthStateChanged(function (admin) {

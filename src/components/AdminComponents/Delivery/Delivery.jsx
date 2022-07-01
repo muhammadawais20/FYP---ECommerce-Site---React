@@ -88,14 +88,14 @@ const Delivery = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Order Date</TableCell>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>Order Id</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>Order Id</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Shipment Time</TableCell>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>Shipment Id</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>Shipment Id</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>User Name</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Phone</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>City</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Email</TableCell>
-                            <TableCell sx={{ minWidth: 400 }} className='tableData'>Product Details</TableCell>
+                            <TableCell sx={{ minWidth: 200 }} className='tableData'>Product Details</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

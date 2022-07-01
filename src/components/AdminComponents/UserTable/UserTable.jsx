@@ -92,7 +92,7 @@ const UserTable = () => {
                                 <TableCell className='tableData'>{users.fullName}</TableCell>
                                 <TableCell className='tableData'>{users.email}</TableCell>
                                 <TableCell className='tableData'>{users.phone}</TableCell>
-                                <TableCell className='tableData'>{users.password}</TableCell>
+                                <TableCell className='tableData' type="password">{users.password}</TableCell>
                                 {/* <TableCell className='tableData'>{users.address}</TableCell> */}
                                 <TableCell className='tableData'>{users.country}</TableCell>
 

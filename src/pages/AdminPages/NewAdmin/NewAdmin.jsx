@@ -38,7 +38,7 @@ const NewAdmin = ({ title }) => {
         }
     }
     const addNewAdmin = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         // Storing the Image
         const uploadTask = storage.ref(`admin-images/${adminImage.name}`).put(adminImage)
         uploadTask.on('state_changed', snapshot => {
@@ -52,7 +52,7 @@ const NewAdmin = ({ title }) => {
             // getting user url and if success then storing the adminImage in db
             storage.ref('admin-images').child(adminImage.name).getDownloadURL().then(url => {
                 auth.createUserWithEmailAndPassword(email, password)
-                    .then((userAuth) => {
+                    .then(() => {
                         db.collection('admins').doc(adminIdPath).set({
                             adminId: adminIdPath,
                             adminName: adminName,
@@ -74,9 +74,8 @@ const NewAdmin = ({ title }) => {
                             setPhone('');;
                             setAdminImage('');
 
-                        //    document.getElementById('fileUpload').value = ('');
-                        }).catch((err) => {
-                            console.log(err);
+                            document.getElementById('fileUpload').value = ('');
+                        }).catch(() => {
                             toast.error('User Data Submission Failed!')
                         });
                     })
@@ -131,7 +130,7 @@ const NewAdmin = ({ title }) => {
 
                             <div className="formInput">
                                 <label>Password</label>
-                                <input type="password" onChange={event => setPassword(event.target.value)} required />
+                                <input type="text" onChange={event => setPassword(event.target.value)} required />
                             </div>
 
                             <div className="formInput">

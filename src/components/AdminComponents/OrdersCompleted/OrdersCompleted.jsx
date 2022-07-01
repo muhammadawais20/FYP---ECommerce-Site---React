@@ -48,7 +48,7 @@ const OrdersCompleted = () => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>Order Date</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>Order Date</TableCell>
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>Order Id</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Shipment Time</TableCell>
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>Shipment Id</TableCell>

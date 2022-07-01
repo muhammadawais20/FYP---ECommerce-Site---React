@@ -47,13 +47,13 @@ const NewUser = ({ title }) => {
             setError(err.message)
         }, () => {
 
-            const userIdPath = `${username}_${Math.random().toFixed(3)}`;
+            const userIdPath = `${username}_${Math.floor(Math.random()) * 1000}`;
 
             // getting user url and if success then storing the userImage in db
             storage.ref('user-images').child(userImage.name).getDownloadURL().then(url => {
                 auth.createUserWithEmailAndPassword(email, password)
-                    .then((userAuth) => {
-                        db.collection('users').doc(userAuth.userIdPath).set({
+                    .then(() => {
+                        db.collection('users').doc(userIdPath).set({
                             userId: userIdPath,
                             userName: username,
                             fullName: fullname,
