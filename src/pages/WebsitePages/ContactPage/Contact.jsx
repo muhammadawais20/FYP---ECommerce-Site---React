@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../../config/firebase';
 import { toast } from 'react-toastify';
 import Layout from '../../../components/WebsiteComponents/Layout/Layout';
@@ -7,32 +7,80 @@ import ContactPageSharpIcon from '@mui/icons-material/ContactPageSharp';
 import './Contact.css';
 
 const ContactUs = () => {
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
 
+    const messageDateTime = () => {
+        let myDate = new Date();
+        let daysList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Aug', 'Oct', 'Nov', 'Dec'];
+        let date = myDate.getDate();
+        let month = monthsList[myDate.getMonth()];
+        let year = myDate.getFullYear();
+        let day = daysList[myDate.getDay()];
+        let today = `${date} ${month} ${year}, ${day}`;
+        let amOrPm;
+        let twelveHours = function () {
+            if (myDate.getHours() > 12) {
+                amOrPm = 'PM';
+                let twentyFourHourTime = myDate.getHours();
+                let conversion = twentyFourHourTime - 12;
+                return `${conversion}`
+
+            } else {
+                amOrPm = 'AM';
+                return `${myDate.getHours()}`
+            }
+        };
+
+        let hours = twelveHours();
+        let minutes = myDate.getMinutes();
+
+        let currentTime = `${hours}:${minutes} ${amOrPm}`;
+
+        return (today + ' ' + currentTime);
+
+    }
+
+    
+    const getMessageId = () => {
+        let date = new Date();
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+
+        const messageId = `${day}${month}${year}`;
+        return (messageId.concat(Math.floor(Math.random() * 100)));
+    }
+
+    const messageId = `${getMessageId()}_${(Math.floor(Math.random() * 1000))}`
+
+   
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        db.collection('contacts').add({
-            name: name,
+        db.collection('contacts').doc(messageId).set({
+            firstName: firstName,
             lastName: lastName,
             email: email,
             phone: phone,
+            messageDate: messageDateTime(),
             message: message
         }).then(() => {
-            toast.success('Message has been submitted');
-            setName("");
+            toast.success('Message Delivered Successfully!');
+            setFirstName("");
             setLastName("");
             setEmail("");
             setPhone("");
             setMessage("");
         }).catch(() => {
-            toast.error('Faild');
+            toast.error('Submission Failed!');
         });
     }
-
+    
     return (
         <Layout>
 
@@ -40,17 +88,18 @@ const ContactUs = () => {
             <Card variant="outlined" sx={{ width: '50%' }} className='paperStyle'>
                 <Grid align='center'>
                     <Avatar className='avatarStyle'><ContactPageSharpIcon /></Avatar>
-                    <h2 className='headerStyle'>CONTACT-US</h2>
-                    <Typography variant='caption' gutterBottom>fill up the from and our team will get back to you within 24 hours</Typography>
+                    <h2 className='headerStyle'>CONTACT US</h2>
+                    <Typography variant='caption' gutterBottom>Fill up the from and our team will get back to you within 24 hours</Typography>
                 </Grid>
                 <form onSubmit={handleSubmit} style={{ padding: '15px' }}>
                     <Grid container spacing={1}>
                         <Grid xs={12} sm={6} item>
                             <TextField
-                                onChange={e => setName(e.target.value)}
+                                onChange={e => setFirstName(e.target.value)}
                                 name="name"
+                                type="text"
                                 label="First Name"
-                                placeholder='Enter first name'
+                                placeholder='Enter first name.'
                                 variant='outlined'
                                 fullWidth required />
                         </Grid>
@@ -58,8 +107,9 @@ const ContactUs = () => {
                             <TextField
                                 onChange={e => setLastName(e.target.value)}
                                 name='last_name'
+                                type="text"
                                 label="Last Name"
-                                placeholder='Enter last name'
+                                placeholder='Enter last name.'
                                 variant='outlined'
                                 fullWidth required />
                         </Grid>
@@ -69,7 +119,7 @@ const ContactUs = () => {
                                 name="user_email"
                                 type="email"
                                 label="Email"
-                                placeholder='Enter email'
+                                placeholder='Enter email.'
                                 variant='outlined'
                                 fullWidth required />
                         </Grid>
@@ -79,7 +129,7 @@ const ContactUs = () => {
                                 name='user_number'
                                 type="number"
                                 label="Phone"
-                                placeholder='Enter phone-number'
+                                placeholder='Enter phone number.'
                                 variant='outlined'
                                 fullWidth required />
                         </Grid>
@@ -87,9 +137,10 @@ const ContactUs = () => {
                             <TextField
                                 onChange={e => setMessage(e.target.value)}
                                 name="message"
+                                type="text"
                                 label="Message"
                                 multiline rows={5}
-                                placeholder='Type your message here'
+                                placeholder='Type your message/complaints.'
                                 variant='outlined'
                                 fullWidth required />
                         </Grid>

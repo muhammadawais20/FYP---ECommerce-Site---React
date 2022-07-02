@@ -1,0 +1,25 @@
+.messageTable {
+    height: 650px;
+    padding: 20px;
+
+
+    .table {
+        display: flex;
+        
+        .tableData{
+            text-align: center;
+        }
+    }
+    
+
+    .messageTableTitle {
+
+        width: 100%;
+        font-size: 24px;
+        color: gray;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

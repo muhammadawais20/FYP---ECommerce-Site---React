@@ -11,8 +11,7 @@ import './CheckOut.css';
 const CheckOut = () => {
 
     const { cartitems } = useSelector(state => state.cartReducer);
-
-
+    
     const navigate = useNavigate();
     const dispatch = useDispatch()
 

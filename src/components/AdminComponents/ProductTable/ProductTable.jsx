@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { db, ref } from '../../../config/firebase';
+import { db } from '../../../config/firebase';
 import './productTable.scss';
 // import { DataGrid } from '@mui/x-data-grid';
 // import { userRows, userColumns } from '../AdminTable/UserTable';
@@ -43,32 +43,6 @@ const ProductTable = () => {
                     //setLoadig
                 })
                 setProduct(getProductFromFirebase)
-                console.log('User =>', getProductFromFirebase)
-                console.log("Id", product[0].productId);
-                console.log("Id", product[1].productId);
-                console.log("Id", product[2].productId);
-
-            })
-        }
-        catch (error) {
-            //setLoadig
-            console.log("Error");
-        }
-    }
-
-    async function getProduct(e) {
-        //  e.preventDefault()
-        try {
-            //setLoadig
-            const getProductFromFirebase = [];
-            db.collection('Products').get().then(snapshot => {
-                snapshot.forEach(product => {
-                    getProductFromFirebase.push({ ...product.data() })
-                    //setLoadig
-                })
-                setProduct(getProductFromFirebase)
-
-
                 console.log('User =>', getProductFromFirebase)
 
             })

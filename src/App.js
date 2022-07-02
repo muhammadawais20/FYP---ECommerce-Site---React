@@ -29,6 +29,7 @@ import Loader from "./components/WebsiteComponents/Loader/Loader";
 import DeliveryList from "./pages/AdminPages/DeliveryList/DeliveryList";
 import OrdersCompletedList from "./pages/AdminPages/OrdersCompletedList/OrdersCompletedList";
 import CustomerList from "./pages/AdminPages/CustomerList/CustomerList";
+import MessageList from "./pages/AdminPages/MessageList/MessageList";
 
 const App = () => {
   const [user, setUser] = useState();
@@ -175,6 +176,10 @@ const App = () => {
 
             <Route path="/orderscompleted">
               <Route index element={ <OrdersCompletedList /> } />
+            </Route>
+
+            <Route path="/messages">
+              <Route index element={ <MessageList /> } />
             </Route>
             
             <Route path="*" element={<Home />}></Route>

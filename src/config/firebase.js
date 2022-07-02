@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import "firebase/messaging";
 
 const firebaseConfig = {
     apiKey: "AIzaSyANrj-XVI_mlUXspQjYNisEqj-80K2f5OA",
@@ -15,9 +16,10 @@ const firebaseConfig = {
   const auth = firebase.auth();
   const db = firebaseApp.firestore();
   const storage = firebase.storage();
-
+  const messaging = firebase.messaging();
   export {
       auth,
       db,
-      storage
+      storage,
+      messaging
   }

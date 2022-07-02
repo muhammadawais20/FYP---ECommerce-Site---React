@@ -65,7 +65,7 @@ const NewAdmin = ({ title }) => {
 
                             adminImg: url
                         }).then(() => {
-                            toast.success('User Data Submission Successfully!');
+                            toast.success('Admin Data Submission Successfully!');
                             setAdminName('');
                             setUsername('');
                             setEmail('');
@@ -76,7 +76,7 @@ const NewAdmin = ({ title }) => {
 
                             document.getElementById('fileUpload').value = ('');
                         }).catch(() => {
-                            toast.error('User Data Submission Failed!')
+                            toast.error('Admin Data Submission Failed!')
                         });
                     })
             })
@@ -130,7 +130,7 @@ const NewAdmin = ({ title }) => {
 
                             <div className="formInput">
                                 <label>Password</label>
-                                <input type="text" onChange={event => setPassword(event.target.value)} required />
+                                <input type="password" onChange={event => setPassword(event.target.value)} required />
                             </div>
 
                             <div className="formInput">

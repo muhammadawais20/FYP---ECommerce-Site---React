@@ -50,13 +50,13 @@ const OrdersCompleted = () => {
                         <TableRow>
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>Order Date</TableCell>
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>Order Id</TableCell>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>Shipment Time</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>Shipment Time</TableCell>
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>Shipment Id</TableCell>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>User Name</TableCell>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>Phone</TableCell>
-                            <TableCell sx={{ minWidth: 50 }} className='tableData'>City</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>User Name</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>Phone</TableCell>
+                            <TableCell sx={{ minWidth: 25 }} className='tableData'>City</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Email</TableCell>
-                            <TableCell sx={{ minWidth: 400 }} className='tableData'>Product Details</TableCell>
+                            <TableCell sx={{ minWidth: 250 }} className='tableData'>Product Details</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -77,10 +77,10 @@ const OrdersCompleted = () => {
 
                                             <Fragment key={index}>
                                                 <div className='productDetails'>
-                                                    <TableCell sx={{ minWidth: 100 }} className='tableData1'>{item.productId}</TableCell>
-                                                    <TableCell sx={{ minWidth: 100 }} className='tableData1'>{item.productName}</TableCell>
+                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
+                                                    {/* <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productName}</TableCell> */}
                                                     <TableCell sx={{ minWidth: 100 }} className='tableData1'>Rs. {item.productPrice}</TableCell>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>
+                                                    <TableCell sx={{ minWidth: 25 }} className='tableData1'>
                                                         <div className="orderImageCell">
                                                             <img src={item.productImg} alt="Product" className="orderImage" />
                                                         </div>

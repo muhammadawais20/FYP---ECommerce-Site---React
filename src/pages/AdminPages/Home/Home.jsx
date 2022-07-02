@@ -5,7 +5,6 @@ import NormalChart from "../../../components/AdminComponents/NormalChart/NormalC
 import Sidebar from "../../../components/AdminComponents/Sidebar/Sidebar";
 import DetailsTable from "../../../components/AdminComponents/DetailsTable/DetailsTable";
 import Widgets from "../../../components/AdminComponents/Widgets/Widgets";
-import { useSelector } from "react-redux";
 import './home.scss';
 import { Grid } from "@mui/material";
 
@@ -20,10 +19,10 @@ const Home = () => {
                     <Navbar />
 
                     <div className="widgets">
-                        <Widgets type="users" />
-                        <Widgets type="orders" />
-                        <Widgets type="earnings" />
-                        <Widgets type="balance" />
+                        <Widgets type="customers" path="/customers" />
+                        <Widgets type="orders" path="/orders" />
+                        <Widgets type="earnings" path="/" />
+                        <Widgets type="balance" path="/" />
                     </div>
 
                     <div className="charts">

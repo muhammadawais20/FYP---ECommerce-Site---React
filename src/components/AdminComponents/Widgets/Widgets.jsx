@@ -5,18 +5,14 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CreditScoreOutlinedIcon from '@mui/icons-material/CreditScoreOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { db } from '../../../config/firebase';
 import { Link } from 'react-router-dom';
 
-const Widgets = ({ type }) => {
+const Widgets = ({ type, path }) => {
 
     const [order, setOrder] = useState([]);
-
-//to do 
-    let ordersQuantity = order.length;
-    // let ordersDate = order.map (orderDetails => orderDetails.OrderInfo.orderDate);
-    
-    // console.log("date", ordersDate);
+    const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
         getOrder();
@@ -40,16 +36,51 @@ const Widgets = ({ type }) => {
         }
     }
 
+    useEffect(() => {
+        getCustomers();
+    }, [])
+
+    async function getCustomers() {
+        try {
+            //setLoadig
+            const getCustomersFromFirebase = [];
+            db.collection('ordersCompleted').get().then(snapshot => {
+                snapshot.forEach(customers => {
+                    getCustomersFromFirebase.push({ ...customers.data() })
+                    //setLoading
+                })
+                setCustomers(getCustomersFromFirebase)
+            })
+        }
+        catch (error) {
+            //setLoading
+            console.log("Error");
+        }
+    }
+
+    //to do 
+    let ordersQuantity = order.length;
+    let ordersCompleted = customers.length;
+    // let ordersDate = order.map (orderDetails => orderDetails.OrderInfo.orderDate);
+
+    // console.log("date", ordersDate);
+
+
+    const customersEmail = customers.map((cus) => {
+        return (cus.ordersOnDelivery.orders.OrderInfo.email);
+    })
+
+    let uniqueCustomersByEmail = [...new Set(customersEmail)]
+    let customersQuantity = uniqueCustomersByEmail.length
+
     let categoryDetails;
-    let amount = 100;
-    let diff = 50;
 
     switch (type) {
-        case "users":
+        case "customers":
             categoryDetails = {
-                categoryTitle: "USERS",
-                isAmount: false,
-                linkToAll: "See all users",
+                categoryTitle: "CUSTOMERS",
+                isAmount: customersQuantity,
+                linkToAll: "See all customers",
                 icon: (
                     <PersonOutlineOutlinedIcon
                         className="icon"
@@ -65,7 +96,20 @@ const Widgets = ({ type }) => {
         case "orders":
             categoryDetails = {
                 categoryTitle: "ORDERS",
-                isAmount: ordersQuantity,
+                pendingIcon: <ShoppingCartOutlinedIcon
+                    style={{
+                        color: "goldenrod",
+                        fontSize: "large"
+                    }}
+                />,
+                isAmount: `${ordersQuantity}`,
+                completedIcon: <DoneAllIcon
+                    style={{
+                        color: "green",
+                        fontSize: "large"
+                    }}
+                />,
+                completedOrders: `${ordersCompleted}`,
                 linkToAll: "View all orders",
                 icon: (
                     <ShoppingCartOutlinedIcon
@@ -124,14 +168,16 @@ const Widgets = ({ type }) => {
             <div className="leftSideOfWidget">
                 <span className="categoryTitle">{categoryDetails.categoryTitle}</span>
                 {/* <span className="categoryCount">{categoryDetails.isAmount && "Rs."} {amount}</span> */}
-                <span className="categoryCount">{categoryDetails.isAmount}</span>
-                <Link to="/orders" style={{ textDecoration: "none" }}>
+                <span className="categoryCount">{categoryDetails.pendingIcon}  {categoryDetails.isAmount}</span>
+                <span className="categoryCount">{categoryDetails.completedIcon}  {categoryDetails.completedOrders}</span>
+
+                <Link to={path} style={{ textDecoration: "none" }}>
                     <span className="seeAllUsers">{categoryDetails.linkToAll}</span>
                 </Link>
 
             </div>
             <div className="rightSideOfWidget">
-                <span className="percentageOfUsers positive"><ArrowDropUpOutlinedIcon className="arrowIcon" />{diff}%</span>
+                <span className="percentageOfUsers positive"><ArrowDropUpOutlinedIcon className="arrowIcon" />{5}%</span>
                 <span className="icon">{categoryDetails.icon}</span>
             </div>
         </div>
