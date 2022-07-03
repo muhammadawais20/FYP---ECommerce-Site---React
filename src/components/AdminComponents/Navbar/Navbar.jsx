@@ -29,7 +29,6 @@ const Navbar = () => {
                     //setLoading
                 })
                 setAdmin(getAdminFromFirebase)
-                console.log('Admin =>', getAdminFromFirebase)
             })
         }
         catch (error) {

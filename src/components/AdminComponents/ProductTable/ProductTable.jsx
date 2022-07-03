@@ -43,8 +43,6 @@ const ProductTable = () => {
                     //setLoadig
                 })
                 setProduct(getProductFromFirebase)
-                console.log('User =>', getProductFromFirebase)
-
             })
         }
         catch (error) {
@@ -54,7 +52,6 @@ const ProductTable = () => {
     }
 
     const deleteHandler = async (products) => {
-        console.log(products)
         try {
             db.collection("Products").doc(products.productId).delete({
             })
@@ -66,7 +63,6 @@ const ProductTable = () => {
     }
 
     const editHandler = async (products) => {
-        console.log(products)
         try {
             db.collection("Products").doc(products.productId).update({
                 productPrice: price,
@@ -148,6 +144,7 @@ const ProductTable = () => {
                             <TableCell sx={{ minWidth: 100 }} className='tableData'>Product Quantity</TableCell>
                             <TableCell sx={{ minWidth: 100 }} className='tableData'>Original Price</TableCell>
                             <TableCell sx={{ minWidth: 100 }} className='tableData'>Product Price</TableCell>
+                            <TableCell sx={{ minWidth: 100 }} className='tableData'>Profit</TableCell>
                             <TableCell sx={{ minWidth: 150 }} className='tableData'>Description</TableCell>
                         </TableRow>
                     </TableHead>
@@ -166,6 +163,7 @@ const ProductTable = () => {
                                 <TableCell className='tableData' style={{ textAlign: 'center' }} >{products.productQuantity}</TableCell>
                                 <TableCell className='tableData' style={{ textAlign: 'center' }} >{products.originalPrice}</TableCell>
                                 <TableCell className='tableData' style={{ textAlign: 'center' }} >{products.productPrice}</TableCell>
+                                <TableCell className='tableData' style={{ textAlign: 'center' }} >{products.profit}</TableCell>
                                 <TableCell className='tableData'>{products.productDescription}</TableCell>
                                 <TableCell className='view-delete'>
                                 </TableCell>

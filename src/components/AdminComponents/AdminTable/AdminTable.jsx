@@ -31,7 +31,6 @@ const AdminTable = () => {
                     //setLoading
                 })
                 setAdmin(getUserFromFirebase)
-                console.log('Admin =>', getUserFromFirebase)
             })
         }
         catch (error) {
@@ -42,7 +41,6 @@ const AdminTable = () => {
 
     
     const deleteHandler = async (admins) => {
-        console.log(admins)
         try {
             db.collection("admins").doc(admins.adminId).delete({
             })

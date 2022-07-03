@@ -27,7 +27,6 @@ const OrdersCompleted = () => {
                     //setLoading
                 })
                 setOrdersCompleted(getOrdersCompletedFromFirebase)
-                console.log('getOrdersCompletedFromFirebase =>', getOrdersCompletedFromFirebase)
             })
         }
         catch (error) {
@@ -74,26 +73,30 @@ const OrdersCompleted = () => {
 
                                     {
                                         order.ordersOnDelivery.orders.OrderInfo.cartitems.map((item, index) => (
-
                                             <Fragment key={index}>
                                                 <div className='productDetails'>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
+                                                    <TableCell sx={{ minWidth: 100 }} className='tableData1'>{item.productId}</TableCell>
                                                     {/* <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productName}</TableCell> */}
-                                                    <TableCell sx={{ minWidth: 100 }} className='tableData1'>Rs. {item.productPrice}</TableCell>
+                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>Rs. {item.originalPrice}</TableCell>
+                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>Rs. {item.productPrice}</TableCell>
+                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>Rs. {item.profit}</TableCell>
+                                                    {/* <TableCell sx={{ minWidth: 100 }} className='tableData1'> {`${parseInt(item.productPrice)}` - `${parseInt(item.originalPrice)}`}</TableCell> */}
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>
                                                         <div className="orderImageCell">
                                                             <img src={item.productImg} alt="Product" className="orderImage" />
                                                         </div>
                                                     </TableCell>
-
                                                 </div>
                                             </Fragment>
                                         ))
                                     }
+                                  
+
 
                                     <TableCell key={index} className='totalAmount'>
                                         <div className='amount'>Total Amount: Rs. {order.ordersOnDelivery.orders.OrderInfo.AddressInfo.totalAmount}</div>
                                     </TableCell>
+
 
                                 </TableRow>
                             </Fragment>

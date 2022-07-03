@@ -58,6 +58,7 @@ const NewProducts = ({ title }) => {
                     productDescription: productDescription,
                     originalPrice: Number(originalProductPrice),
                     productPrice: Number(productPrice),
+                    profit: Number(productPrice) - Number(originalProductPrice),
                     productQuantity: Number(productQuantity),
                     productImg: url
                 }).then(() => {

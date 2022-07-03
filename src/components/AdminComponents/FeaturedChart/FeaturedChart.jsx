@@ -45,7 +45,6 @@ const FeaturedChart = () => {
                     //setLoading
                 })
                 setTotalAmount(getTotalAmountFromFirebase)
-                console.log('totalAmount =>', getTotalAmountFromFirebase)
             })
         }
         catch (error) {

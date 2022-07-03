@@ -28,7 +28,6 @@ const Delivery = () => {
                     //setLoading
                 })
                 setDelivery(getDeliveryOrdersFromFirebase)
-                console.log('getDeliveryOrdersFromFirebase =>', getDeliveryOrdersFromFirebase)
             })
         }
         catch (error) {
@@ -38,16 +37,15 @@ const Delivery = () => {
     }
 
     const orderHandlerForShip = async (ordersOnDelivery) => {
-        console.log(ordersOnDelivery)
 
-        let shipmentId = ordersOnDelivery.shipmentId;
-        let shipmentTime = ordersOnDelivery.shipmentTime;
+        // let shipmentId = ordersOnDelivery.shipmentId;
+        // let shipmentTime = ordersOnDelivery.shipmentTime;
 
         try {
             db.collection("ordersCompleted").doc(ordersOnDelivery.orders.OrderInfo.orderId).set({
                 ordersOnDelivery,
-                shipmentId,
-                shipmentTime
+                // shipmentId,
+                // shipmentTime
             })
             toast.success("Order Shipped Successfully!")
         } catch (error) {
@@ -118,7 +116,9 @@ const Delivery = () => {
                                                 <div className='productDetails'>
                                                     <TableCell sx={{ minWidth: 100 }} className='tableData1'>{item.productId}</TableCell>
                                                     {/* <TableCell sx={{ minWidth: 25 }} className='tableData1'>{item.productName}</TableCell> */}
+                                                    <TableCell sx={{ minWidth: 100 }} className='tableData1'>Rs. {item.originalPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 100 }} className='tableData1'>Rs. {item.productPrice}</TableCell>
+                                                    <TableCell sx={{ minWidth: 100 }} className='tableData1'>Rs. {item.profit}</TableCell>
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>
                                                         <div className="orderImageCell">
                                                             <img src={item.productImg} alt="Product" className="orderImage" />

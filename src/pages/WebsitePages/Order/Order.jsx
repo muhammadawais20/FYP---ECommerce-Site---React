@@ -24,7 +24,6 @@ const OrderPage = () => {
                     setLoading(false)
                 })
                 setOrders(getOrdersFromFirebase)
-                console.log('Orders =>', getOrdersFromFirebase)
             })
         }
         catch (error) {
@@ -47,7 +46,6 @@ const OrderPage = () => {
                     setLoading(false)
                 })
                 setDelivery(getOrdersDeliveryFromFirebase)
-                console.log('delivery =>', getOrdersDeliveryFromFirebase)
             })
         }
         catch (error) {
@@ -97,7 +95,7 @@ const OrderPage = () => {
                 </div>
 
                 <div className='orderList'>
-                    <h3>To Delivery</h3>
+                    <h3>On Delivery</h3>
                 
                 {delivery.filter(obj => obj.orders.OrderInfo.userid == userid).map(del => {
                     

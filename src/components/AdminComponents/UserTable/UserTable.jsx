@@ -31,7 +31,6 @@ const UserTable = () => {
                     //setLoading
                 })
                 setUser(getUserFromFirebase)
-                console.log('User =>', getUserFromFirebase)
             })
         }
         catch (error) {
@@ -41,7 +40,6 @@ const UserTable = () => {
     }
 
     const deleteHandler = async (users) => {
-        console.log(users)
         try {
             db.collection("users").doc(users.userId).delete({
             })

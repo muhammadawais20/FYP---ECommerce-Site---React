@@ -27,7 +27,6 @@ const Customers = () => {
                     //setLoading
                 })
                 setOrdersCompleted(getOrdersCompletedFromFirebase)
-                console.log('getOrdersCompletedFromFirebase =>', getOrdersCompletedFromFirebase)
             })
         }
         catch (error) {

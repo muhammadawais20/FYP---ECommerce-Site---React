@@ -86,7 +86,6 @@ const CheckOut = () => {
             zipcode,
             totalAmount,
         }
-        console.log(AddressInfo)
 
         const OrderInfo = {
             cartitems,

@@ -64,7 +64,16 @@ const Widgets = ({ type, path }) => {
     // let ordersDate = order.map (orderDetails => orderDetails.OrderInfo.orderDate);
 
     // console.log("date", ordersDate);
-
+ 
+    const profit =  customers.map((getProfit) => {
+         return getProfit.ordersOnDelivery.orders.OrderInfo.cartitems.map((e) => {
+            return e.profit;
+          }).reduce(function (firstOrderProfit1,firstOrderProfit2) {
+            return firstOrderProfit1 + firstOrderProfit2;
+        }, 0)
+        }).reduce(function(remainingOrderProfit1, remainingOrderProfit2) {
+            return remainingOrderProfit1 + remainingOrderProfit2;
+        }, 0)
 
     const customersEmail = customers.map((cus) => {
         return (cus.ordersOnDelivery.orders.OrderInfo.email);
@@ -126,7 +135,7 @@ const Widgets = ({ type, path }) => {
         case "earnings":
             categoryDetails = {
                 categoryTitle: "EARNINGS",
-                isAmount: true,
+                isAmount: `Rs. ${profit}`,
                 linkToAll: "View net earnings",
                 icon: (
                     <CreditScoreOutlinedIcon
