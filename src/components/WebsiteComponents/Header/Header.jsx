@@ -4,7 +4,6 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../../config/firebase';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-
 import "./Header.css";
 
 

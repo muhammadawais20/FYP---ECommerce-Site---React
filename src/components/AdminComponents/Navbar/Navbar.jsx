@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../config/firebase';
 import './navbar.scss';
-import avatarImage from '../../../image.jpg';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LanguageIcon from '@mui/icons-material/Language';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlined';
@@ -28,7 +26,7 @@ const Navbar = () => {
                     getAdminFromFirebase.push({ ...admin.data() })
                     //setLoading
                 })
-                setAdmin(getAdminFromFirebase)
+                setAdmin(getAdminFromFirebase);
             })
         }
         catch (error) {
@@ -49,9 +47,6 @@ const Navbar = () => {
                         <DarkModeOutlinedIcon className='navIcon' />
                     </div>
                     <div className="item">
-                        <FullscreenExitOutlinedIcon className='navIcon' />
-                    </div>
-                    <div className="item">
                         <NotificationsNoneOutlinedIcon className='navIcon' />
                         <div className="counter">5</div>
                     </div>
@@ -59,11 +54,9 @@ const Navbar = () => {
                         <ChatIcon className='navIcon' />
                         <div className="counter">10</div>
                     </div>
+                    
                     <div className="item">
-                        <ListIcon className='navIcon' />
-                    </div>
-                    <div className="item">
-                        <img src= {admin.adminImg} alt='Avatar' className='avatar' />
+                        <img src= {admin.map(e => e.adminImg)} alt='Avatar' className='avatar' />
                     </div>
                     
                 </div>

@@ -130,7 +130,7 @@ const CheckOut = () => {
 
         let initialAmount = 0
         cartitems.forEach(cartitem => {
-            initialAmount = parseInt(initialAmount) + parseInt(cartitem.productPrice);
+            initialAmount = parseInt(initialAmount) + parseInt(cartitem.productPrice * cartitem.productQuantity);
         });
         setTotalAmount(initialAmount)
     }, [cartitems])

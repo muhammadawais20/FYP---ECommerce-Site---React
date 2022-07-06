@@ -7,12 +7,13 @@ const initialState = {
     quantity: 0
 }
 
-const cartRerducer = (state = initialState, action) => {
+const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
             return {
                 ...state,
-                cartitems: [...state.cartitems, action.payload]
+                // cartitems: [...state.cartitems, action.payload]
+                cartitems: action.payload
             }
 
 
@@ -29,34 +30,34 @@ const cartRerducer = (state = initialState, action) => {
                 cartitems: action.payload
             }
         case 'currentUser':
-                return {
+            return {
                 ...state,
                 user: action.payload
             }
         case 'adminHome':
-                return {
+            return {
                 ...state,
                 admin: action.payload
             }
         case 'setLoggedIn':
-                return{
-                    ...state,
-                    loggedIn: action.loggedIn
-                }
+            return {
+                ...state,
+                loggedIn: action.loggedIn
+            }
         case 'setLoggedOut':
-                return{
-                    ...state,
-                    loggedIn: action.loggedIn,
-                    adminStatus: action.adminStatus
-                }
+            return {
+                ...state,
+                loggedIn: action.loggedIn,
+                adminStatus: action.adminStatus
+            }
         case 'setAdmin':
-                return{
-                    ...state,
-                    adminStatus: action.adminStatus
-                }
+            return {
+                ...state,
+                adminStatus: action.adminStatus
+            }
         default:
             return state
     }
 }
 
-export default cartRerducer
+export default cartReducer;

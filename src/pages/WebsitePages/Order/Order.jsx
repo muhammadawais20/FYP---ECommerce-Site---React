@@ -73,6 +73,7 @@ const OrderPage = () => {
                                 <tr>
                                     <th>Product</th>
                                     <th>Name</th>
+                                    <th>Quantity</th>
                                     <th>Price</th>
                                 </tr>
                             </thead>
@@ -82,8 +83,8 @@ const OrderPage = () => {
                                         return <tr key={index}>
                                             <td><img src={item.productImg} height="80" width="80" /></td>
                                             <td>{item.productName}</td>
-                                            <td>{item.productPrice}</td>
-
+                                            <td>{item.productQuantity}</td>
+                                            <td>{`${item.productPrice}`  * `${item.productQuantity}`}</td>
                                         </tr>
                                     })
                                 }
@@ -106,6 +107,7 @@ const OrderPage = () => {
                                 <tr>
                                     <th>Product</th>
                                     <th>Name</th>
+                                    <th>Quantity</th>
                                     <th>Price</th>
                                 </tr>
                             </thead>
@@ -115,8 +117,8 @@ const OrderPage = () => {
                                         return <tr key={index}>
                                             <td><img src={item.productImg} height="80" width="80" /></td>
                                             <td>{item.productName}</td>
+                                            <td>{`${item.productPrice}`  * `${item.productQuntity}`}</td>
                                             <td>{item.productPrice}</td>
-
                                         </tr>
                                     })
                                 }

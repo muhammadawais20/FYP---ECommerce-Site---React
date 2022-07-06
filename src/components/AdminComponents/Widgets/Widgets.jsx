@@ -67,7 +67,7 @@ const Widgets = ({ type, path }) => {
  
     const profit =  customers.map((getProfit) => {
          return getProfit.ordersOnDelivery.orders.OrderInfo.cartitems.map((e) => {
-            return e.profit;
+            return (parseInt(e.profit) * parseInt(e.productQuantity));
           }).reduce(function (firstOrderProfit1,firstOrderProfit2) {
             return firstOrderProfit1 + firstOrderProfit2;
         }, 0)

@@ -23,7 +23,7 @@
 .cart-container .titles {
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr  1fr;
     column-gap: 0.5rem;
 }
 

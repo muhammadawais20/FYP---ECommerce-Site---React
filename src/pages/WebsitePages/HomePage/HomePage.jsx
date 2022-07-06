@@ -47,8 +47,18 @@ const Homepages = ({ user }) => {
 
   const addToCart = (product) => {
     console.log("onClick Product => ", product.productQuantity)
+    let newArry = [...cartitems]
     if (loggedIn == true) {
-      {product.productQuantity == 0 ? toast("Product is out of Stock!") : dispatch({ type: 'ADD_TO_CART', payload: product }, toast.success(`${product.productName} added to cart`));}
+      var arry = {
+        productName: product.productName,
+        productPrice: product.productPrice,
+        productImg: product.productImg,
+        productQuantity: 1,
+        originalPrice: product.originalPrice,
+        profit: product.profit
+      }
+      newArry.push(arry)
+      { product.productQuantity == 0 ? alert("Product is out of Stock") : dispatch({ type: 'ADD_TO_CART', payload: newArry }, toast.success(`${product.productName} added to cart`)); }
     }
     else {
       navigate('/weblogin')

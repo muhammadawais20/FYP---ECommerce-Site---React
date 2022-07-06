@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../../config/firebase';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../../components/WebsiteComponents/Loader/Loader';
 import Layout from '../../../components/WebsiteComponents/Layout/Layout';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import './ProductInfo.css'
 
 
@@ -16,6 +17,7 @@ const ProductInfo = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { productid } = useParams();
@@ -42,28 +44,43 @@ const ProductInfo = () => {
   }
 
   useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem('cartitems', JSON.stringify(cartitems))
   }, [cartitems])
+
   const addToCart = (product) => {
+    var newArry = [...cartitems];
+    // console.log(cartitems)
+    console.log(newArry)
     if (loggedIn == true) {
       var arry = {
         productName: product.productName,
         productPrice: product.productPrice,
         productImg: product.productImg,
-        productQuntity: quantity,
+        productQuantity: quantity,
+        originalPrice: product.originalPrice,
+        profit: product.profit,
+        productId: product.productId
       }
-      { product.productQuantity == 0 ? alert("Product is out of Stock") : dispatch({ type: 'ADD_TO_CART', payload: product }, toast.success(`${product.productName} added to cart`)); }
+      newArry.push(arry)
+      { product.productQuantity == 0 || arry.productQuantity == 0 ? toast.warn("Please select the product") : dispatch({ type: 'ADD_TO_CART', payload: newArry }, toast.success(`${product.productName} added to cart`)); }
     } else {
       navigate('/weblogin')
     }
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const handleBuyNow = () => {
+    navigate('/checkOut')
+  }
 
   const handleDec = () => {
-    setQuantity(quantity - 1)
+    if (quantity > 0) {
+      setQuantity(quantity - 1, { setDisabled: true });
+
+    }
   }
   const handleInc = () => {
     setQuantity(quantity + 1)
@@ -71,13 +88,19 @@ const ProductInfo = () => {
   return (
     <Layout>
       <Container fluid="md">
-        <div className='productInfo-container'>
+        <div className='productInfo-container' >
           {loading && (<Loader />)}
+          <div className='backward-link'>
+            <Link to='/'>
+              <ArrowBackIcon style={{ fill: 'black', size: '17px' }} />
+              <span className='backward-link-text'>Back to Home</span>
+            </Link>
+          </div>
           {
             product.map((product, index) => {
               return (
-                <>
-                  <div className="container my-5" key={index}>
+                <div key={index}>
+                  <div className="container my-5">
                     <div className="card row flex-row">
                       <img className="col-lg-4 card-img-start img-fluid p-0 pro-img" src={product.productImg} />
                       <div className="col-lg-8 card-body">
@@ -90,9 +113,7 @@ const ProductInfo = () => {
                         </div>
 
                         <ul>
-                          <li>Product Code 240736</li>
-                          <li>
-                            Availability In Stock</li>
+                          <li>Availability In Stock</li>
                           <li>Delivery Time 3-5 Days</li>
                         </ul>
                         <div className='item-counter-container'>
@@ -105,6 +126,7 @@ const ProductInfo = () => {
                             type="submit"
                             className="buyBtn"
                             variant="contained"
+                            onClick={handleBuyNow}
                           >
                             BuyNow
                           </button>
@@ -123,7 +145,7 @@ const ProductInfo = () => {
                       </div>
                     </div>
                   </div>
-                </>
+                </div>
               )
             })
           }
