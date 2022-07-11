@@ -30,6 +30,8 @@ import DeliveryList from "./pages/AdminPages/DeliveryList/DeliveryList";
 import OrdersCompletedList from "./pages/AdminPages/OrdersCompletedList/OrdersCompletedList";
 import CustomerList from "./pages/AdminPages/CustomerList/CustomerList";
 import MessageList from "./pages/AdminPages/MessageList/MessageList";
+import ProfitList from "./pages/AdminPages/ProfitList/ProfitList";
+import BalanceList from "./pages/AdminPages/BalanceList/BalanceList";
 
 const App = () => {
   const [user, setUser] = useState();
@@ -160,7 +162,6 @@ const App = () => {
               <Route index element={ <CustomerList /> } />
             </Route>
             
-
             <Route path="/products">
               <Route index element={<ProductList />} />
               <Route path="newProduct" element={<NewProducts title="Add New Product" />} />
@@ -178,10 +179,18 @@ const App = () => {
               <Route index element={ <OrdersCompletedList /> } />
             </Route>
 
+            <Route path="/profit">
+              <Route index element={ <ProfitList /> } />
+            </Route>
+
+            <Route path="/balance">
+              <Route index element={ <BalanceList /> } />
+            </Route>
+
             <Route path="/messages">
               <Route index element={ <MessageList /> } />
             </Route>
-            
+          
             <Route path="*" element={<Home />}></Route>
           </Routes> :
 

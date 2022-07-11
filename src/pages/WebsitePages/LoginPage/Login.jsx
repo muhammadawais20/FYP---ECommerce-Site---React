@@ -109,15 +109,6 @@ const WebLogin = () => {
                   fullWidth required />
               </Grid>
             </Grid>
-            {/* <FormControlLabel
-              control={
-                <Checkbox
-                  name='checkedB'
-                  color='primary'
-                />
-              }
-              label="Remember Me"
-            /> */}
             <Button
               className='btnStyle'
               type='submit'

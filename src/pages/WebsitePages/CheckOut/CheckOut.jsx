@@ -51,7 +51,6 @@ const CheckOut = () => {
 
         let hours = twelveHours();
         let minutes = myDate.getMinutes();
-
         let currentTime = `${hours}:${minutes} ${amOrPm}`;
 
         return (today + ' ' + currentTime);
@@ -97,7 +96,6 @@ const CheckOut = () => {
 
         }; 
         
-        
         try {
             db.collection('orders').doc(orderId).set({
                 OrderInfo
@@ -114,7 +112,6 @@ const CheckOut = () => {
                 dispatch({ type: 'CLEAR_ALL_CART', payload: [] });
                 navigate('/');
             })
-
            
         } catch (error) {
             toast.error('Order Failed')
@@ -122,11 +119,6 @@ const CheckOut = () => {
     }
 
     useEffect(() => {
-
-        // let initialAmount = 0
-        // cartitems.reduce((initialAmount, prodPrice = cartitems.productPrice) => {
-        //     initialAmount = (parseInt(initialAmount) + parseInt(prodPrice));
-        // }, 0)
 
         let initialAmount = 0
         cartitems.forEach(cartitem => {
@@ -259,17 +251,6 @@ const CheckOut = () => {
                         <Paper variant="outlined" square className='gridRight'>
                             <h1>Your Cart {cartitems.length}</h1>
                             <div className='Back-cart'>
-                                {/* {cartitems.map((item, index) => {
-                                    return (
-                                        <div className='cart-item-final' key={index}>
-                                            <div className='cart-product'>
-                                                <span>{item.productName}</span>
-                                                <span>{item.productPrice}</span>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                    )
-                                })} */}
                                 <Link to='/cartpage'>
                                     <ArrowBackIcon style={{ fill: 'gray' }} />
                                     <span>Back to  Shopping Cart</span>
@@ -284,4 +265,4 @@ const CheckOut = () => {
     )
 }
 
-export default CheckOut
+export default CheckOut;

@@ -12,13 +12,13 @@ const NewAdmin = ({ title }) => {
 
     const [adminImage, setAdminImage] = useState(null);
     const [adminName, setAdminName] = useState("");
-   const [userName, setUsername] = useState("");
+    const [userName, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
     const [country, setCountry] = useState("");
-    
+
     const [error, setError] = useState("");
 
     const types = ['image/png', 'image/jpeg'];
@@ -31,7 +31,7 @@ const NewAdmin = ({ title }) => {
         }
         else {
             setAdminImage(null)
-            toast.error('Please select a valid image type png or jpeg format!' , {
+            toast.error('Please select a valid image type png or jpeg format!', {
                 position: 'top-center',
                 autoClose: 5000
             })
@@ -62,7 +62,6 @@ const NewAdmin = ({ title }) => {
                             address: address,
                             country: country,
                             phone: phone,
-
                             adminImg: url
                         }).then(() => {
                             toast.success('Admin Data Submission Successfully!');
@@ -142,10 +141,10 @@ const NewAdmin = ({ title }) => {
                                 <label>Country</label>
                                 <input type="text" onChange={event => setCountry(event.target.value)} placeholder="Pakistan" required />
                             </div>
-                          
+
 
                             <div>
-                                <button className="sendButton">Send</button>
+                                <button type="submit" className="sendButton">Send</button>
                             </div>
 
                         </form>

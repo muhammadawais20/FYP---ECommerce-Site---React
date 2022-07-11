@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { toast } from 'react-toastify';
+import Loader from '../../WebsiteComponents/Loader/Loader';
+
 
 const OrderDetails = () => {
 
@@ -66,12 +68,12 @@ const OrderDetails = () => {
 
     async function getOrder() {
         try {
-            //setLoadig
+            <Loader />
             const getOrderFromFirebase = [];
             db.collection('orders').get().then(snapshot => {
                 snapshot.forEach(order => {
                     getOrderFromFirebase.push({ ...order.data() })
-                    //setLoading
+                    {<Loader />}
                 })
                 setOrder(getOrderFromFirebase)
             })
@@ -115,18 +117,6 @@ const OrderDetails = () => {
         setTimeout(deleteHandler(orders), 50000);
     }
 
-
-    // const deliverAndDelete = (orders) => {
-    //     orderHandlerForDelivery(orders);
-    //     deleteHandler(orders);
-    // }
-
-    // const disableButton =() => {
-    //     var btn = document.getElementById('deliver');
-    //     btn.disabled = true;
-    //     btn.innerText = 'Posting...'
-    // }
-
     return (
         <div className='orderTable'>
             <div className="orderTableTitle">
@@ -155,20 +145,6 @@ const OrderDetails = () => {
                                     <TableCell className='tableData'>{orders.OrderInfo.AddressInfo.phonenumber}</TableCell>
                                     <TableCell className='tableData'>{orders.OrderInfo.AddressInfo.city}</TableCell>
                                     <TableCell className='tableData'>{orders.OrderInfo.email}</TableCell>
-                                    {/* 
-                                    <Fragment key={index}>
-                                        <div className='productDetails'>
-                                            <TableCell sx={{ minWidth: 100 }} className='tableData1'>{orders.cartitems.productId}</TableCell>
-                                            <TableCell sx={{ minWidth: 50 }} className='tableData1'>{orders.cartitems.productName}</TableCell>
-                                            <TableCell sx={{ minWidth: 100 }} className='tableData1'>Rs. {orders.cartitems.productPrice}</TableCell>
-                                            <TableCell sx={{ minWidth: 50 }} className='tableData1'>
-                                                <div className="orderImageCell">
-                                                    <img src={orders.cartitems.productImg} alt="Product" className="orderImage" />
-                                                </div>
-                                            </TableCell>
-                                        </div>
-
-                                    </Fragment> */}
 
                                     {
                                         orders.OrderInfo.cartitems.map((item, index) => (
@@ -176,7 +152,6 @@ const OrderDetails = () => {
                                             <Fragment key={index}>
                                                 <div className='productDetails'>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
-                                                    {/* <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productName}</TableCell> */}
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>RP: {item.originalPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>SP: {item.productPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>Qty: {item.productQuantity}</TableCell>

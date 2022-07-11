@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import './ordersCompleted.scss';
+import './profitTable.scss';
 import { db } from '../../../config/firebase';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,24 +9,24 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const OrdersCompleted = () => {
+const Profit = () => {
 
-    const [ordersCompleted, setOrdersCompleted] = useState([]);
+    const [profit, setProfit] = useState([]);
 
     useEffect(() => {
-        getOrdersCompleted();
+        getProfit();
     }, [])
 
-    async function getOrdersCompleted() {
+    async function getProfit() {
         try {
             //setLoadig
-            const getOrdersCompletedFromFirebase = [];
+            const getProfitFromFirebase = [];
             db.collection('ordersCompleted').get().then(snapshot => {
-                snapshot.forEach(ordersCompleted => {
-                    getOrdersCompletedFromFirebase.push({ ...ordersCompleted.data() })
+                snapshot.forEach(profit => {
+                    getProfitFromFirebase.push({ ...profit.data() })
                     //setLoading
                 })
-                setOrdersCompleted(getOrdersCompletedFromFirebase)
+                setProfit(getProfitFromFirebase)
             })
         }
         catch (error) {
@@ -40,7 +40,7 @@ const OrdersCompleted = () => {
         <div className="ordersTable">
 
             <div className="ordersCompletedTableTitle">
-                Orders Completed
+                Profit Earned Against Orders
             </div>
 
             <TableContainer component={Paper} className='orderTableTitle'>
@@ -55,11 +55,11 @@ const OrdersCompleted = () => {
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>Phone</TableCell>
                             <TableCell sx={{ minWidth: 25 }} className='tableData'>City</TableCell>
                             <TableCell sx={{ minWidth: 50 }} className='tableData'>Email</TableCell>
-                            <TableCell sx={{ minWidth: 200 }} className='tableData'>Product Details (In Rs.)</TableCell>
+                            <TableCell sx={{ minWidth: 200 }} className='tableData'>Profit</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {ordersCompleted.map((order, index) => (
+                        {profit.map((order, index) => (
                             <Fragment>
                                 <TableRow key={index}>
                                     <TableCell className='tableData'>{order.ordersOnDelivery.orders.OrderInfo.orderDate}</TableCell>
@@ -71,40 +71,21 @@ const OrdersCompleted = () => {
                                     <TableCell className='tableData'>{order.ordersOnDelivery.orders.OrderInfo.AddressInfo.city}</TableCell>
                                     <TableCell className='tableData'>{order.ordersOnDelivery.orders.OrderInfo.email}</TableCell>
 
-                                    {
-                                        order.ordersOnDelivery.orders.OrderInfo.cartitems.map((item, index) => (
-                                            <Fragment key={index}>
-                                                <div className='productDetails'>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
-                                                    {/* <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productName}</TableCell> */}
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>RP: {item.originalPrice}</TableCell>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>SP: {item.productPrice}</TableCell>
-                                                    <TableCell sx={{ minWidth: 25 }} className='tableData1'>Qty: {item.productQuantity}</TableCell>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>Profit: {`${item.profit}` * `${item.productQuantity}`}</TableCell>
-                                                    {/* <TableCell sx={{ minWidth: 100 }} className='tableData1'> {`${parseInt(item.productPrice)}` - `${parseInt(item.originalPrice)}`}</TableCell> */}
-                                                    <TableCell sx={{ minWidth: 25 }} className='tableData1'>
-                                                        <div className="orderImageCell">
-                                                            <img src={item.productImg} alt="Product" className="orderImage" />
-                                                        </div>
-                                                    </TableCell>
-                                                </div>
-                                            </Fragment>
-                                        ))
-                                    }
-                                  
-                                    <TableCell key={index} className='totalAmount'>
-                                        <div className='amount'>Total Order Amount: Rs. {order.ordersOnDelivery.orders.OrderInfo.AddressInfo.totalAmount}</div>
+                                    <TableCell key={index} className='totalProfit'>
+                                    <Fragment key={index}>
                                         <div className='profit'>Total Profit: Rs. {
                                             order.ordersOnDelivery.orders.OrderInfo.cartitems
                                             .map((e) => {
                                                 return (parseInt(e.profit) * parseInt(e.productQuantity));
                                             })
-                                            .reduce(function (orderProfit1, orderProfit2) {
-                                                return orderProfit1 + orderProfit2;
+                                            .reduce(function (firstOrderProfit1, firstOrderProfit2) {
+                                                return firstOrderProfit1 + firstOrderProfit2;
                                             }, 0)
-                                        }
-                                        </div> 
+                                        }</div>
+                                          </Fragment>
                                     </TableCell>
+
+
                                 </TableRow>
                             </Fragment>
                         ))
@@ -116,4 +97,4 @@ const OrdersCompleted = () => {
     )
 }
 
-export default OrdersCompleted;
+export default Profit;

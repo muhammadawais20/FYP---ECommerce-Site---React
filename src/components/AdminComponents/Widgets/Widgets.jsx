@@ -8,8 +8,9 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { db } from '../../../config/firebase';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const Widgets = ({ type, path }) => {
+const Widgets = ({ type, path, profit, balance }) => {
 
     const [order, setOrder] = useState([]);
     const [customers, setCustomers] = useState([]);
@@ -58,22 +59,8 @@ const Widgets = ({ type, path }) => {
         }
     }
 
-    //to do 
     let ordersQuantity = order.length;
     let ordersCompleted = customers.length;
-    // let ordersDate = order.map (orderDetails => orderDetails.OrderInfo.orderDate);
-
-    // console.log("date", ordersDate);
- 
-    const profit =  customers.map((getProfit) => {
-         return getProfit.ordersOnDelivery.orders.OrderInfo.cartitems.map((e) => {
-            return (parseInt(e.profit) * parseInt(e.productQuantity));
-          }).reduce(function (firstOrderProfit1,firstOrderProfit2) {
-            return firstOrderProfit1 + firstOrderProfit2;
-        }, 0)
-        }).reduce(function(remainingOrderProfit1, remainingOrderProfit2) {
-            return remainingOrderProfit1 + remainingOrderProfit2;
-        }, 0)
 
     const customersEmail = customers.map((cus) => {
         return (cus.ordersOnDelivery.orders.OrderInfo.email);
@@ -88,7 +75,7 @@ const Widgets = ({ type, path }) => {
         case "customers":
             categoryDetails = {
                 categoryTitle: "CUSTOMERS",
-                isAmount: customersQuantity,
+                isAmount:  `Total: ${customersQuantity}`,
                 linkToAll: "See all customers",
                 icon: (
                     <PersonOutlineOutlinedIcon
@@ -117,6 +104,7 @@ const Widgets = ({ type, path }) => {
                         color: "green",
                         fontSize: "large"
                     }}
+                   
                 />,
                 completedOrders: `${ordersCompleted}`,
                 linkToAll: "View all orders",
@@ -136,7 +124,7 @@ const Widgets = ({ type, path }) => {
             categoryDetails = {
                 categoryTitle: "EARNINGS",
                 isAmount: `Rs. ${profit}`,
-                linkToAll: "View net earnings",
+                linkToAll: "View all earnings",
                 icon: (
                     <CreditScoreOutlinedIcon
                         className="icon"
@@ -153,7 +141,7 @@ const Widgets = ({ type, path }) => {
         case "balance":
             categoryDetails = {
                 categoryTitle: "BALANCE",
-                isAmount: true,
+                isAmount: `Rs. ${balance}`,
                 linkToAll: "See available details",
                 icon: (
                     <AccountBalanceWalletOutlinedIcon
@@ -169,7 +157,6 @@ const Widgets = ({ type, path }) => {
 
         case "default":
             break;
-
     }
 
     return (
