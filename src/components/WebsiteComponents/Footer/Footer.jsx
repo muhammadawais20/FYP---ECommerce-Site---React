@@ -35,8 +35,8 @@ const Footer = () => {
                     <div className="col-md-3 mb-md-0 mb-3">
                         <h5 className='Title'>About KhasDryFruits</h5>
                         <ul className="list-unstyled footerLinks" >
-                            <li><NavLink className='links' as={Link} to={"/aboutpage"}>About us</NavLink></li>
-                            <hr />
+                            {/* <li><NavLink className='links' as={Link} to={"/aboutpage"}>About us</NavLink></li>
+                            <hr /> */}
                             <li><NavLink className='links' as={Link} to={"/contactpage"}>Contact us</NavLink></li>
                             <hr />
                             <li><NavLink className='links' as={Link} to={"/privacypage"}>Privacy Policy</NavLink></li>

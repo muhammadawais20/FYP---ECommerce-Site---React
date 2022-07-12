@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { auth } from '../../../config/firebase';
-import { useNavigate, Link } from 'react-router-dom';
-import { Avatar, FormControlLabel, Grid, Paper, TextField, Checkbox, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { auth, db } from '../../../config/firebase';
+import { useNavigate, NavLink, Link } from 'react-router-dom';
+import { Avatar, FormControlLabel, Grid, Paper, TextField, Checkbox, Button, Typography, InputAdornment, IconButton } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
@@ -10,40 +10,31 @@ import './Login.css';
 
 const WebLogin = () => {
   const { loggedIn } = useSelector(state => state.cartReducer);
-  const [admin, setAdmin] = useState();
+  const [getAdmin, setGetAdmin] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // function adminStateChange() {
-  //   auth.onAuthStateChanged(function (admin) {
-  //     setAdmin(admin)
-  //     dispatch({
-  //       type: "adminHome",
-  //       payload: admin,
-  //     });
-  //   });
-  // }
-  // useEffect(() => {
-  //   adminStateChange()
-  // }, [admin]);
-
-
-  // function authChecker(user, component, path = "/") {
-  //   return user ? component : <Navigate to={path} />;
-  // }
   const LoginApp = async (e) => {
     e.preventDefault()
+
     try {
       const result = await auth.signInWithEmailAndPassword(email, password)
       localStorage.setItem('currentUser', JSON.stringify(result))
+      dispatch({
+        type: "currentUser",
+        payload: result.user,
+      });
       toast.success('Login Successfull', {
         position: 'bottom-left'
       })
+      console.log(result.user)
+
       setEmail('');
       setPassword('')
-      if (email === "awais20@gmail.com") {
+      let status = getUserFromFirebase.filter((e) => e.email == email)
+      if (status.length > 0) {
         dispatch({
           type: 'setAdmin',
           adminStatus: true,
@@ -52,6 +43,8 @@ const WebLogin = () => {
           type: 'setLoggedIn',
           loggedIn: false,
         })
+      localStorage.setItem('AdminStatus', true)
+      localStorage.setItem('LoggedIn', false)
         // adminStateChange()
         navigate('/adminHome')
       } else {
@@ -63,30 +56,39 @@ const WebLogin = () => {
           type: 'setAdmin',
           adminStatus: false,
         })
+        localStorage.setItem('LoggedIn', true )
+        localStorage.setItem('AdminStatus', false)
         navigate('/')
 
       }
     }
     catch (error) {
-      toast.error('Login Failed!')
+      toast.error('Login Failed')
     }
-
   }
+
+  const getUserFromFirebase = [];
+  db.collection('admins').get().then(snapshot => {
+    snapshot.forEach(admin => {
+      getUserFromFirebase.push({ ...admin.data() })
+    })
+  }
+  )
   return (
     <Layout>
       <Grid>
         <Paper elevation={10}
           style={{
             width: 280,
-            margin: '20px auto',
+            margin: '100px auto auto',
             padding: 20,
-            height: '70vh',
-            marginTop: 120
+            height: '60vh',
+            marginTop: '100px'
           }}>
           <form onSubmit={LoginApp}>
             <Grid align='center'>
               <Avatar className="avatarStyle"><LogoutOutlinedIcon /></Avatar>
-              <h2 >SIGN IN</h2>
+              <h2 >SIGN-IN</h2>
             </Grid>
             <Grid container direction={"column"} spacing={2}>
               <Grid item>
@@ -95,7 +97,7 @@ const WebLogin = () => {
                   name={email}
                   onChange={e => setEmail(e.target.value)}
                   label="Email"
-                  placeholder='Enter Email'
+                  placeholder='Enter email'
                   variant="outlined"
                   fullWidth required />
               </Grid>
@@ -104,29 +106,29 @@ const WebLogin = () => {
                   type='password'
                   onChange={e => setPassword(e.target.value)}
                   label="Password"
-                  placeholder='Enter Password'
+                  placeholder='Enter password'
                   variant="outlined"
-                  fullWidth required />
+                  fullWidth required
+                />
               </Grid>
             </Grid>
             <Button
-              className='btnStyle'
+             style={{
+              marginBottom: '10px'
+             }}
+              className='sign-in-Btn'
               type='submit'
               variant='contained'
-              fullWidth>Sign In
-            </Button>
+              fullWidth>Sign in</Button>
             <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account? &nbsp;
-              {/* <Link as={Link} to={"/signup"} >
-                Sign Up
-              </Link> */}
-              <Link to="/signup">
-                Sign Up?
-              </Link>
+              <NavLink as={Link} to="/signup">
+                Sign-Up
+              </NavLink>
             </Typography>
-            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forgot Password? &nbsp;
-              <Link to="/forgetpassword">
+            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forget Password? &nbsp;
+              <NavLink as={Link} to="/forgetpassword">
                 Reset Password?
-              </Link>
+              </NavLink>
             </Typography>
           </form>
         </Paper>
@@ -135,4 +137,4 @@ const WebLogin = () => {
   )
 }
 
-export default WebLogin;
+export default WebLogin

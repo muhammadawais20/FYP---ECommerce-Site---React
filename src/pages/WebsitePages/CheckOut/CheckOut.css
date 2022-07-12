@@ -1,20 +1,21 @@
 .checkOutWrapper{
-   margin-top: 100px;
-   margin-left: 10px;
+   margin-top: 20px;
+   margin-left: 20px;
+   margin-right: 20px;
+}
+
+.gridWrapper{
+   display: flex !important;
+   justify-content: center !important;
 
 }
-/* 
-.gridWrapper{
-   display: flex;
-   justify-content: space-between;
 
-} */
-
-.gridLeft, .gridRight{
-  justify-content: center;
-  align-items: center;
+.gridLeft{
    padding: 20px;
-
+}
+.gridRight{
+   padding: 20px;
+   width: 100%;
 }
 
 .cart-item-final {

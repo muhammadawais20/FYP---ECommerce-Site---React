@@ -85,7 +85,7 @@ const ContactUs = () => {
         <Layout>
 
         <div className='contactWrapper'>
-            <Card variant="outlined" sx={{ width: '50%' }} className='paperStyle'>
+            <Card variant="outlined"  className='paperStyle col-10 col-md-6'>
                 <Grid align='center'>
                     <Avatar className='avatarStyle'><ContactPageSharpIcon /></Avatar>
                     <h2 className='headerStyle'>CONTACT US</h2>

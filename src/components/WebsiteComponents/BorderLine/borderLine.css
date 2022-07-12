@@ -1,0 +1,10 @@
+.line-divider {
+    display: flex;
+    justify-content: center;
+ }
+ 
+ .divider {
+     height: 3px;
+     display: block;
+     width: 100%;
+ }

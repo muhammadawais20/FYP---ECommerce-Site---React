@@ -1,11 +1,15 @@
-.about-content{
-    margin-top: 100px;
-}
 .gridStyle{
     max-width: 75%;
-    margin: 20px auto !important;
+    margin: auto !important;
+    padding: 20px;
+    align-items: center;
 }
 .stylePar {
     font-size: 18px;
     text-align: center;
+    justify-content: center;
+}
+
+.divider-about {
+    align-items: center;
 }

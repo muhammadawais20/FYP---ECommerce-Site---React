@@ -120,10 +120,12 @@ const Sidebar = () => {
 
                     <p className="title">OTHER</p>
 
+                    <Link to="/blogs" style={{ textDecoration: "none" }}>
                     <li>
                         <ArticleIcon className='icon' />
                         <span>Blogs</span>
                     </li>
+                    </Link>
 
                     <Link to="/messages" style={{ textDecoration: "none" }}>
                     <li>

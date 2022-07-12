@@ -134,7 +134,7 @@ const CheckOut = () => {
     return (
         <Layout>
             <div className='checkOutWrapper'>
-                <Grid container spacing={2} className="gridWrapper">
+                <Grid container spacing={2} className="gridWrapper" >
                     <Grid item xs={12} md={8}>
                         <Paper variant="outlined" square className='gridLeft'>
                             <h1>CheckOut</h1>
@@ -247,7 +247,7 @@ const CheckOut = () => {
                             </form>
                         </Paper>
                     </Grid>
-                    <Grid container item xs={12} md={4} >
+                    <Grid container item xs={12} md={4}>
                         <Paper variant="outlined" square className='gridRight'>
                             <h1>Your Cart {cartitems.length}</h1>
                             <div className='Back-cart'>

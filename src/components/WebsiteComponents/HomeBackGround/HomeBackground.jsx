@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel} from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 import firstBanner from '../../../resources/banners/banner-1.jpg';
 import secondBanner from '../../../resources/banners/banner-2.jpg';
 import thirdBanner from '../../../resources/banners/banner-3.png';
@@ -17,7 +17,9 @@ function HomeBackground() {
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h1>Buy DryFruits For Every Occaision</h1>
+                        <b></b><span className="section-title-main" style= {{fontSize: '97%'}}>
+                            <h1 style={{color:'#502d2e'}}>Buy DryFruits For Every Occasion</h1>
+                        </span><b></b>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className='carousel-container'>
@@ -34,7 +36,7 @@ function HomeBackground() {
                         alt="third slide"
                     />
                 </Carousel.Item>
-              
+
             </Carousel>
         </div>
 

@@ -4,6 +4,8 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../../config/firebase';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
+
 import "./Header.css";
 
 
@@ -39,6 +41,7 @@ const Header = () => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
+              
               {
                 !loggedIn && <>
                   <Nav.Link as={Link} to={"/"}>Home</Nav.Link>

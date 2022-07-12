@@ -6,8 +6,9 @@
 .navbar{
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    
 }
-.navbar-show{
+.navbar-show{   
     position: fixed !important;
     z-index: 2;
     width: 100%;
@@ -31,5 +32,4 @@
     background: url('../../../resources/logo/Logo.png');
     background-position: center;
     background-size: cover;
-   
 }
