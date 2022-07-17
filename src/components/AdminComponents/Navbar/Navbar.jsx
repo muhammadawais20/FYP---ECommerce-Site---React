@@ -7,11 +7,13 @@ import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import ChatIcon from '@mui/icons-material/Chat';
 import ListIcon from '@mui/icons-material/List';
-
+import { DarkModeContext } from '../../../context/darkModeContext';
+import { useContext } from "react";
 
 const Navbar = () => {
 
     const [admin, setAdmin] = useState([]);
+    const { dispatch } = useContext(DarkModeContext);
 
     useEffect(() => {
         getAdmin();
@@ -44,7 +46,10 @@ const Navbar = () => {
                         English
                     </div>
                     <div className="item">
-                        <DarkModeOutlinedIcon className='navIcon' />
+                        <DarkModeOutlinedIcon
+                            className="navIcon"
+                            onClick={() => dispatch({ type: "TOGGLE" })}
+                        />
                     </div>
                     <div className="item">
                         <NotificationsNoneOutlinedIcon className='navIcon' />
@@ -54,11 +59,11 @@ const Navbar = () => {
                         <ChatIcon className='navIcon' />
                         <div className="counter">10</div>
                     </div>
-                    
+
                     <div className="item">
-                        <img src= {admin.map(e => e.adminImg)} alt='Avatar' className='avatar' />
+                        <img src={admin.map(e => e.adminImg)} alt='Avatar' className='avatar' />
                     </div>
-                    
+
                 </div>
             </div>
         </div>

@@ -225,7 +225,7 @@ const CheckOut = () => {
                                     </Grid>
                                     <Grid xs={12} item>
                                         <TextField
-                                            value={totalAmount}
+                                            value={`Rs. ${totalAmount}`}
                                             variant="outlined"
                                             onChange={(e) => { setTotalAmount(e.target.value) }}
                                             style={{ width: "100%" }}

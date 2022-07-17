@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { db, storage } from '../../../config/firebase';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Navbar from "../../../components/AdminComponents/Navbar/Navbar";
 import Sidebar from "../../../components/AdminComponents/Sidebar/Sidebar";
@@ -14,12 +15,15 @@ const NewProducts = ({ title }) => {
     const [productName, setProductName] = useState();
     const [originalProductPrice, setOriginalProductPrice] = useState();
     const [productPrice, setProductPrice] = useState();
+    const [profit, setProfit] = useState();
     const [productDescription, setProductDescription] = useState()
     const [productQuantity, setProductQuantity] = useState()
 
     const [error, setError] = useState('');
 
     const types = ['image/png', 'image/jpeg'];
+
+    const navigate = useNavigate();
 
     const productImgHandler = (e) => {
         let selectedFile = e.target.files[0]
@@ -62,11 +66,13 @@ const NewProducts = ({ title }) => {
                     productQuantity: Number(productQuantity),
                     productImg: url
                 }).then(() => {
-                    toast.success('Product Data Submission Successfully!');
                     setProductName('');
                     setProductDescription('');
                     setOriginalProductPrice('');
                     setProductPrice('');
+                    setProfit('');
+                    navigate('/products');
+                    toast.success('Product Data Submission Successfully!');
                     document.getElementById('fileUpload').value = ('');
 
                 }).catch(() => {
@@ -103,27 +109,32 @@ const NewProducts = ({ title }) => {
 
                             <div className="formInput">
                                 <label>Product Name</label>
-                                <input type="text" onChange={event => setProductName(event.target.value)} placeholder="Enter Product Name" required />
+                                <input type="text" onChange={event => setProductName(event.target.value)} value={productName} placeholder="Enter Product Name" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Original Price</label>
-                                <input type="number" onChange={event => setOriginalProductPrice(event.target.value)} placeholder="Enter Product Price" required />
+                                <input type="number" onChange={event => setOriginalProductPrice(event.target.value)} value={originalProductPrice} placeholder="Enter Product Price" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Product Price</label>
-                                <input type="number" onChange={event => setProductPrice(event.target.value)} placeholder="Enter Product Price" required />
+                                <input type="number" onChange={event => setProductPrice(event.target.value)} value={productPrice} placeholder="Enter Product Price" required />
+                            </div>
+
+                            <div className="formInput">
+                                <label>Profit</label>
+                                <input type="number" onChange={event => setProfit(event.target.value)} value={profit} placeholder="Enter Profit" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Product Description</label>
-                                <input type="text" onChange={event => setProductDescription(event.target.value)} placeholder="Enter Product Description" required />
+                                <input type="text" onChange={event => setProductDescription(event.target.value)} value={productDescription} placeholder="Enter Product Description" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Quantity</label>
-                                <input type="number" onChange={event => setProductQuantity(event.target.value)} placeholder="Enter Product Quantity" required />
+                                <input type="number" onChange={event => setProductQuantity(event.target.value)} value={productQuantity} placeholder="Enter Product Quantity" required />
                             </div>
 
                             <div>

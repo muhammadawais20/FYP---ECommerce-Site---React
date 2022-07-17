@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { db } from '../../config/firebase';
+import { db } from '../../../config/firebase';
 import './blogTable.scss';
 import { Link } from 'react-router-dom';
 import Table from '@mui/material/Table';
@@ -10,21 +10,25 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { TextField } from '@mui/material';
 import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-
 
 const BlogTable = () => {
 
     const [blogData, setBlogData] = useState([]);
     const [show, setShow] = useState(false);
-
+    const [blogIdState, setBlogIdState] = useState();
     const [productName, setProductName] = useState("");
     const [productIntro, setProductIntro] = useState("");
     const [productDescription, setProductDescription] = useState("");
-    ///to start from here 
+
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
+    const handleShow = (data) => {
+        setBlogIdState(data.blogId);
+        setShow(true);
+    }
 
     useEffect(() => {
         getBlogData();
@@ -60,15 +64,20 @@ const BlogTable = () => {
         };
     }
 
-    const editHandler = async (data) => {
+    const editHandler = async () => {
         try {
-            db.collection("blogs").doc(data.blogId).update({
+            db.collection("blogs").doc(blogIdState).update({
                 productName: productName,
                 productIntro: productIntro,
                 productDescription: productDescription,
+            }).then(() => {
+                setProductName("");
+                setProductIntro("");
+                setProductDescription("");
+                toast.success("Blog Updated Successfully");
+                getBlogData();
             })
-            toast.success("Blog Updated Successfully");
-            getBlogData()
+            
         } catch (error) {
             toast.error("Blog Update Failed!");
         };
@@ -113,7 +122,7 @@ const BlogTable = () => {
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
-                                    <div className='edit' onClick={handleShow}>Edit</div>
+                                    <div className='edit' onClick={() => handleShow(data)}>Edit</div>
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
@@ -128,19 +137,40 @@ const BlogTable = () => {
                                 <Modal.Body>
                                     <form className='formModal'>
 
-                                        <div className="formInput">
-                                            <label>Product Name</label>
-                                            <input type="text" onChange={event => setProductName(event.target.value)} placeholder="Enter Product Name" required />
+                                    <div className="formInput">
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                onChange={e => setProductName(e.target.value)}
+                                                value={productName}
+                                                type="text"
+                                                label="Product Name"
+                                                placeholder="Enter Product Name"
+                                                fullWidth
+                                                required />
                                         </div>
 
                                         <div className="formInput">
-                                            <label>Intro</label>
-                                            <input type="text" onChange={event => setProductIntro(event.target.value)} placeholder="Enter Product Intro" required />
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                onChange={e => setProductIntro(e.target.value)}
+                                                value={productIntro}
+                                                type="text"
+                                                label="Product Intro"
+                                                placeholder="Enter Product Intro"
+                                                fullWidth
+                                                required />
                                         </div>
-
+                
                                         <div className="formInput">
-                                            <label>Description</label>
-                                            <input type="email" onChange={event => setProductDescription(event.target.value)} placeholder="Enter Product Description" required />
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                onChange={e => setProductDescription(e.target.value)}
+                                                value={productDescription}
+                                                type="text"
+                                                label="Description"
+                                                placeholder="Enter Product Description"
+                                                fullWidth
+                                                required />
                                         </div>
                                     </form>
                                 </Modal.Body>

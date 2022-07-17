@@ -43,7 +43,7 @@ const OrdersCompleted = () => {
                 Orders Completed
             </div>
 
-            <TableContainer component={Paper} className='orderTableTitle'>
+            <TableContainer component={Paper} className='orderTableTitle table'>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -75,13 +75,11 @@ const OrdersCompleted = () => {
                                         order.ordersOnDelivery.orders.OrderInfo.cartitems.map((item, index) => (
                                             <Fragment key={index}>
                                                 <div className='productDetails'>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
-                                                    {/* <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productName}</TableCell> */}
+                                                    
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>RP: {item.originalPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>SP: {item.productPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>Qty: {item.productQuantity}</TableCell>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>Profit: {`${item.profit}` * `${item.productQuantity}`}</TableCell>
-                                                    {/* <TableCell sx={{ minWidth: 100 }} className='tableData1'> {`${parseInt(item.productPrice)}` - `${parseInt(item.originalPrice)}`}</TableCell> */}
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>
                                                         <div className="orderImageCell">
                                                             <img src={item.productImg} alt="Product" className="orderImage" />

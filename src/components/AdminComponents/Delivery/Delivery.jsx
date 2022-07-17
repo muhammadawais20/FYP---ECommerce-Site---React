@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Loader from '../../WebsiteComponents/Loader/Loader';
+
 import { toast } from 'react-toastify';
 
 const Delivery = () => {
@@ -20,19 +22,19 @@ const Delivery = () => {
 
     async function getDeliveryOrders() {
         try {
-            //setLoadig
+            <Loader />
             const getDeliveryOrdersFromFirebase = [];
             db.collection('ordersOnDelivery').get().then(snapshot => {
                 snapshot.forEach(delivery => {
                     getDeliveryOrdersFromFirebase.push({ ...delivery.data() })
-                    //setLoading
+                    {<Loader />}
                 })
                 setDelivery(getDeliveryOrdersFromFirebase)
             })
         }
         catch (error) {
-            //setLoading
-            console.log("Error");
+            <Loader />
+            toast.error("Error!");
         }
     }
 
@@ -47,9 +49,9 @@ const Delivery = () => {
                 // shipmentId,
                 // shipmentTime
             })
-            toast.success("Order Shipped Successfully!")
+            toast.success("Order Delivered Successfully!")
         } catch (error) {
-            toast.error("Order Shipped Failed!");
+            toast.error("Order Deliver Failed!");
         };
     }
 
@@ -58,21 +60,18 @@ const Delivery = () => {
         try {
             db.collection("ordersOnDelivery").doc(ordersOnDelivery.orders.OrderInfo.orderId).delete({
             })
-            toast.success("Delivery Order deleted Successfully!")
             getDeliveryOrders();
 
         } catch (error) {
-            toast.error("Delivery Order  deletion Failed!");
+            toast.error("Failed!");
         };
     }
 
     const shipAndDelete = (orders) => {
         orderHandlerForShip(orders);
 
-        setTimeout(deleteHandler(orders), 50000);
+        setTimeout(deleteHandler(orders), 5000);
     }
-
-
 
     return (
         <div className='delivery'>
@@ -81,7 +80,7 @@ const Delivery = () => {
                 Delivery
             </div>
 
-            <TableContainer component={Paper} className='orderTable'>
+            <TableContainer component={Paper} className='orderTable table'>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -114,8 +113,6 @@ const Delivery = () => {
 
                                             <Fragment key={index}>
                                                 <div className='productDetails'>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
-                                                    {/* <TableCell sx={{ minWidth: 25 }} className='tableData1'>{item.productName}</TableCell> */}
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>RP: {item.originalPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>SP: {item.productPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>Qty: {item.productQuantity}</TableCell>
@@ -133,7 +130,7 @@ const Delivery = () => {
                                     }
 
                                     <TableCell key={index} className='pendingOrder'>
-                                        <button className='pending' id="deliver" type='submit' onClick={() => shipAndDelete(ordersOnDelivery)}>Delivered?</button>
+                                        <button className='pending' id="deliver" type='submit' onClick={() => shipAndDelete(ordersOnDelivery)}>Deliver?</button>
                                     </TableCell>
                                 </TableRow>
                             </Fragment>

@@ -43,7 +43,7 @@ const Customers = () => {
                 Customers
             </div>
 
-            <TableContainer component={Paper} className='customersTableTitle'>
+            <TableContainer component={Paper} className='customersTableTitle table'>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>

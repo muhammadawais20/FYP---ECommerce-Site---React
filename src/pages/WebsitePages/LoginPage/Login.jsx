@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { auth, db } from '../../../config/firebase';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
-import { Avatar, FormControlLabel, Grid, Paper, TextField, Checkbox, Button, Typography, InputAdornment, IconButton } from '@mui/material';
+import { Avatar, Grid, Paper, TextField, Button, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
@@ -10,7 +10,6 @@ import './Login.css';
 
 const WebLogin = () => {
   const { loggedIn } = useSelector(state => state.cartReducer);
-  const [getAdmin, setGetAdmin] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -27,13 +26,12 @@ const WebLogin = () => {
         payload: result.user,
       });
       toast.success('Login Successfull', {
-        position: 'bottom-left'
+        position: 'top-right'
       })
-      console.log(result.user)
 
       setEmail('');
       setPassword('')
-      let status = getUserFromFirebase.filter((e) => e.email == email)
+      let status = getUserFromFirebase.filter((e) => e.email === email)
       if (status.length > 0) {
         dispatch({
           type: 'setAdmin',
@@ -63,7 +61,7 @@ const WebLogin = () => {
       }
     }
     catch (error) {
-      toast.error('Login Failed')
+      toast.error('Login Failed!')
     }
   }
 
@@ -79,11 +77,11 @@ const WebLogin = () => {
       <Grid>
         <Paper elevation={10}
           style={{
-            width: 280,
-            margin: '100px auto auto',
+            width: 320,
+            margin: '20px auto',
+            marginTop: '100px',
             padding: 20,
             height: '60vh',
-            marginTop: '100px'
           }}>
           <form onSubmit={LoginApp}>
             <Grid align='center'>
@@ -112,22 +110,21 @@ const WebLogin = () => {
                 />
               </Grid>
             </Grid>
+         
             <Button
-             style={{
-              marginBottom: '10px'
-             }}
               className='sign-in-Btn'
               type='submit'
               variant='contained'
+              style={{marginTop: '15px', marginBottom: '15px'}}
               fullWidth>Sign in</Button>
-            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account? &nbsp;
+            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account?&nbsp;
               <NavLink as={Link} to="/signup">
                 Sign-Up
               </NavLink>
             </Typography>
-            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forget Password? &nbsp;
+            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forget Password?&nbsp;
               <NavLink as={Link} to="/forgetpassword">
-                Reset Password?
+                Reset Password
               </NavLink>
             </Typography>
           </form>
@@ -137,4 +134,4 @@ const WebLogin = () => {
   )
 }
 
-export default WebLogin
+export default WebLogin;

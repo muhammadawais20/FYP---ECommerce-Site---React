@@ -1,14 +1,12 @@
 import React from 'react';
 import './sidebar.scss';
 import logo from '../../../logo.png';
-import {auth} from '../../../config/firebase';
+import { auth } from '../../../config/firebase';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
-// import PersonIcon from '@mui/icons-material/Person';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-// import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import FaceIcon from '@mui/icons-material/Face';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StoreSharpIcon from '@mui/icons-material/StoreSharp';
@@ -20,6 +18,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import ExitToAppTwoToneIcon from '@mui/icons-material/ExitToAppTwoTone';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -33,8 +32,9 @@ const Sidebar = () => {
                 loggedIn: false,
                 adminStatus: false
             })
-            navigate('/weblogin')
+            navigate('/weblogin');
         })
+       
     }
     return (
         <div className='sidebar'>
@@ -106,9 +106,22 @@ const Sidebar = () => {
                         </li>
                     </Link>
 
-
                     <p className="title">IMPORTANT</p>
-                    <li>
+
+                    <Link to="/messages" style={{ textDecoration: "none" }}>
+                        <li>
+                            <FeedbackIcon className='icon' />
+                            <span>Complaints</span>
+                        </li>
+                    </Link>
+
+                    <Link to="/resolvedcomplaints" style={{ textDecoration: "none" }}>
+                        <li>
+                            <TaskAltIcon className='icon' />
+                            <span>Resolved Complaints</span>
+                        </li>
+                    </Link>
+                    {/* <li>
                         <InsertChartIcon className='icon' />
                         <span>Stats</span>
                     </li>
@@ -116,42 +129,33 @@ const Sidebar = () => {
                     <li>
                         <NotificationsNoneIcon className='icon' />
                         <span>Notificatios</span>
-                    </li>
+                    </li> */}
 
                     <p className="title">OTHER</p>
 
                     <Link to="/blogs" style={{ textDecoration: "none" }}>
-                    <li>
-                        <ArticleIcon className='icon' />
-                        <span>Blogs</span>
-                    </li>
+                        <li>
+                            <ArticleIcon className='icon' />
+                            <span>Blogs</span>
+                        </li>
                     </Link>
 
-                    <Link to="/messages" style={{ textDecoration: "none" }}>
-                    <li>
-                        <FeedbackIcon className='icon' />
-                        <span>Complaints</span>
-                    </li>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                        <p className="title">USER</p>
+                        <li>
+                            <AccountCircleOutlinedIcon className='icon' />
+                            <span>Profile</span>
+                        </li>
                     </Link>
 
-                    <p className="title">USER</p>
-                    <li>
-                        <AccountCircleOutlinedIcon className='icon' />
-                        <span>Profile</span>
-                    </li>
-
-                    <li>
-                        <ExitToAppTwoToneIcon className='icon' />
-                        <span onClick={handleLogout}>Logout</span>
-                    </li>
+                    
+                        <li>
+                            <ExitToAppTwoToneIcon className='icon' />
+                            <span onClick={handleLogout}>Logout</span>
+                        </li>
+                   
                 </ul>
             </div>
-
-            {/* <div className="bottomDashboard">
-                <div className="panelMode"></div>
-                <div className="panelMode"></div>
-            </div> */}
-
         </div>
     );
 };

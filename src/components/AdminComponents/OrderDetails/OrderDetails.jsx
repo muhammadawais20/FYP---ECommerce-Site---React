@@ -93,9 +93,9 @@ const OrderDetails = () => {
                 shipmentId: getShipmentId(),
                 shipmentTime: shipmentDateTime()
             })
-            toast.success("Product added Successfully!")
+            toast.success("Product Shipped Successfully!")
         } catch (error) {
-            toast.error("Product addition Failed!");
+            toast.error("Product Shipped Failed!");
         };
     }
 
@@ -103,11 +103,10 @@ const OrderDetails = () => {
         try {
             db.collection("orders").doc(orders.OrderInfo.orderId).delete({
             })
-            toast.success("Product deleted Successfully!")
             getOrder();
 
         } catch (error) {
-            toast.error("Product deletion Failed!");
+            toast.error("Failed!");
         };
     }
 

@@ -56,19 +56,20 @@ const OrderPage = () => {
 
     return (
         <Layout>
-
             <div className='container-md order-wrapper'>
                 {loading && (<Loader />)}
+                
                 <div className='text-center'>
                     <h1>Welcome to Order Page!</h1>
                 </div>
                
                <div className='orderList'>
-                   <h3>Pending</h3>
+                   <h3>Pending Orders</h3>
+                  
                 {orders.filter(obj => obj.OrderInfo.userid == userid).map(order => {
                     
                     return (
-                        <table className='table mt-3'>
+                        <table className='table mt-30'>
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -83,7 +84,7 @@ const OrderPage = () => {
                                         return <tr key={index}>
                                             <td><img src={item.productImg} height="80" width="80" /></td>
                                             <td>{item.productName}</td>
-                                            <td>{item.productQuantity}</td>
+                                            <td>{`${item.productQuantity} Kg`}</td>
                                             <td>{`${item.productPrice}`  * `${item.productQuantity}`}</td>
                                         </tr>
                                     })
@@ -96,12 +97,9 @@ const OrderPage = () => {
                 </div>
 
                 <div className='orderList'>
-                    <h3>On Delivery</h3>
-                
-                {delivery.filter(obj => obj.orders.OrderInfo.userid == userid).map(del => {
-                    
+                    <h3>Orders On Delivery</h3>        
+                {delivery.filter(obj => obj.orders.OrderInfo.userid == userid).map(del => {       
                     return (
-                        
                         <table className='table mt-3'>
                             <thead>
                                 <tr>
@@ -126,7 +124,7 @@ const OrderPage = () => {
                             </tbody>
                         </table>
                     ) 
-                })}
+                })} 
                 </div>
             </div>
         </Layout>

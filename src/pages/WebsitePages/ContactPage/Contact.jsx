@@ -53,16 +53,15 @@ const ContactUs = () => {
         const year = date.getFullYear();
 
         const messageId = `${day}${month}${year}`;
-        return (messageId.concat(Math.floor(Math.random() * 100)));
+        return messageId;
     }
 
     const messageId = `${getMessageId()}_${(Math.floor(Math.random() * 1000))}`
 
-   
-
     const handleSubmit = (e) => {
         e.preventDefault();
         db.collection('contacts').doc(messageId).set({
+            messageId: messageId,
             firstName: firstName,
             lastName: lastName,
             email: email,

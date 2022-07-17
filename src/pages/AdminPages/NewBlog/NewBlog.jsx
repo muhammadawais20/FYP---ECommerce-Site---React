@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Navbar from "../../../components/AdminComponents/Navbar/Navbar";
 import Sidebar from "../../../components/AdminComponents/Sidebar/Sidebar";
 import './newBlog.scss';
@@ -16,6 +17,8 @@ const NewBlog = ({title}) => {
     const [productDescription, setProductDescription] = useState("");
 
     const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     const getDate = () => {
         let myDate = new Date();
@@ -71,7 +74,7 @@ const NewBlog = ({title}) => {
         // Storing the Image
         const uploadTask = storage.ref(`blog-images/${blogImage.name}`).put(blogImage)
         uploadTask.on('state_changed', snapshot => {
-           return (snapshot.bytesTransferred / snapshot.totalBytes) * 10
+        //    return (snapshot.bytesTransferred / snapshot.totalBytes) * 10
             
         }, err => {
             setError(err.message)
@@ -93,6 +96,7 @@ const NewBlog = ({title}) => {
                     setProductIntro("");
                     setProductDescription("");
                     setBlogImage("");
+                    navigate('/blogs');
                     document.getElementById('fileUpload').value = ('');
                 }).catch(() => {
                     toast.error('Blog Submission Failed!')
@@ -128,17 +132,17 @@ const NewBlog = ({title}) => {
 
                             <div className="formInput">
                                 <label>Product Name</label>
-                                <input type="text" onChange={event => setProductName(event.target.value)} placeholder="Enter Product Name" required />
+                                <input type="text" onChange={event => setProductName(event.target.value)} value={productName} placeholder="Enter Product Name" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Intro</label>
-                                <input type="text" onChange={event => setProductIntro(event.target.value)} placeholder="Enter Product Intro" required />
+                                <input type="text" onChange={event => setProductIntro(event.target.value)} value={productIntro} placeholder="Enter Product Intro" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Description</label>
-                                <input type="text" onChange={event => setProductDescription(event.target.value)} placeholder="Enter Product Description" required />
+                                <input type="text" onChange={event => setProductDescription(event.target.value)} value={productDescription} placeholder="Enter Product Description" required />
                             </div>
 
                             <div>

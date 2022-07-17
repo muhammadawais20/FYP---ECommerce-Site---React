@@ -1,19 +1,19 @@
 import React from "react";
-import BlogTable from "../../../components/AdminComponents/BlogTable/BlogTable";
 import Navbar from "../../../components/AdminComponents/Navbar/Navbar";
+import ResolvedComplaintsTable from "../../../components/AdminComponents/ResolvedComplaintsTable/ResolvedComplaintsTable";
 import Sidebar from "../../../components/AdminComponents/Sidebar/Sidebar";
-import './blogList.scss';
+import './resolvedComplaints.scss';
 
-const BlogList = () => {
+const ResolvedComplaints = () => {
     return (
         <div className="list">
             <Sidebar />
             <div className="homeContainer">
                 <Navbar />
-                <BlogTable />
+                <ResolvedComplaintsTable />
             </div>
         </div>
     )
 }
 
-export default BlogList;
+export default ResolvedComplaints;

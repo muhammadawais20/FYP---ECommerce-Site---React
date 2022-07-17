@@ -45,53 +45,5 @@
             padding: 2px 6px;
             cursor: pointer;
         }
-
-        .edit{
-            color: green;
-            border: 1px dotted greenyellow;
-            padding: 2px 6px;
-            cursor: pointer;
-        }
     }
-
-    .userImageCell{
-        display: flex;
-        align-items: center;
-
-        .userImage{
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            margin-right: 10px;
-            
-        }
-
-    }
-
-    .userStatusCell {
-
-            padding: 5px;
-    
-            &.Active {
-                color: green;
-                background-color: rgb(146, 241, 146, 0.5);
-                width: 50px;
-                text-align: center;
-            }
-    
-            &.Pending {
-                color: goldenrod;
-                background-color: rgb(248, 248, 38, 0.5);
-                width: 50px;
-                text-align: center;
-            }
-
-            &.Passive {
-                color: crimson;
-                background-color: rgb(255, 140, 163, 0.5);
-                width: 50px;
-                text-align: center;
-            }
-    }
-
 }

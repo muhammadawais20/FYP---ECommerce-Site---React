@@ -75,7 +75,7 @@ const Widgets = ({ type, path, profit, balance }) => {
         case "customers":
             categoryDetails = {
                 categoryTitle: "CUSTOMERS",
-                isAmount:  `Total: ${customersQuantity}`,
+                isAmount:  `${customersQuantity}`,
                 linkToAll: "See all customers",
                 icon: (
                     <PersonOutlineOutlinedIcon

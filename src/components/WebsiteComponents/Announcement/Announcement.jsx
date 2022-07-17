@@ -4,7 +4,7 @@ import './Announcement.css'
 const Announcement = () => {
   return (
     <div className='announcement-container'>
-      Welcome to the KhassDryFruit online store
+      Welcome to the Khaas Dry Fruits online store!
     </div>
   )
 }

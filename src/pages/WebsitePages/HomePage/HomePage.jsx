@@ -84,7 +84,6 @@ const Homepages = ({ user }) => {
             {products.map((product, index) => {
               return <Card key={index}
                 hoverable
-                onClick={() => { navigate(`/productInfo/${product.productId}`) }}
                 style={{ width: 240, marginTop: 20 }}
                 cover={<img alt="example" src={product.productImg} />}
               >
@@ -121,4 +120,4 @@ const Homepages = ({ user }) => {
   )
 }
 
-export default Homepages
+export default Homepages;

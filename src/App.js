@@ -28,13 +28,16 @@ import MessageList from "./pages/AdminPages/MessageList/MessageList";
 import BlogList from "./pages/AdminPages/BlogList/BlogList";
 import ProfitList from "./pages/AdminPages/ProfitList/ProfitList";
 import BalanceList from "./pages/AdminPages/BalanceList/BalanceList";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-toastify/dist/ReactToastify.css";
-import "antd/dist/antd.css";
 import NewBlog from "./pages/AdminPages/NewBlog/NewBlog";
 import BlogPage from "./pages/WebsitePages/BlogPage/BlogPage";
 import Loader from "./components/WebsiteComponents/Loader/Loader";
+import ResolvedComplaints from "./pages/AdminPages/ResolvedComplaints/ResolvedComplaints";
+import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import './darkMode.scss';
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
 
 const App = () => {
   const { loggedIn, adminStatus, user } = useSelector(
@@ -44,7 +47,7 @@ const App = () => {
   const [adminList, setAdminList] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  console.log(loggedIn);
+  const { darkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     let currentUser = JSON.parse(localStorage.getItem('currentUser')) ? JSON.parse(localStorage.getItem('currentUser')) : [];
@@ -72,7 +75,7 @@ const App = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="App">
+    <div className={darkMode ? "app dark" : "app"}>
       <ToastContainer />
       <BrowserRouter>
         {adminStatus ? (
@@ -127,6 +130,10 @@ const App = () => {
               <Route index element={<MessageList />} />
             </Route>
 
+            <Route path="/resolvedcomplaints">
+              <Route index element={<ResolvedComplaints /> } />
+            </Route>
+
             <Route path="*" element={<Home />}></Route>
           </Routes>
 
@@ -142,6 +149,7 @@ const App = () => {
             <Route path="/aboutpage" element={<About />}></Route>
             <Route path="/contactpage" element={<ContactPage />}></Route>
             <Route path="/privacypage" element={<PrivacyPolicy />}></Route>
+            <Route path="*" element={<Homepages />}></Route>
           </Routes>
 
         ) : (

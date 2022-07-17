@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Navbar from "../../../components/AdminComponents/Navbar/Navbar";
 import Sidebar from "../../../components/AdminComponents/Sidebar/Sidebar";
 import './newUser.scss';
@@ -21,6 +22,8 @@ const NewUser = ({ title }) => {
     const [error, setError] = useState("");
 
     const types = ['image/png', 'image/jpeg'];
+
+    const navigate = useNavigate();
 
     const UserImgHandler = (e) => {
         let selectedFile = e.target.files[0]
@@ -72,7 +75,7 @@ const NewUser = ({ title }) => {
                             setCountry('');
                             setPhone('');;
                             setUserImage('');
-                            
+                            navigate('/users');
                             // document.getElementById('fileUpload').value = ('');
                         }).catch(() => {
                             toast.error('User Data Submission Failed!')
@@ -109,149 +112,44 @@ const NewUser = ({ title }) => {
 
                             <div className="formInput">
                                 <label>User Name</label>
-                                <input type="text" onChange={event => setUsername(event.target.value)} placeholder="awais26" required />
+                                <input type="text" onChange={event => setUsername(event.target.value)} placeholder="Enter Username" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Full Name</label>
-                                <input type="text" onChange={event => setFullname(event.target.value)} placeholder="M.Awais" required />
+                                <input type="text" onChange={event => setFullname(event.target.value)} placeholder="Enter Fullname" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Email</label>
-                                <input type="email" onChange={event => setEmail(event.target.value)} placeholder="awais26@gmail.com" required />
+                                <input type="email" onChange={event => setEmail(event.target.value)} placeholder="Enter Email" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Phone</label>
-                                <input type="text" onChange={event => setPhone(event.target.value)} placeholder="03340268449" required />
-                            </div>
-
-                            <div className="formInput">
-                                <label>Password</label>
-                                <input type="password" onChange={event => setPassword(event.target.value)} required />
+                                <input type="text" onChange={event => setPhone(event.target.value)} placeholder="Enter Phone" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Address</label>
-                                <input type="text" onChange={event => setAddress(event.target.value)} placeholder="Gulshan e Iqbal, Karachi" required />
+                                <input type="text" onChange={event => setAddress(event.target.value)} placeholder="Enter Address" required />
                             </div>
 
                             <div className="formInput">
                                 <label>Country</label>
-                                <input type="text" onChange={event => setCountry(event.target.value)} placeholder="Pakistan" required />
+                                <input type="text" onChange={event => setCountry(event.target.value)} placeholder="Enter Country" required />
                             </div>
                           
+                            <div className="formInput">
+                                <label>Password</label>
+                                <input type="password" onChange={event => setPassword(event.target.value)} required />
+                            </div>
 
                             <div>
                                 <button className="sendButton">Send</button>
                             </div>
 
                         </form>
-
-
-
-
-
-
-
-
-                        {/* <Grid>
-                        <DriveFolderUploadIcon />
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                                }}
-                                noValidate
-                                autoComplete="off">
-                                    
-                                        
-                            
-
-                                <TextField
-                                    id="userName"
-                                    label="User Name"
-                                    type="text"
-                                    autoComplete="userName"
-                                    variant="standard"
-                                />
-                                <TextField
-                                    id="fullName"
-                                    label="Full Name"
-                                    type="text"
-                                    autoComplete="fullName"
-                                    variant="standard"
-                                />
-                            </Box>
-
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                                }}
-                                noValidate
-                                autoComplete="off">
-                                <TextField
-                                    id="email"
-                                    label="Email"
-                                    type="email"
-                                    autoComplete="email"
-                                    variant="standard"
-                                />
-                                <TextField
-                                    id="phone"
-                                    label="Phone"
-                                    type="text"
-                                    autoComplete="phone"
-                                    variant="standard"
-                                />
-                            </Box>
-
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                                }}
-                                noValidate
-                                autoComplete="off">
-                                <TextField
-                                    id="password"
-                                    label="Password"
-                                    type="password"
-                                    autoComplete="password"
-                                    variant="standard"
-                                />
-                                <TextField
-                                    id="country"
-                                    label="Country"
-                                    type="text"
-                                    autoComplete="country"
-                                    variant="standard"
-                                />
-                            </Box>
-
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { m: 1, width: '52ch' },
-                                }}
-                                noValidate
-                                autoComplete="off">
-                                <TextField
-                                    id="address"
-                                    label="Address"
-                                    type="text"
-                                    autoComplete="address"
-                                    variant="standard"
-                                />
-
-                            </Box>
-                            <Button className="sendButton" variant="contained" endIcon={<SendIcon />}>
-                                Send
-                            </Button>
-                            
-                        </Grid> */}
                     </div>
                 </div>
             </div>

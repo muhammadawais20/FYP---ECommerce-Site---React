@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { db } from '../../../config/firebase';
-import './productTable.scss';
-// import { DataGrid } from '@mui/x-data-grid';
-// import { userRows, userColumns } from '../AdminTable/UserTable';
 import { Link } from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,10 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-// import { Grid, TextField, Button } from '@mui/material'
+import { TextField } from '@mui/material';
 import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-
+import './productTable.scss';
 
 const ProductTable = () => {
 
@@ -24,34 +21,40 @@ const ProductTable = () => {
     const [quantity, setQuantity] = useState();
     const [price, setPrice] = useState();
     const [description, setDescription] = useState();
-
+    const [productName, setProductName] = useState();
+    const [originalPrice, setOriginalPrice] = useState();
+    const [productIdState, setProductIdState] = useState();
+    
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
+    const handleShow = (products) => {
+        console.log("Product Id", products.productId)
+        setProductIdState(products.productId);
+        setShow(true);
+    }
 
     useEffect(() => {
         getProduct();
     }, [])
 
-    async function getProduct(e) {
-        //  e.preventDefault()
+    async function getProduct() {
+     
         try {
-            //setLoadig
             const getProductFromFirebase = [];
             db.collection('Products').get().then(snapshot => {
                 snapshot.forEach(product => {
                     getProductFromFirebase.push({ ...product.data() })
-                    //setLoadig
                 })
                 setProduct(getProductFromFirebase)
             })
         }
         catch (error) {
-            //setLoadig
-            console.log("Error");
+            toast.error("Error");
         }
     }
 
     const deleteHandler = async (products) => {
+       
         try {
             db.collection("Products").doc(products.productId).delete({
             })
@@ -62,67 +65,33 @@ const ProductTable = () => {
         };
     }
 
-    const editHandler = async (products) => {
+    const editHandler = async () => {
         try {
-            db.collection("Products").doc(products.productId).update({
+            db.collection("Products").doc(productIdState).update({
+                productName: productName,
+                originalPrice: originalPrice,
                 productPrice: price,
                 productDescription: description,
-                productQuantity: quantity
+                productQuantity: quantity,
+
+            }).then(() => {
+                setPrice("");
+                setDescription("");
+                setQuantity("");
+                setProductName("");
+                setOriginalPrice("");
+                toast.success("Product Updated Successfully");
+                getProduct();
             })
-            toast.success("Product Update Successfully");
-            getProduct()
+            
         } catch (error) {
             toast.error("Product Update Failed!");
         };
     }
 
-
-    // const editHandler = async (products) => {
-
-    //     var washingtonRef = db.collection("Products").doc(products.productId);
-
-    //     // Set the "capital" field of the city 'DC'
-    //     return washingtonRef.update({
-    //         productsproductPrice: price,
-    //         productDescription: description,
-    //         productQuantity: quantity
-    //     })
-    //     .then(() => {
-    //         console.log("Document successfully updated!");
-    //     })
-    //     .catch((error) => {
-    //         // The document probably doesn't exist.
-    //         console.error("Error updating document: ", error);
-    //     });
-    // }
-
-    // try {
-    //     firebase.database().ref("Products/products.productId").set({
-    //         productsproductPrice: price,
-    //         productDescription: description,
-    //         productQuantity: quantity
-    //     })
-
-    // const actionFields = [
-    //     {
-    //         field: 'action', headerName: 'Action', width: 230,
-    //         renderCell: () => {
-    //             return (
-
-    //                 <div className='actionFields'>
-    //                     <Link to="/products/singleproduct" style={{ textDecoration: "none" }}>
-    //                         <div className='view'>View</div>
-    //                     </Link>
-
-    //                     <div className='edit'>Edit</div>
-    //                     <div className='delete'>Delete</div>
-    //                 </div>
-
-    //             )
-    //         }
-    //     },
-
-    // ]
+    useEffect(() => {
+        getProduct();
+    }, [editHandler])
 
     return (
 
@@ -150,7 +119,6 @@ const ProductTable = () => {
                     </TableHead>
                     {product.map((products) => (
                         <TableBody>
-
                             <TableRow key={products.productsId}>
                                 <TableCell className='tableData'>{products.productId}</TableCell>
                                 <TableCell className='tableData'>
@@ -169,42 +137,79 @@ const ProductTable = () => {
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
-                                    <div className='edit' onClick={handleShow}>Edit</div>
+                                    <div className='edit' onClick={() => handleShow(products)}>Edit</div>
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
                                     <div className='delete' onClick={() => deleteHandler(products)}>Delete</div>
                                 </TableCell>
 
-                                <TableCell className='tableData'>
-                                    <div className={`status ${products.status}`}>{products.status}</div>
-                                </TableCell>
                             </TableRow>
                             <Modal className='modal' show={show} onHide={handleClose}>
                                 <Modal.Header closeButton >
-                                    <Modal.Title className="modal-title w-100 ">Cashout Details</Modal.Title>
+                                    <Modal.Title className="modal-title w-100 ">Product Update</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <form className='formModal'>
 
-                                        {/* <div className="formInput">
-                                        <label>Product Quantity</label>
-                                        <input type="text" placeholder="Enter Product Quantity"  onChange={(e) => { setQuantity(e.target.value) }} required />
-                                    </div> */}
+                                    <div className="formInput">
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                type="text"
+                                                label="Product Name"
+                                                placeholder="Enter Product Name"
+                                                onChange={(e) => setProductName(e.target.value) }
+                                                value={productName}
+                                                fullWidth
+                                                required />
+                                        </div>
 
-                                        <div className="formInput">
-                                            <label>Product Price</label>
-                                            <input type="number" placeholder="Enter Product Price" onChange={(e) => { setPrice(e.target.value) }} required />
+                                    <div className="formInput">
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                type="number"
+                                                label="Original Price"
+                                                placeholder="Enter Original Price"
+                                                onChange={(e) => setOriginalPrice(e.target.value) }
+                                                value={originalPrice}
+                                                fullWidth
+                                                required />
                                         </div>
 
                                         <div className="formInput">
-                                            <label>Product Description</label>
-                                            <input type="text" placeholder="Enter Product Description" onChange={(e) => { setDescription(e.target.value) }} required />
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                type="number"
+                                                label="Product Price"
+                                                placeholder="Enter Product Price"
+                                                onChange={(e) => setPrice(e.target.value) }
+                                                value={price}
+                                                fullWidth
+                                                required />
                                         </div>
 
+
                                         <div className="formInput">
-                                            <label>Product Quantity</label>
-                                            <input type="number" placeholder="Enter Product Quantity" onChange={(e) => { setQuantity(e.target.value) }} required />
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                type="text"
+                                                label="Description"
+                                                placeholder="Enter Product Description"
+                                                onChange={(e) => setDescription(e.target.value) }
+                                                value={description}
+                                                fullWidth
+                                                required />
+                                        </div>
+                                        <div className="formInput">
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                type="number"
+                                                label="Quantity"
+                                                placeholder="Enter Product Quantity"
+                                                onChange={(e) => setQuantity(e.target.value) }
+                                                value={quantity}
+                                                fullWidth
+                                                required />
                                         </div>
                                     </form>
                                 </Modal.Body>
@@ -214,14 +219,10 @@ const ProductTable = () => {
                                 </Modal.Footer>
                             </Modal>
                         </TableBody>
-
-
                     ))}
                 </Table>
             </TableContainer>
-
         </div>
-
     );
 };
 

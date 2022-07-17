@@ -89,7 +89,7 @@ const CartPages = () => {
                         { `${cartitem.productPrice}`}
                       </div>
                       <div className='cart-product-price'>
-                        {cartitem.productQuantity}
+                        { `${cartitem.productQuantity} Kg`}
                       </div>
                       <div className='cart-product-action'>
                         <DeleteIcon onClick={() => deleteItemCart(cartitem)} />
@@ -102,11 +102,11 @@ const CartPages = () => {
                 <button className='clear-cart' onClick={handleclearCart}>Clear Cart</button>
                 <div className='cart-placeorder'>
                   <div className='totalitems'>
-                    <span>TotalItems</span>
+                    <span>Total Items</span>
                     <span className='items'>{cartitems.length}</span>
                   </div>
                   <div className='subtotal'>
-                    <span>Subtotal</span>
+                    <span>Sub Total</span>
                     <span className='amount'>{totalAmount}</span>
                   </div>
                   <button onClick={() => { navigate('/checkOut') }}>CheckOut</button>
