@@ -3,11 +3,12 @@
     height: 70px;
     width: 120px;
 } */
-/* .navbar{
+.navbar{
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    
 }
-.navbar-show{
+.navbar-show{   
     position: fixed !important;
     z-index: 2;
     width: 100%;
@@ -26,48 +27,9 @@
 .navbar-logo{
     min-width: 90px;
     height: 70px;
-    width: 120px;
+    width: 100px;
     display: block;
     background: url('../../../resources/logo/Logo.png');
     background-position: center;
     background-size: cover;
-   
-} */
-
-
-.conatiner {
-    height: 60px;
-}
-
-.wrapper {
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.Logo {
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.MeunItem {
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-}
-
-.MeunItem>ul>li {
-    list-style: none;    
-    justify-content: flex-end !important;
-}
-.link {
-    text-decoration: none;
-    color: black;
-    margin-left: 10px;
-}
-
-.logout {
-    border: none;
-    background: none;
-    margin-left: 10px;
 }

@@ -13,6 +13,7 @@ import './HomePage.css'
 import BorderLine from '../../../components/WebsiteComponents/BorderLine/BorderLine';
 import About from '../AboutPage/About';
 import Blog from '../../../components/WebsiteComponents/Blog/Blog';
+import Announcement from '../../../components/WebsiteComponents/Announcement/Announcement';
 
 const Homepages = ({ user }) => {
   const { cartitems, loggedIn } = useSelector(state => state.cartReducer);
@@ -68,8 +69,9 @@ const Homepages = ({ user }) => {
     }
   }
   return (
+    <>
+    <Announcement />
     <Layout>
-      <>
         <HomeBackground />
 
         <div className="container section-title-container">
@@ -83,7 +85,7 @@ const Homepages = ({ user }) => {
             {loading && (<Loader />)}
             {products.map((product, index) => {
               return <Card key={index}
-                hoverable
+                hoverable = {true}
                 style={{ width: 240, marginTop: 20 }}
                 cover={<img alt="example" src={product.productImg} />}
               >
@@ -115,8 +117,8 @@ const Homepages = ({ user }) => {
         <About />
         <Blog />
         <BorderLine />
-      </>
     </Layout>
+    </>
   )
 }
 

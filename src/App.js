@@ -38,6 +38,7 @@ import "react-toastify/dist/ReactToastify.css";
 import './darkMode.scss';
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import Profile from "./pages/AdminPages/Profile/Profile";
 
 const App = () => {
   const { loggedIn, adminStatus, user } = useSelector(
@@ -134,6 +135,10 @@ const App = () => {
               <Route index element={<ResolvedComplaints /> } />
             </Route>
 
+            <Route path="/profile">
+              <Route index element={<Profile /> } />
+            </Route>
+
             <Route path="*" element={<Home />}></Route>
           </Routes>
 
@@ -164,6 +169,7 @@ const App = () => {
             <Route path="/aboutpage" element={<About />}></Route>
             <Route path="/contactpage" element={<ContactPage />}></Route>
             <Route path="/privacypage" element={<PrivacyPolicy />}></Route>
+            <Route path="/blogs" element={<BlogPage />}></Route>
             <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
             <Route path="*" element={<Homepages />}></Route>
           </Routes>

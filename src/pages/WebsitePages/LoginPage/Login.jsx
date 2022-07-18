@@ -6,31 +6,58 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import Layout from '../../../components/WebsiteComponents/Layout/Layout';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 
 const WebLogin = () => {
   const { loggedIn } = useSelector(state => state.cartReducer);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [values, setValues] = useState({
+    password: '',
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const LoginApp = async (e) => {
     e.preventDefault()
 
     try {
-      const result = await auth.signInWithEmailAndPassword(email, password)
+      const result = await auth.signInWithEmailAndPassword(email, values.password)
       localStorage.setItem('currentUser', JSON.stringify(result))
       dispatch({
         type: "currentUser",
         payload: result.user,
       });
-      toast.success('Login Successfull', {
+      toast.success('Login Successfull!', {
         position: 'top-right'
       })
 
       setEmail('');
-      setPassword('')
+      setValues("");
+  
       let status = getUserFromFirebase.filter((e) => e.email === email)
       if (status.length > 0) {
         dispatch({
@@ -41,8 +68,8 @@ const WebLogin = () => {
           type: 'setLoggedIn',
           loggedIn: false,
         })
-      localStorage.setItem('AdminStatus', true)
-      localStorage.setItem('LoggedIn', false)
+        localStorage.setItem('AdminStatus', true)
+        localStorage.setItem('LoggedIn', false)
         // adminStateChange()
         navigate('/adminHome')
       } else {
@@ -54,7 +81,7 @@ const WebLogin = () => {
           type: 'setAdmin',
           adminStatus: false,
         })
-        localStorage.setItem('LoggedIn', true )
+        localStorage.setItem('LoggedIn', true)
         localStorage.setItem('AdminStatus', false)
         navigate('/')
 
@@ -100,22 +127,36 @@ const WebLogin = () => {
                   fullWidth required />
               </Grid>
               <Grid item>
-                <TextField
-                  type='password'
-                  onChange={e => setPassword(e.target.value)}
-                  label="Password"
-                  placeholder='Enter password'
-                  variant="outlined"
-                  fullWidth required
-                />
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handleChange('password')}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
               </Grid>
             </Grid>
-         
+
             <Button
               className='sign-in-Btn'
               type='submit'
               variant='contained'
-              style={{marginTop: '15px', marginBottom: '15px'}}
+              style={{ marginTop: '15px', marginBottom: '15px' }}
               fullWidth>Sign in</Button>
             <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account?&nbsp;
               <NavLink as={Link} to="/signup">

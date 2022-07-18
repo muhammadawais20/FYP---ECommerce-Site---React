@@ -32,9 +32,13 @@ const Sidebar = () => {
                 loggedIn: false,
                 adminStatus: false
             })
+            dispatch({ type: 'CLEAR_ALL_CART', payload: [] });
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('AdminStatus');
+            localStorage.removeItem('LoggedIn');
             navigate('/weblogin');
         })
-       
+
     }
     return (
         <div className='sidebar'>
@@ -128,7 +132,7 @@ const Sidebar = () => {
 
                     <li>
                         <NotificationsNoneIcon className='icon' />
-                        <span>Notificatios</span>
+                        <span>Notifications</span>
                     </li> */}
 
                     <p className="title">OTHER</p>
@@ -140,20 +144,19 @@ const Sidebar = () => {
                         </li>
                     </Link>
 
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link to="/profile" style={{ textDecoration: "none" }}>
                         <p className="title">USER</p>
                         <li>
                             <AccountCircleOutlinedIcon className='icon' />
-                            <span>Profile</span>
+                            <span>Profiles</span>
                         </li>
                     </Link>
-
-                    
+                    <Link to="" style={{ textDecoration: "none" }}>
                         <li>
                             <ExitToAppTwoToneIcon className='icon' />
                             <span onClick={handleLogout}>Logout</span>
                         </li>
-                   
+                    </Link>
                 </ul>
             </div>
         </div>

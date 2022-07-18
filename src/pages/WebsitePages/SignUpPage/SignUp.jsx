@@ -5,6 +5,13 @@ import { Avatar, Grid, Paper, TextField, Button, Typography } from '@mui/materia
 import { toast } from 'react-toastify';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './SignUp.css';
 import Loader from '../../../components/WebsiteComponents/Loader/Loader';
 
@@ -18,20 +25,40 @@ const SignUp = () => {
   
   const navigate = useNavigate();
 
+  const [values, setValues] = useState({
+    password: '',
+    showPassword: false,
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   const SignInApp = async (e) => {
     e.preventDefault();
-    if (password.length < 7) {
+    if (values.password.length < 7) {
       toast.error("Password should be more than 7 characters");
-    } else if (password.search(/[a-zA-Z]/) == -1) {
+    } else if (values.password.search(/[a-zA-Z]/) == -1) {
       toast.error("Password should contain alphabets");
-    } else if (password.search(/[0-9]/) == -1) {
+    } else if (values.password.search(/[0-9]/) == -1) {
       toast.error("Password should contain numbers");
-    } else if (password.search(/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/) == -1) {
+    } else if (values.password.search(/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/) == -1) {
       toast.error("Password should conatian special characters");
     } else {
       const userIdPath = `${userName}_${(Math.random().toFixed(2)) * 100}`;
 
-      auth.createUserWithEmailAndPassword(email, password)
+      auth.createUserWithEmailAndPassword(email, values.password)
         .then((userAuth) => {
           db.collection('users').doc(userIdPath).set({
             fullName: fullName,
@@ -40,7 +67,7 @@ const SignUp = () => {
             phone: phone,
             country: country,
             email: email,
-            password: password,
+            password: values.password,
           }).then(() => {
             <Loader />
             toast.success('Registeration Successfull!')
@@ -49,7 +76,8 @@ const SignUp = () => {
             setPhone('');
             setCountry('');
             setEmail('');
-            setPassword('');
+            setValues("");
+
             navigate('/weblogin');
           }).catch(() => {
             toast.error('Registeration Failed!')
@@ -125,14 +153,30 @@ const SignUp = () => {
                   variant="outlined"
                   fullWidth required />
               </Grid>
+
               <Grid item>
-                <TextField
-                  type='password'
-                  onChange={e => setPassword(e.target.value)}
-                  label="Password"
-                  placeholder='Enter Password'
-                  variant="outlined"
-                  fullWidth required />
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handleChange('password')}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
               </Grid>
             </Grid>
             <Grid style={{margin: '10px'}}>

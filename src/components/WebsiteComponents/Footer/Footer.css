@@ -1,57 +1,84 @@
-.page-footer {
-    background-color: #f3f0f0;
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+.footer-section {
+  background: rgb(37, 36, 36, 0.7);
+  position: relative;
+}
+.footer-content {
+  position: relative;
+  z-index: 2;
+}
+.footer-pattern img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 330px;
+  background-size: cover;
+  background-position: 100% 100%;
+}
+.footer-logo {
+  margin-top: -70px;
+}
+.footer-logo img {
+    max-width: 200px;
+}
+.footer-text p {
+  margin-top: -14px;
+  font-size: 18px;
+  color: #4b2627;
+
+}
+
+.footer-widget-heading h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
     position: relative;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-}
+    margin-bottom: 80px;
+    
+  }
+  .footer-widget-heading h3::before {
+    content: "";
+    position: absolute;
+    left: 1;
+    bottom: -15px;
+    height: 2px;
+    width: 50px;
+    background: #4b2627;
+  }
 
-p {
-    font-size: 16px;
-    text-align: left;
-    color: black;
-}
+  .footer-widget ul li {
+    list-style: none;
+  }
+  
+  .footer-widget ul li{
+    display:inline-block;
+    width: 50%;
+    margin-bottom: 12px;
+    
+    
+  }
+  .footer-widget ul li a:hover{
+    color: 878787;
+    font-weight: bold;
+  }
+  .footer-widget ul li a {
+    color: #4b2627;
+    text-transform: capitalize;
+  }
 
-h5 {
-    text-align: left;
-    text-transform: uppercase;
+.copyright-area{
+  background: #202020;
+  padding: 0;
 }
-
-.navlinkStyle {
-    color: black;
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #878787;
 }
-
-.footerLinks li {
-    text-align: left;
-}
-
-.links {
-    font-size: 16px;
-    font-weight: 500;
-    color: black;
-    text-decoration: none;
-}
-
-.links:hover {
-    text-decoration: underline;
-}
-
-hr {
-    width: 65%;
-    border-top: 2px solid black;
-}
-
-.SocialLinks {
-    float: left;
-    margin-right: 12px !important;
-    margin-bottom: 15px;
-}
-
-.footerEnd {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 12px;
-    padding-left: 5;
+.copyright-text p a{
+  color: #fff;
 }

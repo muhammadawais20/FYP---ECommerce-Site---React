@@ -1,6 +1,6 @@
 import React from 'react'
 import { Divider, Grid, Card, CardMedia, Typography } from '@mui/material';
-import honey from '../../../resources/collages/collage1.png'
+import collage1 from '../../../resources/collages/collage1.png'
 import './About.css'
 
 const About = () => {
@@ -11,8 +11,8 @@ const About = () => {
           <Grid item xs={12} sm={6}>
             <Card>
               <CardMedia
-                image={honey}
-                style={{ height: '550px' }}
+                image={collage1}
+                style={{ height: '550px', maxWidth: '100%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%'}}
               />
             </Card>
           </Grid>

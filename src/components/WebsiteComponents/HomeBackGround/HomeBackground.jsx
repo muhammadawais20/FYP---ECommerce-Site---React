@@ -18,7 +18,7 @@ function HomeBackground() {
                     />
                     <Carousel.Caption>
                         <b></b><span className="section-title-main" style= {{fontSize: '97%'}}>
-                            <h1 style={{color:'#502d2e'}}>Buy Dry Fruits For Every Occasion</h1>
+                            {/* <h1 style={{color:'#502d2e'}}>Buy Dry Fruits For Every Occasion</h1> */}
                         </span><b></b>
                     </Carousel.Caption>
                 </Carousel.Item>
