@@ -1,6 +1,6 @@
 import React from 'react';
 import './sidebar.scss';
-import logo from '../../../logo.png';
+import logo from '../../../../src/resources/logo/Logo.png';
 import { auth } from '../../../config/firebase';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

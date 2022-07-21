@@ -135,9 +135,9 @@ const CheckOut = () => {
         <Layout>
             <div className='checkOutWrapper'>
                 <Grid container spacing={2} className="gridWrapper" >
-                    <Grid item xs={12} md={8}>
+                    <Grid item xs={12} md={8} style={{marginTop: '5rem', marginBottom: '1rem'}}>
                         <Paper variant="outlined" square className='gridLeft'>
-                            <h1>CheckOut</h1>
+                            <h1 className='checkout-heading'>CheckOut</h1>
                             <form onSubmit={placeorder}>
                                 <Grid container spacing={1}>
                                     <Grid xs={12} sm={6} item>
@@ -226,7 +226,9 @@ const CheckOut = () => {
                                     <Grid xs={12} item>
                                         <TextField
                                             value={`Rs. ${totalAmount}`}
+                                            label="Order Amount"
                                             variant="outlined"
+                                            fullWidth
                                             onChange={(e) => { setTotalAmount(e.target.value) }}
                                             style={{ width: "100%" }}
                                             inputProps={
@@ -247,16 +249,15 @@ const CheckOut = () => {
                             </form>
                         </Paper>
                     </Grid>
-                    <Grid container item xs={12} md={4}>
+                    <Grid container item xs={12} md={4} style={{marginTop: '5rem', marginBottom: '1rem'}} className='gridRightMain'>
                         <Paper variant="outlined" square className='gridRight'>
-                            <h1>Your Cart {cartitems.length}</h1>
+                            <h3>Your Cart has {cartitems.length} Items</h3>
                             <div className='Back-cart'>
-                                <Link to='/cartpage'>
+                                <Link to='/cartpage' style={{ textDecoration: 'none' }}>
                                     <ArrowBackIcon style={{ fill: 'gray' }} />
                                     <span>Back to  Shopping Cart</span>
                                 </Link>
                             </div>
-
                         </Paper>
                     </Grid>
                 </Grid>

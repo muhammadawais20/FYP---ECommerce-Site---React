@@ -99,6 +99,7 @@ const WebLogin = () => {
     })
   }
   )
+  
   return (
     <Layout>
       <Grid>
@@ -106,7 +107,7 @@ const WebLogin = () => {
           style={{
             width: 320,
             margin: '20px auto',
-            marginTop: '100px',
+            marginTop: '110px',
             padding: 20,
             height: '60vh',
           }}>
@@ -124,7 +125,9 @@ const WebLogin = () => {
                   label="Email"
                   placeholder='Enter email'
                   variant="outlined"
-                  fullWidth required />
+                  fullWidth 
+                  required 
+                  />
               </Grid>
               <Grid item>
                 <FormControl fullWidth variant="outlined">
@@ -156,15 +159,15 @@ const WebLogin = () => {
               className='sign-in-Btn'
               type='submit'
               variant='contained'
-              style={{ marginTop: '15px', marginBottom: '15px' }}
+              style={{ marginTop: '15px', marginBottom: '15px', backgroundColor: "#502d2e" }}
               fullWidth>Sign in</Button>
             <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account?&nbsp;
-              <NavLink as={Link} to="/signup">
+              <NavLink as={Link} to="/signup" style={{color: "#100909"}}>
                 Sign-Up
               </NavLink>
             </Typography>
             <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forget Password?&nbsp;
-              <NavLink as={Link} to="/forgetpassword">
+              <NavLink as={Link} to="/forgetpassword" style={{color: "#100909"}}>
                 Reset Password
               </NavLink>
             </Typography>

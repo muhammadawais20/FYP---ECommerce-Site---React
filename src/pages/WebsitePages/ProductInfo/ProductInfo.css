@@ -25,7 +25,7 @@
   border: 1px solid #ffda85;
   padding: 2px 8px;
   margin-bottom: 10px;
-  max-width: 230px;
+  max-width: 200px;
   background: #fff3d6;
   color: #dd2400;
 }
@@ -74,9 +74,28 @@
   background: none;
   outline: none;
 }
+.service {
+  margin-top: 10px;
+}
 .provider-service{
-  color: #666 !important;
+  color: #100909 !important;
+  text-decoration: none;
 }
 .provider-service:hover{
   color: #666;
+}
+.buyBtn, .addBtn{
+  width: 100px;
+  border: 1px solid #100909;
+  margin-top: 5px;
+  background-color: #502d2e;
+  color: white;
+}
+.buyBtn, .addBtn:hover {
+  font-size: 16px;
+}
+
+.backward-link-text{
+  color: gray;
+  margin-left: 0.5rem;
 }

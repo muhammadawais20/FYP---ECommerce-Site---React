@@ -1,28 +1,69 @@
 .announcement-container {
-    height: 30px;
+    height: 40px;
     background-color: #502d2e;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     position: fixed;
     z-index: 100;
     margin-top: -16px;
     padding-top: 15px;
     animation-name: moveText;
-    animation-duration: 8s;
-    animation-iteration-count: 50;
+    animation-duration: 7s;
+    animation-iteration-count: 1000;
 
 }
 
 @keyframes moveText {
     from {
-        width: 30%;
+        width: 40%;
     }
 
     to {
         width: 100%;
     }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .announcement-container {
+        font-size: 10px;
+    }
+
+
+    @keyframes moveText {
+        from {
+            width: 0%;
+        }
+
+        to {
+            width: 100%;
+        }
+
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+
+    .announcement-container {
+        font-size: 10px;
+    }
+
+
+    @keyframes moveText {
+        from {
+            width: 40%;
+        }
+
+        to {
+            width: 100%;
+        }
+
+    }
+
 }

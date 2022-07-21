@@ -13,7 +13,7 @@
 .gridLeft{
    padding: 20px;
 }
-.gridRight{
+.gridRight{  
    padding: 20px;
    width: 100%;
 }
@@ -29,10 +29,11 @@ hr {
    width: 100%;
 }
 .Back-cart{
-   margin-top: 1rem;
+   color: gray;
+   margin-left: 0.5rem;
 }
 .Back-cart span{
-   color: black;
+   color: gray;
    margin-left: 0.5rem;
    font-size: large;
    font-weight: 500;
@@ -45,8 +46,13 @@ hr {
     letter-spacing: 1.15px;
     border: 0.5px solid rgb(177, 177, 177);
     color: white;
-    background: #4b70e2 !important;
+    background: #502d2e !important;
     outline: none;
     cursor: pointer;
     margin: 25px 0;
+}
+
+.checkout-heading {
+   color: gray;
+   text-decoration: none;
 }

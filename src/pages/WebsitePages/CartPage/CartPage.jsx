@@ -59,7 +59,7 @@ const CartPages = () => {
             <div className='cart-empty'>
               <p>Your cart is currently empty</p>
               <div className='start-shopping'>
-                <Link to='/'>
+                <Link to='/' style={{ textDecoration: 'none' }}>
                   <ArrowBackIcon style={{ fill: 'gray' }} />
                   <span>Start Shopping</span>
                 </Link>
@@ -99,7 +99,7 @@ const CartPages = () => {
                 })}
               </div>
               <div className='cart-summary'>
-                <button className='clear-cart' onClick={handleclearCart}>Clear Cart</button>
+                <button className='clear-cart' onClick={handleclearCart} style={{color: "#502d2e" }}>Clear Cart</button>
                 <div className='cart-placeorder'>
                   <div className='totalitems'>
                     <span>Total Items</span>
@@ -107,11 +107,11 @@ const CartPages = () => {
                   </div>
                   <div className='subtotal'>
                     <span>Sub Total</span>
-                    <span className='amount'>{totalAmount}</span>
+                    <span className='amount'>{`Rs. ${totalAmount}`}</span>
                   </div>
-                  <button onClick={() => { navigate('/checkOut') }}>CheckOut</button>
+                  <button onClick={() => { navigate('/checkOut') }} style={{backgroundColor: "#502d2e" }}>CheckOut</button>
                   <div className='continue-shopping'>
-                    <Link to='/'>
+                    <Link to='/' style={{textDecoration: 'none' }}>
                       <ArrowBackIcon style={{ fill: 'gray' }} />
                       <span>Continue Shopping</span>
                     </Link>

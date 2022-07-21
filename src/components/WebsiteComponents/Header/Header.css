@@ -6,7 +6,7 @@
 .navbar{
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-    
+    height: 90px;
 }
 .navbar-show{   
     position: fixed !important;
@@ -26,10 +26,10 @@
 }
 .navbar-logo{
     min-width: 90px;
-    height: 70px;
+    height: 90px;
     width: 100px;
     display: block;
-    background: url('../../../resources/logo/Logo.png');
+    /* background: url('../../../resources/logo/Logo.png'); */
     background-position: center;
     background-size: cover;
 }

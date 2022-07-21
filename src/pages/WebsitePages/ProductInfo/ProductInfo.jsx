@@ -91,8 +91,8 @@ const ProductInfo = () => {
         <div className='productInfo-container' >
           {loading && (<Loader />)}
           <div className='backward-link'>
-            <Link to='/'>
-              <ArrowBackIcon style={{ fill: 'black', size: '17px' }} />
+            <Link to='/' style={{textDecoration: 'none' }}>
+              <ArrowBackIcon style={{ fill: 'gray' }} />
               <span className='backward-link-text'>Back to Home</span>
             </Link>
           </div>
@@ -109,12 +109,11 @@ const ProductInfo = () => {
                         <p className="card-text">{product.productDescription}</p>
 
                         <div className="free-shipping">
-                          <span>Free Home Delivery in Pakistan</span>
+                          <span>Free Home Delivery in Karachi</span>
                         </div>
 
                         <ul>
-                          <li>Availability In Stock</li>
-                          <li>Delivery Time 3-5 Days</li>
+                          <li>Delivery Time 3-5 days.</li>
                         </ul>
                         <div className='item-counter-container'>
                           <div onClick={() => handleDec()} className='item-counter-child1'>-</div>
@@ -139,8 +138,8 @@ const ProductInfo = () => {
                             Add to Cart
                           </button>
                         </div>
-                        <div>
-                          <a href='' className='provider-service'>Ask question</a>
+                        <div className='service'>
+                          <Link to='/contactpage' className='provider-service'>Ask question?</Link>
                         </div>
                       </div>
                     </div>

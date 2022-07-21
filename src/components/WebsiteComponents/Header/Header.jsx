@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../../config/firebase';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { toast } from 'react-toastify';
+import logo from './Logo.png';
 import "./Header.css";
-
 
 const Header = () => {
   const { cartitems, loggedIn, user } = useSelector(state => state.cartReducer);
@@ -34,7 +34,7 @@ const Header = () => {
       <Navbar bg="light" expand="lg" className="navbar-show">
         <Container fluid>
           <div className='navbar-brand'>
-            <Navbar.Brand as={Link} to={"/"} > <span className="navbar-logo"></span></Navbar.Brand>
+            <Navbar.Brand as={Link} to={"/"} ><img src={logo} alt='Logo' className="navbar-logo" /></Navbar.Brand>
           </div>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">

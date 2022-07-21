@@ -3,7 +3,8 @@ ul {
     padding: 0px;
 }
 .footer-section {
-  background: rgb(37, 36, 36, 0.7);
+  /* background: rgb(37, 36, 36, 0.7); */
+  background: #d9d9d9;
   position: relative;
 }
 .footer-content {
@@ -28,7 +29,6 @@ ul {
   margin-top: -14px;
   font-size: 18px;
   color: #4b2627;
-
 }
 
 .footer-widget-heading h3 {
@@ -62,7 +62,7 @@ ul {
     
   }
   .footer-widget ul li a:hover{
-    color: 878787;
+    color: #502d2e;
     font-weight: bold;
   }
   .footer-widget ul li a {

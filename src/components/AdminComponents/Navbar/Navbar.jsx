@@ -51,14 +51,14 @@ const Navbar = () => {
                             onClick={() => dispatch({ type: "TOGGLE" })}
                         />
                     </div>
-                    <div className="item">
+                    {/* <div className="item">
                         <NotificationsNoneOutlinedIcon className='navIcon' />
                         <div className="counter">5</div>
                     </div>
                     <div className="item">
                         <ChatIcon className='navIcon' />
                         <div className="counter">10</div>
-                    </div>
+                    </div> */}
 
                     <div className="item">
                         <img src={admin.map(e => e.adminImg)} alt='Avatar' className='avatar' />
