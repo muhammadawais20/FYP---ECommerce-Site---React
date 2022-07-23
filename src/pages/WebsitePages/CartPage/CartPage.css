@@ -126,3 +126,9 @@
 .cart-product-action {
     cursor: pointer;
 }
+
+.delivery-process {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}

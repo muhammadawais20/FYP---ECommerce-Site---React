@@ -43,6 +43,25 @@ const NewAdmin = ({ title }) => {
     const addNewAdmin = (e) => {
         e.preventDefault();
         // Storing the Image
+        if (password.length < 7) {
+            toast.error("Password should be more than 7 characters");
+        }
+        else if (password.search(/[a-zA-Z]/) == -1) {
+            toast.error("Password should contain alphabets");
+        }
+        else if (password.search(/[0-9]/) == -1) {
+            toast.error("Password should contain numbers");
+        }
+        else if (password.search(/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/) == -1) {
+            toast.error("Password should contain special characters");
+        }
+        else if (phone.length > 11 || phone.length < 11) {
+            toast.error("Phone should have 11 digits");
+        }
+        else if (Number(!phone.startsWith("03"))) {
+            toast.error("Phone should be of Pakistani Network, Starts with 03.");
+        }
+
         const uploadTask = storage.ref(`admin-images/${adminImage.name}`).put(adminImage)
         uploadTask.on('state_changed', snapshot => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 10

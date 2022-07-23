@@ -28,6 +28,10 @@ const AdminTable = () => {
     const [adminName, setAdminName] = useState();
     const [email, setEmail] = useState();
     const [phone, setPhone] = useState();
+    const [showMod, setShowMod] = useState(false);
+
+    const closeModal = () => setShowMod(false);
+    const showModal = () => setShowMod(true);
 
     const [values, setValues] = useState({
         password: '',
@@ -92,7 +96,7 @@ const AdminTable = () => {
                 setPhone("");
                 setValues("");
 
-                toast.success("Admin Data Updated Successfully!");
+                toast.success("Admin Created Successfully!");
                 getAdmin()
             })
 
@@ -107,6 +111,7 @@ const AdminTable = () => {
 
 
     const deleteHandler = async (admins) => {
+        setShowMod(false);
         try {
             db.collection("admins").doc(admins.adminId).delete({
             })
@@ -115,6 +120,7 @@ const AdminTable = () => {
         } catch (error) {
             toast.error("Admin deletion failed!");
         };
+        
     }
 
     return (
@@ -163,7 +169,7 @@ const AdminTable = () => {
                                     </div>
                                 </TableCell>
                                 <TableCell className='view-delete'>
-                                    <div className='delete' onClick={() => deleteHandler(admins)}>Delete</div>
+                                    <div className='delete' onClick={showModal}>Delete</div>
                                 </TableCell>
                             </TableRow>
                             <Modal className='modal' show={show} onHide={handleClose}>
@@ -205,7 +211,7 @@ const AdminTable = () => {
                                                 fullWidth
                                                 required />
                                         </div>
-            
+
                                         <FormControl fullWidth variant="outlined">
                                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                             <OutlinedInput
@@ -235,6 +241,20 @@ const AdminTable = () => {
                                     <Button onClick={() => editHandler(admins)}>Save</Button>
                                 </Modal.Footer>
                             </Modal>
+
+                            <Modal show={showMod} centered>
+                                <div className="modal-header text-center">
+                                    <h3 className="modal-title w-100">Confirmation</h3>
+                                </div>
+                                <Modal.Body>
+                                    <p className='text-center'>Do You Really Want to Delete Admin?</p>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button onClick={closeModal}>No</Button>
+                                    <Button onClick={() => deleteHandler(admins)} className="btn btn-danger">Yes</Button>
+                                </Modal.Footer>
+                            </Modal>
+
                         </TableBody>
                     ))}
                 </Table>

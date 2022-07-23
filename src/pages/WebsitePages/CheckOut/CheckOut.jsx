@@ -11,7 +11,7 @@ import './CheckOut.css';
 const CheckOut = () => {
 
     const { cartitems } = useSelector(state => state.cartReducer);
-    
+
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
@@ -70,51 +70,62 @@ const CheckOut = () => {
     }
 
     const [orderId, setOrderId] = useState(getOrderId);
-    
+
 
     const placeorder = (e) => {
         e.preventDefault();
-        const AddressInfo = {
-            firstName,
-            lastName,
-            phonenumber,
-            email,
-            address,
-            city,
-            state,
-            zipcode,
-            totalAmount,
+
+
+        if (phonenumber.length > 11 || phonenumber.length < 11) {
+            toast.error("Phone should have 11 digits");
+        }
+        else if (Number(!phonenumber.startsWith("03"))) {
+            toast.error("Phone should be of Pakistani Network, Starts with 03.");
         }
 
-        const OrderInfo = {
-            cartitems,
-            AddressInfo,
-            email: JSON.parse(localStorage.getItem('currentUser')).user.email,
-            userid: JSON.parse(localStorage.getItem('currentUser')).user.uid,
-            orderDate,
-            orderId
+        else {
+            const AddressInfo = {
+                firstName,
+                lastName,
+                phonenumber,
+                email,
+                address,
+                city,
+                state,
+                zipcode,
+                totalAmount,
+            }
 
-        }; 
-        
-        try {
-            db.collection('orders').doc(orderId).set({
-                OrderInfo
-            }).then(() => {
-                setFirstName("");
-                setLastName("");
-                setPhoneNumber("");
-                setEmail("");
-                setAddress("");
-                setCity("");
-                setState("");
-                setZipCode("");
-                toast.success('Order Placed Successfully');
-                dispatch({ type: 'CLEAR_ALL_CART', payload: [] });
-                navigate('/');
-            })
-           
-        } catch (error) {
-            toast.error('Order Failed')
+            const OrderInfo = {
+                cartitems,
+                AddressInfo,
+                email: JSON.parse(localStorage.getItem('currentUser')).user.email,
+                userid: JSON.parse(localStorage.getItem('currentUser')).user.uid,
+                orderDate,
+                orderId
+
+            };
+
+            try {
+                db.collection('orders').doc(orderId).set({
+                    OrderInfo
+                }).then(() => {
+                    setFirstName("");
+                    setLastName("");
+                    setPhoneNumber("");
+                    setEmail("");
+                    setAddress("");
+                    setCity("");
+                    setState("");
+                    setZipCode("");
+                    toast.success('Order Placed Successfully!');
+                    dispatch({ type: 'CLEAR_ALL_CART', payload: [] });
+                    navigate('/');
+                })
+
+            } catch (error) {
+                toast.error('Order Failed!')
+            }
         }
     }
 
@@ -135,7 +146,7 @@ const CheckOut = () => {
         <Layout>
             <div className='checkOutWrapper'>
                 <Grid container spacing={2} className="gridWrapper" >
-                    <Grid item xs={12} md={8} style={{marginTop: '5rem', marginBottom: '1rem'}}>
+                    <Grid item xs={12} md={8} style={{ marginTop: '5rem', marginBottom: '1rem' }}>
                         <Paper variant="outlined" square className='gridLeft'>
                             <h1 className='checkout-heading'>CheckOut</h1>
                             <form onSubmit={placeorder}>
@@ -174,12 +185,14 @@ const CheckOut = () => {
                                     <Grid xs={12} sm={6} item>
                                         <TextField
                                             onChange={e => setEmail(e.target.value)}
-                                            name='email'
+                                            value={JSON.parse(localStorage.getItem('currentUser')).user.email}
                                             type="email"
                                             label="Email address"
-                                            placeholder='Enter email address'
                                             variant='outlined'
                                             style={{ width: "100%" }}
+                                            inputProps={
+                                                { readOnly: true, }
+                                            }
                                             required />
                                     </Grid>
                                     <Grid xs={12} item>
@@ -249,14 +262,30 @@ const CheckOut = () => {
                             </form>
                         </Paper>
                     </Grid>
-                    <Grid container item xs={12} md={4} style={{marginTop: '5rem', marginBottom: '1rem'}} className='gridRightMain'>
+
+                    <Grid container item xs={12} md={4} style={{ marginTop: '5rem', marginBottom: '1rem' }}>
                         <Paper variant="outlined" square className='gridRight'>
-                            <h3>Your Cart has {cartitems.length} Items</h3>
+                            <h2 className='text-center'>Your Cart has {cartitems.length} Items</h2>
+                            <hr />
                             <div className='Back-cart'>
-                                <Link to='/cartpage' style={{ textDecoration: 'none' }}>
-                                    <ArrowBackIcon style={{ fill: 'gray' }} />
-                                    <span>Back to  Shopping Cart</span>
-                                </Link>
+                                {cartitems.map((item, index) => {
+                                    return (
+                                        <div className='cart-item-final' key={index}>
+                                            <div className='cart-product'>
+                                                <img src={item.productImg} alt='product_img' />
+                                                <span>{item.productQuantity} kg</span>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    )
+                                })}
+                                <div>
+                                    <Link to='/cartpage' className='back'>
+                                        <ArrowBackIcon style={{ fill: 'gray' }} />
+                                        <span>Back to  Shopping Cart</span>
+                                    </Link>
+                                </div>
+
                             </div>
                         </Paper>
                     </Grid>

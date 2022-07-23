@@ -2,18 +2,62 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../../config/firebase';
 import './navbar.scss';
 import LanguageIcon from '@mui/icons-material/Language';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlined';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import ChatIcon from '@mui/icons-material/Chat';
-import ListIcon from '@mui/icons-material/List';
-import { DarkModeContext } from '../../../context/darkModeContext';
-import { useContext } from "react";
+import Loader from '../../WebsiteComponents/Loader/Loader';
+import { toast } from 'react-toastify';
+import SwitchModes from '../SwitchModes/SwitchModes'
+import OrderNotifications from '../OrderNotifications/OrderNotifications';
+import MessageNotification from '../MessageNotification/MessageNotification';
 
 const Navbar = () => {
 
     const [admin, setAdmin] = useState([]);
-    const { dispatch } = useContext(DarkModeContext);
+    const [order, setOrder] = useState([]);
+    const [complaint, setComplaint] = useState([]);
+
+    useEffect(() => {
+        getOrder();
+    }, [])
+
+    async function getOrder() {
+        try {
+            //setLoadig
+            const getOrderFromFirebase = [];
+            db.collection('orders').get().then(snapshot => {
+                snapshot.forEach(order => {
+                    getOrderFromFirebase.push({ ...order.data() })
+                    //setLoading
+                })
+                setOrder(getOrderFromFirebase)
+            })
+        }
+        catch (error) {
+            //setLoading
+            toast.error("Error!");
+        }
+    }
+
+    useEffect(() => {
+        getComplaint();
+    }, [])
+
+    async function getComplaint() {
+        try {
+            //setLoadig
+            const getComplaintFromFirebase = [];
+            db.collection('contacts').get().then(snapshot => {
+                snapshot.forEach(complaint => {
+                    getComplaintFromFirebase.push({ ...complaint.data() })
+                    //setLoading
+                })
+                setComplaint(getComplaintFromFirebase)
+            })
+        }
+        catch (error) {
+            //setLoading
+            toast.error("Error!");
+        }
+    }
+
 
     useEffect(() => {
         getAdmin();
@@ -21,7 +65,7 @@ const Navbar = () => {
 
     async function getAdmin() {
         try {
-            //setLoadig
+
             const getAdminFromFirebase = [];
             db.collection('admins').get().then(snapshot => {
                 snapshot.forEach(admin => {
@@ -33,9 +77,13 @@ const Navbar = () => {
         }
         catch (error) {
             //setLoading
-            console.log("Error");
+            toast.error("Error!");
         }
     }
+
+    let ordersQuantity = order.length;
+    let complaintsQuantity = complaint.length;
+
 
     return (
         <div className='navbar'>
@@ -45,20 +93,24 @@ const Navbar = () => {
                         <LanguageIcon className='navIcon' />
                         English
                     </div>
-                    <div className="item">
-                        <DarkModeOutlinedIcon
+
+                    <div className="item1">
+                        <SwitchModes
                             className="navIcon"
-                            onClick={() => dispatch({ type: "TOGGLE" })}
                         />
                     </div>
-                    {/* <div className="item">
-                        <NotificationsNoneOutlinedIcon className='navIcon' />
-                        <div className="counter">5</div>
-                    </div>
+
                     <div className="item">
-                        <ChatIcon className='navIcon' />
-                        <div className="counter">10</div>
-                    </div> */}
+                        <OrderNotifications className='navIcon' />
+                        {/* <NotificationsNoneOutlinedIcon className='navIcon' /> */}
+                        <div className="counter">{ordersQuantity}</div>
+                    </div>
+
+                    <div className="item">
+                        <MessageNotification className='navIcon' />
+                        {/* <ChatIcon className='navIcon' /> */}
+                        <div className="counter">{complaintsQuantity}</div>
+                    </div>
 
                     <div className="item">
                         <img src={admin.map(e => e.adminImg)} alt='Avatar' className='avatar' />
@@ -66,7 +118,7 @@ const Navbar = () => {
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

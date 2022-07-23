@@ -60,6 +60,14 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (phone.length > 11 || phone.length < 11) {
+            toast.error("Phone should have 11 digits");
+          }
+          else if (Number(!phone.startsWith("03"))) {
+            toast.error("Phone should be of Pakistani Network, Starts with 03.");
+          } 
+          
         db.collection('contacts').doc(messageId).set({
             messageId: messageId,
             firstName: firstName,
@@ -95,6 +103,7 @@ const ContactUs = () => {
                         <Grid xs={12} sm={6} item>
                             <TextField
                                 onChange={e => setFirstName(e.target.value)}
+                                value={firstName}
                                 name="name"
                                 type="text"
                                 label="First Name"
@@ -105,6 +114,7 @@ const ContactUs = () => {
                         <Grid xs={12} sm={6} item>
                             <TextField
                                 onChange={e => setLastName(e.target.value)}
+                                value={lastName}
                                 name='last_name'
                                 type="text"
                                 label="Last Name"
@@ -115,6 +125,7 @@ const ContactUs = () => {
                         <Grid xs={12} item>
                             <TextField
                                 onChange={e => setEmail(e.target.value)}
+                                value={email}
                                 name="user_email"
                                 type="email"
                                 label="Email"
@@ -125,6 +136,7 @@ const ContactUs = () => {
                         <Grid xs={12} item>
                             <TextField
                                 onChange={e => setPhone(e.target.value)}
+                                value={phone}
                                 name='user_number'
                                 type="number"
                                 label="Phone"
@@ -135,6 +147,7 @@ const ContactUs = () => {
                         <Grid xs={12} item>
                             <TextField
                                 onChange={e => setMessage(e.target.value)}
+                                value={message}
                                 name="message"
                                 type="text"
                                 label="Message"

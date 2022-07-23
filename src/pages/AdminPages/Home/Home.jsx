@@ -4,7 +4,6 @@ import FeaturedChart from "../../../components/AdminComponents/FeaturedChart/Fea
 import Navbar from "../../../components/AdminComponents/Navbar/Navbar";
 import NormalChart from "../../../components/AdminComponents/NormalChart/NormalChart";
 import Sidebar from "../../../components/AdminComponents/Sidebar/Sidebar";
-import DetailsTable from "../../../components/AdminComponents/DetailsTable/DetailsTable";
 import Widgets from "../../../components/AdminComponents/Widgets/Widgets";
 import './home.scss';
 import { Grid } from "@mui/material";
@@ -12,7 +11,6 @@ import { toast } from 'react-toastify';
 
 
 const Home = () => {
-
 
     const [profit, setProfit] = useState([]);
     const [balance, setBalance] = useState([]);
@@ -61,6 +59,12 @@ const Home = () => {
         }
     }
 
+    const total = profit.map((get) => {
+        return get.ordersOnDelivery.orders.OrderInfo.AddressInfo.totalAmount;
+    })
+
+    const [myTotal, setMyTotal] = useState([]);
+
     const profitFromOrders = profit.map((get) => {
         return get.ordersOnDelivery.orders.OrderInfo.cartitems.map((e) => {
             return (parseInt(e.profit) * parseInt(e.productQuantity));
@@ -79,8 +83,7 @@ const Home = () => {
 
 const getBal = parseInt(profitFromOrders) - parseInt(transactionsAmount);
 
-    //  aspect={2 / 1} title="Revenue of Last 6 Months" />
-    return (
+       return (
         <Grid>
             <div className="home">
                 <Sidebar />
@@ -97,12 +100,7 @@ const getBal = parseInt(profitFromOrders) - parseInt(transactionsAmount);
 
                     <div className="charts">
                         <FeaturedChart />
-                        <NormalChart profit={profitFromOrders} aspect={2 / 1} title="Revenue of Last 6 Months" />
-                    </div>
-
-                    <div className="listContainer">
-                        <div className="listTitle">Previous Transactions</div>
-                        <DetailsTable />
+                        <NormalChart profit={profitFromOrders} aspect={2 / 1} title="Revenue From Orders" total1 = {total} />
                     </div>
                 </div>
             </div>

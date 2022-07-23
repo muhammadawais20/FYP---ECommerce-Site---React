@@ -24,7 +24,11 @@ const ProductTable = () => {
     const [productName, setProductName] = useState();
     const [originalPrice, setOriginalPrice] = useState();
     const [productIdState, setProductIdState] = useState();
-    
+    const [showMod, setShowMod] = useState(false);
+
+    const closeModal = () => setShowMod(false);
+    const showModal = () => setShowMod(true);
+
     const handleClose = () => setShow(false);
 
     const handleShow = (products) => {
@@ -54,7 +58,7 @@ const ProductTable = () => {
     }
 
     const deleteHandler = async (products) => {
-       
+        setShowMod(false);
         try {
             db.collection("Products").doc(products.productId).delete({
             })
@@ -141,7 +145,7 @@ const ProductTable = () => {
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
-                                    <div className='delete' onClick={() => deleteHandler(products)}>Delete</div>
+                                    <div className='delete' onClick={showModal}>Delete</div>
                                 </TableCell>
 
                             </TableRow>
@@ -216,6 +220,19 @@ const ProductTable = () => {
                                 <Modal.Footer>
                                     <Button onClick={handleClose}>Close</Button>
                                     <Button onClick={() => editHandler(products)}>Save</Button>
+                                </Modal.Footer>
+                            </Modal>
+
+                            <Modal show={showMod} centered>
+                                <div className="modal-header text-center">
+                                    <h3 className="modal-title w-100">Confirmation</h3>
+                                </div>
+                                <Modal.Body>
+                                    <p className='text-center'>Do You Really Want to Delete Product?</p>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button onClick={closeModal}>No</Button>
+                                    <Button onClick={() => deleteHandler(products)} className="btn btn-danger">Yes</Button>
                                 </Modal.Footer>
                             </Modal>
                         </TableBody>

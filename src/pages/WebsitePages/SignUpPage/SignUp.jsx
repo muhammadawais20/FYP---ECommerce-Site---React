@@ -21,7 +21,6 @@ const SignUp = () => {
   const [phone, setPhone] = useState('');
   const [country, setCountry] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
@@ -47,6 +46,7 @@ const SignUp = () => {
 
   const SignInApp = async (e) => {
     e.preventDefault();
+
     if (values.password.length < 7) {
       toast.error("Password should be more than 7 characters");
     } else if (values.password.search(/[a-zA-Z]/) == -1) {
@@ -54,36 +54,15 @@ const SignUp = () => {
     } else if (values.password.search(/[0-9]/) == -1) {
       toast.error("Password should contain numbers");
     } else if (values.password.search(/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/) == -1) {
-      toast.error("Password should conatian special characters");
+      toast.error("Password should contain special characters");
     }
-    // else if ((Number(phone.slice(0,3) !== "030")) || (Number(phone.slice(0,3) !== "031")) || (Number(phone.slice(0,3) !== "032")) || (Number(phone.slice(0,3) !== "033")) || (Number(phone.slice(0,3) !== "034")) || (Number(phone.slice(0,3) !== "035"))) {
-    //   toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    // }
-
-    // else if (Number(phone.slice(0, 3) !== "030")) {
-    //   toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    // }
-    // else if (Number(phone.slice(0, 3) !== "031")) {
-    //   toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    // }
-    // else if (Number(phone.slice(0, 3) !== "032")) {
-    //   toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    // }
-    // else if (Number(phone.slice(0, 3) !== "033")) {
-    //   toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    // }
-    // else if (Number(phone.slice(0, 3) !== "034")) {
-    //   toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    // }
-  
     else if (phone.length > 11 || phone.length < 11) {
       toast.error("Phone should have 11 digits");
     }
-
-    else if (Number(!phone.startsWith("031"))) {
+    else if (Number(!phone.startsWith("03"))) {
       toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    }  
-
+    } 
+  
     else {
       const userIdPath = `${userName}_${(Math.random().toFixed(2)) * 100}`;
 
@@ -112,9 +91,9 @@ const SignUp = () => {
             toast.error('Registeration Failed!')
           });
         })
-      // .catch(() => {
-      //   toast.error('Registeration Failed')
-      // });
+        .catch(() => {
+          toast.error('Registeration Failed')
+        });
     }
   }
 
@@ -122,8 +101,6 @@ const SignUp = () => {
     auth.onAuthStateChanged(function (user) {
     });
   }, [SignInApp]);
-
-
 
 
   return (

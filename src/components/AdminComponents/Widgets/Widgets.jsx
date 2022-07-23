@@ -9,6 +9,8 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { db } from '../../../config/firebase';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import LabelImportantIcon from '@mui/icons-material/LabelImportant';
+import Loader from '../../WebsiteComponents/Loader/Loader';
 
 const Widgets = ({ type, path, profit, balance }) => {
 
@@ -33,7 +35,7 @@ const Widgets = ({ type, path, profit, balance }) => {
         }
         catch (error) {
             //setLoading
-            console.log("Error");
+            toast.error("Error!");
         }
     }
 
@@ -54,8 +56,8 @@ const Widgets = ({ type, path, profit, balance }) => {
             })
         }
         catch (error) {
-            //setLoading
-            console.log("Error");
+            
+            toast.error("Error");
         }
     }
 
@@ -163,17 +165,16 @@ const Widgets = ({ type, path, profit, balance }) => {
         <div className="widget">
             <div className="leftSideOfWidget">
                 <span className="categoryTitle">{categoryDetails.categoryTitle}</span>
-                {/* <span className="categoryCount">{categoryDetails.isAmount && "Rs."} {amount}</span> */}
                 <span className="categoryCount">{categoryDetails.pendingIcon}  {categoryDetails.isAmount}</span>
                 <span className="categoryCount">{categoryDetails.completedIcon}  {categoryDetails.completedOrders}</span>
 
-                <Link to={path} style={{ textDecoration: "none" }}>
+                <Link className="seeAll" to={path} style={{ textDecoration: "none" ,  color: "#555",}}>
                     <span className="seeAllUsers">{categoryDetails.linkToAll}</span>
                 </Link>
 
             </div>
             <div className="rightSideOfWidget">
-                <span className="percentageOfUsers positive"><ArrowDropUpOutlinedIcon className="arrowIcon" />{5}%</span>
+                <span className="percentageOfUsers positive"><LabelImportantIcon className="arrowIcon" /></span>
                 <span className="icon">{categoryDetails.icon}</span>
             </div>
         </div>

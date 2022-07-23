@@ -72,7 +72,7 @@ const NewProducts = ({ title }) => {
                     setProductPrice('');
                     setProfit('');
                     navigate('/products');
-                    toast.success('Product Data Submission Successfully!');
+                    toast.success('Product Added Successfully!');
                     document.getElementById('fileUpload').value = ('');
 
                 }).catch(() => {
@@ -124,7 +124,7 @@ const NewProducts = ({ title }) => {
 
                             <div className="formInput">
                                 <label>Profit</label>
-                                <input type="number" onChange={event => setProfit(event.target.value)} value={profit} placeholder="Enter Profit" required />
+                                <input type="number" onChange={event => setProfit(event.target.value)} value={productPrice - originalProductPrice} placeholder="Enter Profit" disabled />
                             </div>
 
                             <div className="formInput">

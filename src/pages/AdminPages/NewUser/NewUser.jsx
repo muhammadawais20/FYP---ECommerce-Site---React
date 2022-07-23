@@ -33,13 +33,21 @@ const NewUser = ({ title }) => {
         }
         else {
             setUserImage(null)
-            toast.error('Please select a valid image type png or jpeg format!' , {
+            toast.error('Please select a valid image type png or jpeg format!', {
                 position: 'top-center',
                 autoClose: 5000
             })
         }
     }
     const addNewUser = (e) => {
+
+        if (phone.length > 11 || phone.length < 11) {
+            toast.error("Phone should have 11 digits");
+        }
+        else if (Number(!phone.startsWith("03"))) {
+            toast.error("Phone should be of Pakistani Network, Starts with 03.");
+        }
+
         e.preventDefault();
         // Storing the Image
         const uploadTask = storage.ref(`user-images/${userImage.name}`).put(userImage)
@@ -139,7 +147,7 @@ const NewUser = ({ title }) => {
                                 <label>Country</label>
                                 <input type="text" onChange={event => setCountry(event.target.value)} placeholder="Enter Country" required />
                             </div>
-                          
+
                             <div className="formInput">
                                 <label>Password</label>
                                 <input type="password" onChange={event => setPassword(event.target.value)} required />

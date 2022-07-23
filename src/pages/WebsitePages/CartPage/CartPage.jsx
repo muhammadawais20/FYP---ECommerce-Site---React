@@ -4,7 +4,7 @@ import Layout from '../../../components/WebsiteComponents/Layout/Layout';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
+import { Modal,Button } from 'react-bootstrap';
 import './CartPage.css';
 import { toast } from 'react-toastify';
 
@@ -19,11 +19,11 @@ const CartPages = () => {
   const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
+  const handleShow = () => setShow(true);
 
   const handleclearCart = () => {
     dispatch({ type: 'CLEAR_ALL_CART', payload: [] });
+    setShow(false);
   }
 
   useEffect(() => {
@@ -41,11 +41,8 @@ const CartPages = () => {
   const deleteItemCart = (product) => {
     // dispatch({ type: 'DELETE_FROM_CART', payload: product });
     let newArry = [...cartitems];
-    console.log(newArry, "cartlist")
     const itemIndex = newArry.findIndex((e) => e.productName == product.productName)
-    console.log(itemIndex)
     newArry.splice(itemIndex, 1)
-    console.log(newArry)
     dispatch({ type: 'ADD_TO_CART', payload: newArry })
     toast.error(`${product.productName} remove from cart`)
   }
@@ -86,7 +83,7 @@ const CartPages = () => {
                         {cartitem.productName}
                       </div>
                       <div className='cart-product-price'>
-                        { `${cartitem.productPrice}`}
+                        { `Rs. ${cartitem.productPrice}`}
                       </div>
                       <div className='cart-product-price'>
                         { `${cartitem.productQuantity} Kg`}
@@ -99,7 +96,7 @@ const CartPages = () => {
                 })}
               </div>
               <div className='cart-summary'>
-                <button className='clear-cart' onClick={handleclearCart} style={{color: "#502d2e" }}>Clear Cart</button>
+                <button className='clear-cart' onClick={handleShow} style={{color: "#502d2e" }}>Clear Cart</button>
                 <div className='cart-placeorder'>
                   <div className='totalitems'>
                     <span>Total Items</span>
@@ -108,6 +105,10 @@ const CartPages = () => {
                   <div className='subtotal'>
                     <span>Sub Total</span>
                     <span className='amount'>{`Rs. ${totalAmount}`}</span>
+                  </div>
+
+                  <div className='delivery-process'>
+                    <span>Cash On Delivery</span>
                   </div>
                   <button onClick={() => { navigate('/checkOut') }} style={{backgroundColor: "#502d2e" }}>CheckOut</button>
                   <div className='continue-shopping'>
@@ -122,6 +123,20 @@ const CartPages = () => {
           )}
         </div>
       </>
+      <div>
+        <Modal show={show} centered>
+          <div className="modal-header text-center">
+            <h3 className="modal-title w-100">Confirmation</h3>
+          </div>
+          <Modal.Body>
+            <p className='text-center'>Are You Really Want to Empty Shopping Cart?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={handleClose}>No</Button>
+            <Button onClick={handleclearCart} className="btn btn-danger">Yes</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
       <div>
       </div>
     </Layout>

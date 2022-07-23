@@ -24,7 +24,6 @@
             font-weight: 600;
           
         }
-
         .seeAllUsers {
             font-size: 14px;
             border-bottom: 1px solid gray;
@@ -36,7 +35,11 @@
             display: flex;   
             justify-content: center;   
             align-items: center;
-            font-size: 14px;
+
+            .arrowIcon{
+                font-size: 10px;
+                color: gray;
+            }
 
             &.positive {
                 color: green;

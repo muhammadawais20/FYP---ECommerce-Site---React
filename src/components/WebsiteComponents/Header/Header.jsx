@@ -25,7 +25,7 @@ const Header = () => {
       localStorage.removeItem('AdminStatus');
       localStorage.removeItem('LoggedIn');
       toast.success(`${user.email.substring(0, user.email.length - 10)} Logout Successfully!`)
-      navigate('/');
+      navigate('/weblogin');
     })
   }
 
