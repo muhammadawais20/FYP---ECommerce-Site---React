@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 
 const CartPages = () => {
   const { cartitems } = useSelector(state => state.cartReducer);
-  console.log(cartitems)
 
   const [totalAmount, setTotalAmount] = useState(0);
   const [show, setShow] = useState(false);

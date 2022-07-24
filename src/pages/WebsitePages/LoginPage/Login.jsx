@@ -57,7 +57,7 @@ const WebLogin = () => {
 
       setEmail('');
       setValues("");
-  
+
       let status = getUserFromFirebase.filter((e) => e.email === email)
       if (status.length > 0) {
         dispatch({
@@ -99,7 +99,7 @@ const WebLogin = () => {
     })
   }
   )
-  
+
   return (
     <Layout>
       <Grid>
@@ -125,9 +125,9 @@ const WebLogin = () => {
                   label="Email"
                   placeholder='Enter email'
                   variant="outlined"
-                  fullWidth 
-                  required 
-                  />
+                  fullWidth
+                  required
+                />
               </Grid>
               <Grid item>
                 <FormControl fullWidth variant="outlined">
@@ -162,14 +162,15 @@ const WebLogin = () => {
               style={{ marginTop: '15px', marginBottom: '15px', backgroundColor: "#502d2e" }}
               fullWidth>Sign in</Button>
             <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account?&nbsp;
-              <NavLink as={Link} to="/signup" style={{color: "#100909"}}>
+              <NavLink as={Link} to="/signup" style={{ color: "#100909" }}>
                 Sign-Up
               </NavLink>
             </Typography>
             <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forget Password?&nbsp;
-              <NavLink as={Link} to="/forgetpassword" style={{color: "#100909"}}>
+
+              <a href="https://khaasdryfruits.herokuapp.com/" target="_blank">
                 Reset Password
-              </NavLink>
+              </a>
             </Typography>
           </form>
         </Paper>
