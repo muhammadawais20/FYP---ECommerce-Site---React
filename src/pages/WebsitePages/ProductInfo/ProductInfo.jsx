@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Loader from '../../../components/WebsiteComponents/Loader/Loader';
 import Layout from '../../../components/WebsiteComponents/Layout/Layout';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Button } from '@mui/material';
 import './ProductInfo.css'
 
 
@@ -53,8 +54,6 @@ const ProductInfo = () => {
 
   const addToCart = (product) => {
     var newArry = [...cartitems];
-    // console.log(cartitems)
-    console.log(newArry)
     if (loggedIn == true) {
       var arry = {
         productName: product.productName,
@@ -66,7 +65,7 @@ const ProductInfo = () => {
         productId: product.productId
       }
       newArry.push(arry)
-      { product.productQuantity == 0 || arry.productQuantity == 0 ? toast.warn("Please select the product") : dispatch({ type: 'ADD_TO_CART', payload: newArry }, toast.success(`${product.productName} added to cart`)); }
+      { product.productQuantity == 0 || arry.productQuantity == 0 ? toast.warn("Please select the product quantity!") : dispatch({ type: 'ADD_TO_CART', payload: newArry }, toast.success(`${product.productName} added to cart`)); }
     } else {
       navigate('/weblogin')
     }
@@ -91,7 +90,7 @@ const ProductInfo = () => {
         <div className='productInfo-container' >
           {loading && (<Loader />)}
           <div className='backward-link'>
-            <Link to='/' style={{textDecoration: 'none' }}>
+            <Link to='/' style={{ textDecoration: 'none' }}>
               <ArrowBackIcon style={{ fill: 'gray' }} />
               <span className='backward-link-text'>Back to Home</span>
             </Link>
@@ -105,7 +104,7 @@ const ProductInfo = () => {
                       <img className="col-lg-4 card-img-start img-fluid p-0 pro-img" src={product.productImg} />
                       <div className="col-lg-8 card-body">
                         <h1 className="card-title">{product.productName}</h1>
-                        <p className='card-price'>Rs: {product.productPrice}</p>
+                        <p className='card-price' style={{ fontWeight: 'bold'}}>Rs. {product.productPrice}/Kg</p>
                         <p className="card-text">{product.productDescription}</p>
 
                         <div className="free-shipping">
@@ -113,33 +112,21 @@ const ProductInfo = () => {
                         </div>
 
                         <ul>
-                          <li>Delivery Time 3-5 days.</li>
+                          <li>Delivery Time 24 Hours.</li>
                         </ul>
-                        <div className='item-counter-container'>
-                          <div onClick={() => handleDec()} className='item-counter-child1'>-</div>
-                          <div className='item-counter-child2' style={{ alignSelf: 'center' }}>{quantity}</div>
-                          <div onClick={() => handleInc()} className='item-counter-child3'>+</div>
+
+                        <div className='product-quantity'>
+                          <button onClick={() => handleDec()} style={{fontSize: '20px', fontWeight: 'bold'}}>-</button>
+                          <div className='count' style={{fontSize: '20px', fontWeight: 'bold'}}>{quantity}</div>
+                          <button onClick={() => handleInc()} style={{fontSize: '20px', fontWeight: 'bold'}}>+</button>
                         </div>
-                        <div className="btnWrapper">
-                          <button
-                            type="submit"
-                            className="buyBtn"
-                            variant="contained"
-                            onClick={handleBuyNow}
-                          >
-                            BuyNow
-                          </button>
-                          <button
-                            type="submit"
-                            className='addBtn'
-                            variant="contained"
-                            onClick={() => addToCart(product)}
-                          >
-                            Add to Cart
-                          </button>
+                        <div className='BtnWrapper'>
+                          <div className="buyContainer"><Button variant="contained" onClick={handleBuyNow} className="buyBtn">Buy Now</Button></div>
+                          <div className="addContainer"><Button variant="contained" onClick={() => addToCart(product)} className="addBtn">Add to Cart</Button></div>
                         </div>
+
                         <div className='service'>
-                          <Link to='/contactpage' className='provider-service'>Ask question?</Link>
+                          <Link to='/contactpage' className='provider-service' style={{color: '#555'}}>Ask question?</Link>
                         </div>
                       </div>
                     </div>
@@ -154,5 +141,4 @@ const ProductInfo = () => {
   )
 }
 
-export default ProductInfo
-
+export default ProductInfo;

@@ -100,6 +100,10 @@ const WebLogin = () => {
   }
   )
 
+  const onNavigateHandler = () => {
+    navigate('/signup')
+  }
+
   return (
     <Layout>
       <Grid>
@@ -109,12 +113,12 @@ const WebLogin = () => {
             margin: '20px auto',
             marginTop: '110px',
             padding: 20,
-            height: '60vh',
+            height: '65vh',
           }}>
           <form onSubmit={LoginApp}>
             <Grid align='center'>
-              <Avatar className="avatarStyle"><LogoutOutlinedIcon /></Avatar>
-              <h2 >SIGN-IN</h2>
+              <Avatar className="avatar"><LogoutOutlinedIcon /></Avatar>
+              <h2 className='signin'>Sign In</h2>
             </Grid>
             <Grid container direction={"column"} spacing={2}>
               <Grid item>
@@ -160,18 +164,24 @@ const WebLogin = () => {
               type='submit'
               variant='contained'
               style={{ marginTop: '15px', marginBottom: '15px', backgroundColor: "#502d2e" }}
-              fullWidth>Sign in</Button>
-            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Do you have an account?&nbsp;
-              <NavLink as={Link} to="/signup" style={{ color: "#100909" }}>
-                Sign-Up
-              </NavLink>
-            </Typography>
-            <Typography gutterBottom color="textSecondary" variant='body2' component="p"> Forget Password?&nbsp;
+              fullWidth>Sign In</Button>
 
-              <a href="https://khaasdryfruits.herokuapp.com/" target="_blank">
-                Reset Password
-              </a>
-            </Typography>
+            <a href="https://khaasdryfruits-forgetpassword.herokuapp.com/" target="_blank" className="forget-text">
+              <span>Forget Password?</span>
+            </a>
+
+            <Grid>
+              <Button
+                className='createAccBtn'
+                type='submit'
+                variant='contained'
+                onClick={onNavigateHandler}
+                fullWidth
+                style={{backgroundColor: '#502d2e'}}
+                >
+                Create an account
+              </Button>
+            </Grid>
           </form>
         </Paper>
       </Grid>

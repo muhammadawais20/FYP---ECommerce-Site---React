@@ -5,12 +5,12 @@
 
     .table {
         display: flex;
-        
-        .tableData{
+
+        .tableData {
             text-align: center;
         }
     }
-    
+
 
     .productTableTitle {
 
@@ -48,14 +48,14 @@
             cursor: pointer;
         }
 
-        .edit{
+        .edit {
             color: green;
             border: 1px dotted greenyellow;
             padding: 2px 6px;
             cursor: pointer;
         }
     }
-    
+
     .productImageCell {
         display: flex;
         align-items: center;
@@ -67,8 +67,8 @@
             object-fit: cover;
             margin-right: 10px;
 
+
         }
 
     }
-
 }

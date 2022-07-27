@@ -1,9 +1,18 @@
 .avatarStyle {
-    background-color: black !important;
+    background-color: #502d2e !important;
 }
 .headerStyle{
     margin: 0;
+    font-weight: 800 !important;
 }
-.btnStyle{
+.btnstyle{
     font-weight: 700 !important;
+    background-color: #502d2e !important;
+}
+.linkSignup{
+    text-decoration: none;
+}
+.linkSignup:hover {
+    color: #555;
+    font-weight: 600;
 }

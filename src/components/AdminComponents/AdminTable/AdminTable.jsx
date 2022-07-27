@@ -120,7 +120,7 @@ const AdminTable = () => {
         } catch (error) {
             toast.error("Admin deletion failed!");
         };
-        
+
     }
 
     return (

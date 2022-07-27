@@ -42,7 +42,7 @@ const ProductTable = () => {
     }, [])
 
     async function getProduct() {
-     
+
         try {
             const getProductFromFirebase = [];
             db.collection('Products').get().then(snapshot => {
@@ -87,7 +87,7 @@ const ProductTable = () => {
                 toast.success("Product Updated Successfully");
                 getProduct();
             })
-            
+
         } catch (error) {
             toast.error("Product Update Failed!");
         };
@@ -156,25 +156,25 @@ const ProductTable = () => {
                                 <Modal.Body>
                                     <form className='formModal'>
 
-                                    <div className="formInput">
+                                        <div className="formInput">
                                             <TextField
                                                 style={{ marginBottom: '10px' }}
                                                 type="text"
                                                 label="Product Name"
                                                 placeholder="Enter Product Name"
-                                                onChange={(e) => setProductName(e.target.value) }
+                                                onChange={(e) => setProductName(e.target.value)}
                                                 value={productName}
                                                 fullWidth
                                                 required />
                                         </div>
 
-                                    <div className="formInput">
+                                        <div className="formInput">
                                             <TextField
                                                 style={{ marginBottom: '10px' }}
                                                 type="number"
                                                 label="Original Price"
                                                 placeholder="Enter Original Price"
-                                                onChange={(e) => setOriginalPrice(e.target.value) }
+                                                onChange={(e) => setOriginalPrice(e.target.value)}
                                                 value={originalPrice}
                                                 fullWidth
                                                 required />
@@ -186,7 +186,7 @@ const ProductTable = () => {
                                                 type="number"
                                                 label="Product Price"
                                                 placeholder="Enter Product Price"
-                                                onChange={(e) => setPrice(e.target.value) }
+                                                onChange={(e) => setPrice(e.target.value)}
                                                 value={price}
                                                 fullWidth
                                                 required />
@@ -199,7 +199,7 @@ const ProductTable = () => {
                                                 type="text"
                                                 label="Description"
                                                 placeholder="Enter Product Description"
-                                                onChange={(e) => setDescription(e.target.value) }
+                                                onChange={(e) => setDescription(e.target.value)}
                                                 value={description}
                                                 fullWidth
                                                 required />
@@ -210,7 +210,7 @@ const ProductTable = () => {
                                                 type="number"
                                                 label="Quantity"
                                                 placeholder="Enter Product Quantity"
-                                                onChange={(e) => setQuantity(e.target.value) }
+                                                onChange={(e) => setQuantity(e.target.value)}
                                                 value={quantity}
                                                 fullWidth
                                                 required />

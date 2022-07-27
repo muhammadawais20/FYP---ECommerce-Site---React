@@ -83,107 +83,118 @@ const OrderPage = () => {
 
     return (
         <Layout>
-            <div className='container-md order-wrapper'>
+            <div className='order-wrapper'>
                 {loading && (<Loader />)}
 
                 <div className='text-center'>
-                    <h1>Welcome to Order Page!</h1>
+                    <h1>*Order's History*</h1>
                 </div>
 
-                <div className='orderList'>
-                    <h3>Pending Orders</h3>
-                    {ordersPending.length > 0 ?
-                        orders.filter(obj => obj.OrderInfo.userid == userid).map(order => {
-                            return (
-                                <table className='table mt-3'>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            order.OrderInfo.cartitems.map((item, index) => {
-                                                return <tr key={index}>
-                                                    <td><img src={item.productImg} height="80" width="80" /></td>
-                                                    <td>{item.productName}</td>
-                                                    <td>{`${item.productQuantity} Kg`}</td>
-                                                    <td>Rs. {`${item.productPrice}`}</td>
-                                                </tr>
-                                            })
-                                        }
+                <div className='orders'>
+                    <div className='orderList'>
+                        <div className='text-center'>
+                            <h3>Pending Orders</h3>
+                        </div>
 
-                                    </tbody>
-                                </table>
-                            )
-                        }) : <p>You don't have any pending order!</p>}
-                </div>
+                        {ordersPending.length > 0 ?
+                            orders.filter(obj => obj.OrderInfo.userid == userid).map(order => {
+                                return (
+                                    <table className='table mt-3'>
+                                        <thead className='orderHead'>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='orderBody'>
+                                            {
+                                                order.OrderInfo.cartitems.map((item, index) => {
+                                                    return <tr key={index}>
+                                                        <td><img src={item.productImg} height="25" width="25" /></td>
+                                                        <td>{item.productName}</td>
+                                                        <td>{`${item.productQuantity} Kg`}</td>
+                                                        <td>Rs. {`${item.productPrice}`}</td>
+                                                    </tr>
+                                                })
+                                            }
 
-                <div className='orderList'>
-                    <h3>Orders On Delivery</h3>
-                    {deliveryPending.length > 0 ?
-                        delivery.filter(obj => obj.orders.OrderInfo.userid == userid).map(del => {
-                            return (
-                                <table className='table mt-3'>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            del.orders.OrderInfo.cartitems.map((item, index) => {
-                                                return <tr key={index}>
-                                                    <td><img src={item.productImg} height="80" width="80" /></td>
-                                                    <td>{item.productName}</td>
-                                                    <td>{`${item.productQuantity} Kg`}</td>
-                                                    <td>Rs. {item.productPrice}</td>
-                                                </tr>
-                                            })
-                                        }
+                                        </tbody>
+                                    </table>
+                                )
+                            }) : <p>You don't have any pending order!</p>}
+                    </div>
 
-                                    </tbody>
-                                </table>
-                            )
-                        }) : <p>You don't have any order on delivery!</p>}
-                </div>
+                    <div className='orderList'>
+                        <div className='text-center'>
+                            <h3>Orders On Delivery</h3>
+                        </div>
 
-                <div className='orderList'>
-                    <h3>Orders Completed</h3>
-                    {ordersComplete.length > 0 ?
-                        ordersCompleted.filter(obj => obj.ordersOnDelivery.orders.OrderInfo.userid == userid).map(del => {
-                            return (
-                                <table className='table mt-3'>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            del.ordersOnDelivery.orders.OrderInfo.cartitems.map((item, index) => {
-                                                return <tr key={index}>
-                                                    <td><img src={item.productImg} height="80" width="80" /></td>
-                                                    <td>{item.productName}</td>
-                                                    <td>{`${item.productQuantity} Kg`}</td>
-                                                    <td>Rs. {item.productPrice}</td>
-                                                </tr>
-                                            })
-                                        }
+                        {deliveryPending.length > 0 ?
+                            delivery.filter(obj => obj.orders.OrderInfo.userid == userid).map(del => {
+                                return (
+                                    <table className='table mt-3'>
+                                        <thead className='orderHead'>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='orderBody'>
+                                            {
+                                                del.orders.OrderInfo.cartitems.map((item, index) => {
+                                                    return <tr key={index}>
+                                                        <td><img src={item.productImg} height="25" width="25" /></td>
+                                                        <td>{item.productName}</td>
+                                                        <td>{`${item.productQuantity} Kg`}</td>
+                                                        <td>Rs. {item.productPrice}</td>
+                                                    </tr>
+                                                })
+                                            }
 
-                                    </tbody>
-                                </table>
-                            )
-                        }) : <p>You don't have orders completed history!</p>}
+                                        </tbody>
+                                    </table>
+                                )
+                            }) : <p>You don't have any order on delivery!</p>}
+                    </div>
+
+                    <div className='orderList'>
+                        <div className='text-center'>
+                            <h3>Orders Completed</h3>
+                        </div>
+
+                        {ordersComplete.length > 0 ?
+                            ordersCompleted.filter(obj => obj.ordersOnDelivery.orders.OrderInfo.userid == userid).map(del => {
+                                return (
+                                    <table className='table mt-3'>
+                                        <thead className='orderHead'>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='orderBody'>
+                                            {
+                                                del.ordersOnDelivery.orders.OrderInfo.cartitems.map((item, index) => {
+                                                    return <tr key={index}>
+                                                        <td><img src={item.productImg} height="25" width="25" /></td>
+                                                        <td>{item.productName}</td>
+                                                        <td>{`${item.productQuantity} Kg`}</td>
+                                                        <td>Rs. {item.productPrice}</td>
+                                                    </tr>
+                                                })
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                )
+                            }) : <p>You don't have orders completed history!</p>}
+                    </div>
                 </div>
             </div>
         </Layout>

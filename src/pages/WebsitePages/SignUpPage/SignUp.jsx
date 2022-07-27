@@ -61,8 +61,8 @@ const SignUp = () => {
     }
     else if (Number(!phone.startsWith("03"))) {
       toast.error("Phone should be of Pakistani Network, Starts with 03.");
-    } 
-  
+    }
+
     else {
       const userIdPath = `${userName}_${(Math.random().toFixed(2)) * 100}`;
 
@@ -117,7 +117,7 @@ const SignUp = () => {
           <form onSubmit={SignInApp}>
             <Grid align='center'>
               <Avatar className='avatarStyle'><AccountCircleSharpIcon /></Avatar>
-              <h2 className='headerStyle'>SIGN-UP</h2>
+              <h2 className='headerStyle'>Sign Up</h2>
               <Typography variant='caption' gutterBottom>Please fill this form to create an account!</Typography>
             </Grid>
             <Grid container direction={"column"} spacing={1}>
@@ -192,23 +192,25 @@ const SignUp = () => {
             <Grid style={{ margin: '10px' }}>
               <Typography gutterBottom color="textSecondary" variant='body2' component="p">
                 By creating an acount, you agree to the&nbsp;
-                <NavLink as={Link} to="/privacypage" style={{ color: "#100909" }}>
-                  Privacy Policy
+                <NavLink as={Link} to="/privacypage" className="linkSignup">
+                  Privacy Policy.
                 </NavLink>
               </Typography>
             </Grid>
-            <Button
-              className='btnStyle'
-              type='submit'
-              variant='contained'
-              fullWidth
-              style={{ backgroundColor: "#502d2e" }}
-            >
-              create an account
-            </Button>
+            <Grid>
+              <Button
+                className='btnstyle'
+                type='submit'
+                variant='contained'
+                fullWidth
+                style={{ backgroundColor: "#502d2e" }}
+              >
+                create an account
+              </Button>
+            </Grid>
             <Grid style={{ margin: '10px' }}>
               <Typography gutterBottom color="textSecondary" variant='body2' component="p">Have an account?&nbsp;
-                <NavLink as={Link} to="/weblogin" style={{ color: "#100909" }}>
+                <NavLink as={Link} to="/weblogin" className="linkSignup">
                   Sign-In
                 </NavLink>
               </Typography>

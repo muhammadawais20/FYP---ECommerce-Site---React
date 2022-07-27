@@ -92,7 +92,7 @@ const Homepages = ({ user }) => {
                 <Meta style={{ fontWeight: 'bolder', fontSize: '16px' }} title= {`${product.productName}`} description= {`Rs. ${product.productPrice}`} />
                 <div className="additional">
                   <Button
-                    style={{ width: '200px', marginTop: '15px', backgroundColor: '#502d2e'  }}
+                    style={{ width: '200px', marginTop: '15px', backgroundColor: '#502d2e', fontWeight: '600', fontSize: '14px'  }}
                     variant="contained"
                     onClick={() => { navigate(`/productInfo/${product.productId}`) }}>
                     View
@@ -100,7 +100,7 @@ const Homepages = ({ user }) => {
                   <br />
                   <br />
                   <Button
-                    style={{ width: '200px', backgroundColor: '#502d2e' }}
+                    style={{ width: '200px', backgroundColor: '#502d2e', fontWeight: '600', fontSize: '14px' }}
                     variant="contained"
                     onClick={() => addToCart(product)}
                   >

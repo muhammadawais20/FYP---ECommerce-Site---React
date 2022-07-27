@@ -4,7 +4,7 @@ import Layout from '../../../components/WebsiteComponents/Layout/Layout';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link, useNavigate } from 'react-router-dom';
-import { Modal,Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import './CartPage.css';
 import { toast } from 'react-toastify';
 
@@ -50,7 +50,7 @@ const CartPages = () => {
     <Layout>
       <>
         <div className="cart-container">
-          <h2>Shopping Cart</h2>
+          <h1>*Shopping Cart*</h1>
           {cartitems.length == [] ? (
             <div className='cart-empty'>
               <p>Your cart is currently empty</p>
@@ -63,39 +63,42 @@ const CartPages = () => {
             </div>
 
           ) : (
-            <div>
-              <div className='titles'>
-                <h3>Product</h3>
-                <h3>Name</h3>
-                <h3>Price</h3>
-                <h3>Quantity</h3>
-                <h3>Action</h3>
-              </div>
-              <div className='cart-items'>
-                {cartitems.map((cartitem, index) => {
-                  return (
-                    <div className='cart-item' key={index}>
-                      <div className='cart-product'>
-                        <img src={cartitem.productImg} alt='product_img' />
+            <div className='main'>
+
+              <div >
+                <div className='titles'>
+                  <h4>Product</h4>
+                  <h4>Name</h4>
+                  <h4>Price</h4>
+                  <h4>Quantity</h4>
+                  <h4>Action</h4>
+                </div>
+                <div className='cart-items'>
+                  {cartitems.map((cartitem, index) => {
+                    return (
+                      <div className='cart-item' key={index}>
+                        <div className='cart-product' style={{justifyContent: 'center'}}>
+                          <img src={cartitem.productImg} alt='product_img'  />
+                        </div>
+                        <div className='cart-product-name'>
+                          {cartitem.productName}
+                        </div>
+                        <div className='cart-product-price'>
+                          {`Rs. ${cartitem.productPrice}`}
+                        </div>
+                        <div className='cart-product-price'>
+                          {`${cartitem.productQuantity} Kg`}
+                        </div>
+                        <div className='cart-product-action'>
+                          <DeleteIcon onClick={() => deleteItemCart(cartitem)} />
+                        </div>
                       </div>
-                      <div className='cart-product-name'>
-                        {cartitem.productName}
-                      </div>
-                      <div className='cart-product-price'>
-                        { `Rs. ${cartitem.productPrice}`}
-                      </div>
-                      <div className='cart-product-price'>
-                        { `${cartitem.productQuantity} Kg`}
-                      </div>
-                      <div className='cart-product-action'>
-                        <DeleteIcon onClick={() => deleteItemCart(cartitem)} />
-                      </div>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
+                </div>
               </div>
               <div className='cart-summary'>
-                <button className='clear-cart' onClick={handleShow} style={{color: "#502d2e" }}>Clear Cart</button>
+                <button className='clear-cart' onClick={handleShow} style={{ color: "#502d2e" }}>Clear Cart</button>
                 <div className='cart-placeorder'>
                   <div className='totalitems'>
                     <span>Total Items</span>
@@ -109,9 +112,9 @@ const CartPages = () => {
                   <div className='delivery-process'>
                     <span>Cash On Delivery</span>
                   </div>
-                  <button onClick={() => { navigate('/checkOut') }} style={{backgroundColor: "#502d2e" }}>CheckOut</button>
+                  <button onClick={() => { navigate('/checkOut') }} style={{ backgroundColor: "#502d2e" }}>CheckOut</button>
                   <div className='continue-shopping'>
-                    <Link to='/' style={{textDecoration: 'none' }}>
+                    <Link to='/' style={{ textDecoration: 'none' }}>
                       <ArrowBackIcon style={{ fill: 'gray' }} />
                       <span>Continue Shopping</span>
                     </Link>

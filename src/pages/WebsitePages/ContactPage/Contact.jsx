@@ -159,7 +159,7 @@ const ContactUs = () => {
                         <Grid xs={12} item>
                             <Button
                                 type="submit"
-                                className='btnStyle'
+                                className='btnmessage'
                                 variant="contained"
                                 fullWidth>
                                 Submit

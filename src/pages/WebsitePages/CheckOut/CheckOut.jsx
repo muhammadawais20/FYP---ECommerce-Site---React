@@ -18,7 +18,7 @@ const CheckOut = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phonenumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(JSON.parse(localStorage.getItem('currentUser')).user.email);
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -81,6 +81,10 @@ const CheckOut = () => {
         }
         else if (Number(!phonenumber.startsWith("03"))) {
             toast.error("Phone should be of Pakistani Network, Starts with 03.");
+        }
+
+        else if (totalAmount === 0) {
+            toast.warn("You don't have any product to purchase!")
         }
 
         else {
@@ -184,7 +188,7 @@ const CheckOut = () => {
                                     </Grid>
                                     <Grid xs={12} sm={6} item>
                                         <TextField
-                                            onChange={e => setEmail(e.target.value)}
+                                            // onChange={e => setEmail(e.target.value)}
                                             value={JSON.parse(localStorage.getItem('currentUser')).user.email}
                                             type="email"
                                             label="Email address"
@@ -251,7 +255,7 @@ const CheckOut = () => {
                                     <Grid xs={12} item>
                                         <button
                                             type="submit"
-                                            className='btnStyle'
+                                            className='btnorder'
                                             variant="contained"
                                             style={{ width: "100%" }} >
                                             Place Order

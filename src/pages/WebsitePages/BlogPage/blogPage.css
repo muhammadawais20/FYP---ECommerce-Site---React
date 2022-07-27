@@ -1,17 +1,16 @@
 .main-grid {
     display: flex;
     justify-content: space-between;
-
-    margin-top: 100px;
+    margin: 100px 50px;
 }
 
 .grid-style{
     max-width: 75%;
     margin: auto !important;
-    padding: 20px;
+    padding: 20px 20px;
     align-items: center;
     justify-content: center;
-    border: 1px solid #4b2627;
+    border: 2px solid #502d2e;
 }
 
 .productDescription {

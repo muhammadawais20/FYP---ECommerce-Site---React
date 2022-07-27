@@ -142,7 +142,7 @@ const Header = () => {
                 {
                   loggedIn && <>
                     <Nav.Link as={Link} to={"/"} style={{color: "#555"}}>{loggedIn && user != undefined ? user.email.substring(0, user.email.length - 10) : ""}</Nav.Link>
-                    <Nav.Link  style={{color: "#555"}} as={Link} to={"/order"}>Orders</Nav.Link>
+                    <Nav.Link  style={{color: "#555"}} as={Link} to={"/ordershistory"}>Orders</Nav.Link>
                     <Nav.Link style={{color: "#555"}} onClick={handleLogout}>Logout</Nav.Link>
                     <Nav.Link style={{color: "#555"}} as={Link} to={"/cartpage"}>
                       Cart

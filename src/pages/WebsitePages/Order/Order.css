@@ -1,7 +1,16 @@
-.order-wrapper{
-    margin: 100px;
-   width: 100%;
-   height: 100%;
+.order-wrapper {
+    margin-top: 100px;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .orderList {
@@ -9,8 +18,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+   
 }
 
-tr {
-    width: 100vw;
+.orderHead tr th{
+    width: 300px;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: 600;
+    text-align: center;    
+}
+
+
+.orderBody tr td{
+    text-align: center;
 }

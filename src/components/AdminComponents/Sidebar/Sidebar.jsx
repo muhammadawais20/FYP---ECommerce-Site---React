@@ -115,7 +115,7 @@ const Sidebar = () => {
                     <Link to="/messages" style={{ textDecoration: "none" }}>
                         <li>
                             <FeedbackIcon className='icon' />
-                            <span>Complaints</span>
+                            <span>Feedback</span>
                         </li>
                     </Link>
 
@@ -125,15 +125,6 @@ const Sidebar = () => {
                             <span>Resolved Complaints</span>
                         </li>
                     </Link>
-                    {/* <li>
-                        <InsertChartIcon className='icon' />
-                        <span>Stats</span>
-                    </li>
-
-                    <li>
-                        <NotificationsNoneIcon className='icon' />
-                        <span>Notifications</span>
-                    </li> */}
 
                     <p className="title">OTHER</p>
 
