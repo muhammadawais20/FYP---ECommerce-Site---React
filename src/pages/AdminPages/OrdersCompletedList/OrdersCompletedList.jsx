@@ -6,7 +6,7 @@ import './ordersCompletedList.scss';
 
 const OrdersCompletedList = () => {
     return (
-        <div className="list">
+        <div className="listOrdersCompleted">
             <Sidebar />
             <div className="homeContainer">
                 <Navbar />

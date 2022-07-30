@@ -1,5 +1,4 @@
-import { React, useState, useEffect } from 'react';
-import { db } from '../../../config/firebase';
+import { React } from 'react';
 import "./normalChart.scss";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -17,6 +16,16 @@ const NormalChart = ({aspect, title, total1}) => {
     {total: total1[8]},
     {total: total1[9]},
     {total: total1[10]},
+    {total: total1[11]},
+    {total: total1[12]},
+    {total: total1[13]},
+    {total: total1[14]},
+    {total: total1[15]},
+    {total: total1[16]},
+    {total: total1[17]},
+    {total: total1[18]},
+    {total: total1[19]},
+    {total: total1[20]}
 ]
 
     return (

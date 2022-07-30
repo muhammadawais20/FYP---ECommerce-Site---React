@@ -46,7 +46,8 @@ const BlogPage = () => {
                         className='grid-style'>
                         <Grid item xs={12} sm={6}>
                             <Card>
-                                <CardMedia
+                                <CardMedia 
+                                className='blogs'
                                     image={data.blogImg}
                                     style={{ height: '550px' }}
                                 />
@@ -63,8 +64,10 @@ const BlogPage = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-
             ))}
+
+<Divider textAlign='center'></Divider>
+            
         </Layout>
     )
 }

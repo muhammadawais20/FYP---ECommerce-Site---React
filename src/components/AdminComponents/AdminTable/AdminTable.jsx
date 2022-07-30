@@ -31,7 +31,10 @@ const AdminTable = () => {
     const [showMod, setShowMod] = useState(false);
 
     const closeModal = () => setShowMod(false);
-    const showModal = () => setShowMod(true);
+    const showModal = (admins) => {
+        setAdminIdState(admins.adminId)
+        setShowMod(true);
+    }
 
     const [values, setValues] = useState({
         password: '',
@@ -83,7 +86,7 @@ const AdminTable = () => {
     }
 
     const editHandler = async () => {
-
+        setShow(true);
         try {
             db.collection("admins").doc(adminIdState).update({
                 adminName: adminName,
@@ -110,10 +113,10 @@ const AdminTable = () => {
     }, [editHandler])
 
 
-    const deleteHandler = async (admins) => {
+    const deleteHandler = async () => {
         setShowMod(false);
         try {
-            db.collection("admins").doc(admins.adminId).delete({
+            db.collection("admins").doc(adminIdState).delete({
             })
             toast.success("Admin deleted successfully!")
             getAdmin()
@@ -148,7 +151,7 @@ const AdminTable = () => {
                         </TableRow>
                     </TableHead>
                     {admin.map((admins, index) => (
-                        <TableBody key={index + 1}>
+                        <TableBody>
                             <TableRow key={index}>
                                 <TableCell className='tableData'>{admins.adminId}</TableCell>
                                 <TableCell className='tableData'>
@@ -169,12 +172,12 @@ const AdminTable = () => {
                                     </div>
                                 </TableCell>
                                 <TableCell className='view-delete'>
-                                    <div className='delete' onClick={showModal}>Delete</div>
+                                    <div className='delete' onClick={() => showModal(admins)}>Delete</div>
                                 </TableCell>
                             </TableRow>
                             <Modal className='modal' show={show} onHide={handleClose}>
                                 <Modal.Header closeButton >
-                                    <Modal.Title className="modal-title w-100 ">Product Update</Modal.Title>
+                                    <Modal.Title className="modal-title w-100 ">Admin Update</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <form className='formModal'>

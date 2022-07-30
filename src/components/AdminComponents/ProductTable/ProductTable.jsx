@@ -27,12 +27,14 @@ const ProductTable = () => {
     const [showMod, setShowMod] = useState(false);
 
     const closeModal = () => setShowMod(false);
-    const showModal = () => setShowMod(true);
+    const showModal = (products) => {
+        setProductIdState(products.productId)
+        setShowMod(true);
+    }
 
     const handleClose = () => setShow(false);
 
     const handleShow = (products) => {
-        console.log("Product Id", products.productId)
         setProductIdState(products.productId);
         setShow(true);
     }
@@ -57,10 +59,10 @@ const ProductTable = () => {
         }
     }
 
-    const deleteHandler = async (products) => {
+    const deleteHandler = async () => {
         setShowMod(false);
         try {
-            db.collection("Products").doc(products.productId).delete({
+            db.collection("Products").doc(productIdState).delete({
             })
             toast.success("Product deleted Successfully!")
             getProduct()
@@ -77,6 +79,7 @@ const ProductTable = () => {
                 productPrice: price,
                 productDescription: description,
                 productQuantity: quantity,
+                profit: profit
 
             }).then(() => {
                 setPrice("");
@@ -96,6 +99,8 @@ const ProductTable = () => {
     useEffect(() => {
         getProduct();
     }, [editHandler])
+
+    let profit = price - originalPrice;
 
     return (
 
@@ -145,7 +150,7 @@ const ProductTable = () => {
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
-                                    <div className='delete' onClick={showModal}>Delete</div>
+                                    <div className='delete' onClick={() => showModal(products)}>Delete</div>
                                 </TableCell>
 
                             </TableRow>
@@ -192,6 +197,18 @@ const ProductTable = () => {
                                                 required />
                                         </div>
 
+                                        <div className="formInput">
+                                            <TextField
+                                                style={{ marginBottom: '10px' }}
+                                                type="number"
+                                                label="Profit"
+                                                placeholder="Enter Profit"
+                                                value={profit}
+                                                fullWidth
+                                                required
+                                               disabled
+                                            />
+                                        </div>
 
                                         <div className="formInput">
                                             <TextField

@@ -115,7 +115,7 @@ const OrderPage = () => {
                                                         <td><img src={item.productImg} height="25" width="25" /></td>
                                                         <td>{item.productName}</td>
                                                         <td>{`${item.productQuantity} Kg`}</td>
-                                                        <td>Rs. {`${item.productPrice}`}</td>
+                                                        <td>Rs. {`${item.productPrice}` * `${item.productQuantity}`}</td>
                                                     </tr>
                                                 })
                                             }
@@ -150,7 +150,7 @@ const OrderPage = () => {
                                                         <td><img src={item.productImg} height="25" width="25" /></td>
                                                         <td>{item.productName}</td>
                                                         <td>{`${item.productQuantity} Kg`}</td>
-                                                        <td>Rs. {item.productPrice}</td>
+                                                        <td>Rs. {`${item.productPrice}` * `${item.productQuantity}`}</td>
                                                     </tr>
                                                 })
                                             }
@@ -185,7 +185,7 @@ const OrderPage = () => {
                                                         <td><img src={item.productImg} height="25" width="25" /></td>
                                                         <td>{item.productName}</td>
                                                         <td>{`${item.productQuantity} Kg`}</td>
-                                                        <td>Rs. {item.productPrice}</td>
+                                                        <td>Rs. {`${item.productPrice}` * `${item.productQuantity}`}</td>
                                                     </tr>
                                                 })
                                             }

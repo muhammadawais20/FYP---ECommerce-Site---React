@@ -6,7 +6,7 @@ import './customerList.scss';
 
 const CustomerList = () => {
     return (
-        <div className="list">
+        <div className="listCustomer">
             <Sidebar />
             <div className="homeContainer">
                 <Navbar />

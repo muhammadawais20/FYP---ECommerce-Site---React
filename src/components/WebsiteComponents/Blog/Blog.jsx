@@ -3,7 +3,6 @@ import { db } from '../../../config/firebase'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Divider, Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -74,7 +73,6 @@ export default function Blog() {
                         onClick={() => { navigate("/blogs") }}
                         sx={{ maxWidth: 345, marginBottom: 2, border: '1px solid #4b2627', cursor: 'pointer' }}
                         hoverable
-
                     >
                         <CardHeader
                             title={data.productName}
@@ -92,27 +90,6 @@ export default function Blog() {
                                 {data.productIntro}
                             </Typography>
                         </CardContent>
-                        {/* <CardActions disableSpacing>
-
-                            <Typography variant="body2" marginLeft={1} color={'#502d2e'}>
-                                Continue Reading...
-                            </Typography>
-                            <ExpandMore
-                                expand={expanded}
-                                onClick={handleExpandClick}
-                                aria-expanded={expanded}
-                                aria-label="show more"
-                            >
-                                <ExpandMoreIcon />
-                            </ExpandMore>
-                        </CardActions>
-                        <Collapse in={expanded} timeout="auto" unmountOnExit>
-                            <CardContent>
-                                <Typography color={'#502d2e'} paragraph>
-                                    {data.productDescription}
-                                </Typography>
-                            </CardContent>
-                        </Collapse> */}
                     </Card>
                 ))}
             </div>

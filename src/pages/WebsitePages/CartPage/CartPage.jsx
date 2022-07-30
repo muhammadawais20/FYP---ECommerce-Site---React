@@ -84,7 +84,7 @@ const CartPages = () => {
                           {cartitem.productName}
                         </div>
                         <div className='cart-product-price'>
-                          {`Rs. ${cartitem.productPrice}`}
+                          Rs. {`${cartitem.productPrice}` * `${cartitem.productQuantity}`}
                         </div>
                         <div className='cart-product-price'>
                           {`${cartitem.productQuantity} Kg`}

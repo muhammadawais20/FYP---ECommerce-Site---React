@@ -6,7 +6,7 @@ import './productList.scss';
 
 const ProductList = () => {
     return (
-        <div className="list">
+        <div className="listProduct">
             <Sidebar />
             <div className="homeContainer">
                 <Navbar />

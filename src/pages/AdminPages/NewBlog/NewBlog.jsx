@@ -142,7 +142,7 @@ const NewBlog = ({title}) => {
 
                             <div className="formInput">
                                 <label>Description</label>
-                                <input type="text" onChange={event => setProductDescription(event.target.value)} value={productDescription} placeholder="Enter Product Description" required />
+                                <textarea style={{height: "200px", width: "385px", overflowX: "hidden", overflowY: "scroll"}} type="text" onChange={event => setProductDescription(event.target.value)} value={productDescription} placeholder="Enter Product Description" required />
                             </div>
 
                             <div>

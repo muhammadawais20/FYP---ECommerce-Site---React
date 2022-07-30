@@ -150,7 +150,7 @@ const OrderDetails = () => {
 
                                             <Fragment key={index}>
                                                 <div className='productDetails'>
-                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productId}</TableCell>
+                                                    <TableCell sx={{ minWidth: 50 }} className='tableData1'>{item.productName}</TableCell>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>RP: {item.originalPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 50 }} className='tableData1'>SP: {item.productPrice}</TableCell>
                                                     <TableCell sx={{ minWidth: 25 }} className='tableData1'>Qty: {item.productQuantity}</TableCell>
@@ -160,13 +160,10 @@ const OrderDetails = () => {
                                                             <img src={item.productImg} alt="Product" className="orderImage" />
                                                         </div>
                                                     </TableCell>
-
                                                 </div>
-
                                             </Fragment>
                                         ))
                                     }
-
                                     <TableCell key={index} className='pendingOrder'>
                                         <button className='pending' id="deliver" type='submit' onClick={() => deliverAndDelete(orders)}>Ship Order?</button>
                                     </TableCell>

@@ -12,8 +12,6 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import StoreSharpIcon from '@mui/icons-material/StoreSharp';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import InsertChartIcon from '@mui/icons-material/InsertChart';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ArticleIcon from '@mui/icons-material/Article';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';

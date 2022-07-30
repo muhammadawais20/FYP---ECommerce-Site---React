@@ -22,6 +22,14 @@ const BlogTable = () => {
     const [productName, setProductName] = useState("");
     const [productIntro, setProductIntro] = useState("");
     const [productDescription, setProductDescription] = useState("");
+    const [showMod, setShowMod] = useState(false);
+
+    const closeModal = () => setShowMod(false);
+
+    const showModal = (data) => {
+        setBlogIdState(data.blogId);
+        setShowMod(true);
+    }
 
     const handleClose = () => setShow(false);
 
@@ -53,12 +61,13 @@ const BlogTable = () => {
         }
     }
 
-    const deleteHandler = async (data) => {
+    const deleteHandler = async () => {
+        setShowMod(false);
         try {
-            db.collection("blogs").doc(data.blogId).delete({
+            db.collection("blogs").doc(blogIdState).delete({
             })
+            getBlogData();
             toast.success("Blog deleted Successfully!")
-            getBlogData()
         } catch (error) {
             toast.error("Blog deletion Failed!");
         };
@@ -106,7 +115,6 @@ const BlogTable = () => {
                     </TableHead>
                     {blogData.map((data) => (
                         <TableBody>
-
                             <TableRow key={data.productsId}>
                                 <TableCell className='tableData'>{data.blogDate}</TableCell>
                                 <TableCell className='tableData'>
@@ -126,7 +134,7 @@ const BlogTable = () => {
                                 </TableCell>
 
                                 <TableCell className='view-delete'>
-                                    <div className='delete' onClick={() => deleteHandler(data)}>Delete</div>
+                                    <div className='delete' onClick={() => showModal(data)}>Delete</div>
                                 </TableCell>
 
                             </TableRow>
@@ -177,6 +185,19 @@ const BlogTable = () => {
                                 <Modal.Footer>
                                     <Button onClick={handleClose}>Close</Button>
                                     <Button onClick={() => editHandler(data)}>Save</Button>
+                                </Modal.Footer>
+                            </Modal>
+
+                            <Modal show={showMod} centered>
+                                <div className="modal-header text-center">
+                                    <h3 className="modal-title w-100">Confirmation</h3>
+                                </div>
+                                <Modal.Body>
+                                    <p className='text-center'>Do You Really Want to Delete Blog?</p>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button onClick={closeModal}>No</Button>
+                                    <Button onClick={() => deleteHandler(data)} className="btn btn-danger">Yes</Button>
                                 </Modal.Footer>
                             </Modal>
                         </TableBody>
